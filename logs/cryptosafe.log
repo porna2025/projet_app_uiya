@@ -1,0 +1,2104 @@
+[INFO] 28/01/2026 11:26:22 django.utils.autoreload run_with_reloader:668 - Watching for file changes with StatReloader
+[INFO] 28/01/2026 11:26:28 django.utils.autoreload trigger_reload:266 - C:\Users\lenovo\Django\cryptosafe\cryptosafe\settings.py changed, reloading.
+[INFO] 28/01/2026 11:26:30 django.utils.autoreload run_with_reloader:668 - Watching for file changes with StatReloader
+[INFO] 28/01/2026 11:27:27 django.server log_message:212 - "GET /dashboard/ HTTP/1.1" 200 16288
+[INFO] 28/01/2026 11:28:09 django.server log_message:212 - "GET /profile/ HTTP/1.1" 200 0
+[INFO] 28/01/2026 11:30:51 django.server log_message:212 - "GET /keys/ HTTP/1.1" 200 6537
+[INFO] 28/01/2026 11:31:15 django.server log_message:212 - "GET /decrypt/ HTTP/1.1" 200 17599
+[WARNING] 28/01/2026 11:32:06 crypto_app.views decrypt_file:169 - Decryption failed for user 1: Invalid padding bytes.
+[INFO] 28/01/2026 11:32:06 django.server log_message:212 - "POST /decrypt/ HTTP/1.1" 200 17896
+[WARNING] 28/01/2026 11:33:17 crypto_app.views decrypt_file:169 - Decryption failed for user 1: Invalid padding bytes.
+[INFO] 28/01/2026 11:33:17 django.server log_message:212 - "POST /decrypt/ HTTP/1.1" 200 17896
+[INFO] 28/01/2026 11:33:28 django.server log_message:212 - "GET /encrypt/ HTTP/1.1" 200 7750
+[INFO] 28/01/2026 11:34:24 crypto_app.views encrypt_file:102 - Encryption successful for user 1: TP1.doc
+[INFO] 28/01/2026 11:34:24 django.server log_message:212 - "POST /encrypt/ HTTP/1.1" 302 0
+[INFO] 28/01/2026 11:34:24 django.server log_message:212 - "GET /files/ HTTP/1.1" 200 24330
+[INFO] 28/01/2026 11:35:02 django.server log_message:212 - "GET /decrypt/ HTTP/1.1" 200 19101
+[INFO] 28/01/2026 11:35:34 django.server log_message:212 - "GET /dashboard/ HTTP/1.1" 200 16856
+[INFO] 28/01/2026 11:35:40 django.server log_message:212 - "GET /encrypt/ HTTP/1.1" 200 7750
+[INFO] 28/01/2026 11:35:45 django.server log_message:212 - "GET /dashboard/ HTTP/1.1" 200 16856
+[ERROR] 28/01/2026 11:35:50 django.request log_response:241 - Internal Server Error: /encrypt-text/
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 875, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'text'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 881, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(
+                                            ~~~~~~~^
+        type(current), bit
+        ^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+AttributeError: type object 'RequestContext' has no attribute 'text'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 891, in _resolve_lookup
+    current = current[int(bit)]
+                      ~~~^^^^^
+ValueError: invalid literal for int() with base 10: 'text'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py", line 203, in encrypt_text
+    return render(request, 'crypto_app/encrypt_text.html', {
+        'form': form,
+        'result': result,
+        'action': locals().get('action', None),
+    })
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 961, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 961, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 961, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1059, in render
+    output = self.filter_expression.resolve(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 731, in resolve
+    arg_vals.append(arg.resolve(context))
+                    ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 842, in resolve
+    value = self._resolve_lookup(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 898, in _resolve_lookup
+    raise VariableDoesNotExist(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+    )  # missing attribute
+    ^
+django.template.base.VariableDoesNotExist: Failed lookup for key [text] in [{'True': True, 'False': False, 'None': None}, {}, {}, {'form': <TextEncryptionForm bound=False, valid=False, fields=(text;password;action)>, 'result': None, 'action': None}]
+[ERROR] 28/01/2026 11:35:50 django.server log_message:212 - "GET /encrypt-text/ HTTP/1.1" 500 188105
+[INFO] 28/01/2026 11:38:15 django.utils.autoreload trigger_reload:266 - C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py changed, reloading.
+[INFO] 28/01/2026 11:38:19 django.utils.autoreload run_with_reloader:668 - Watching for file changes with StatReloader
+[INFO] 28/01/2026 11:44:31 django.server log_message:212 - "GET /profile/ HTTP/1.1" 200 15356
+[INFO] 28/01/2026 12:19:29 django.server log_message:212 - "GET /profile/ HTTP/1.1" 200 15356
+[INFO] 28/01/2026 12:19:54 django.server log_message:212 - "GET /encrypt/ HTTP/1.1" 200 7750
+[INFO] 28/01/2026 12:19:55 django.server log_message:212 - "GET /keys/ HTTP/1.1" 200 6537
+[INFO] 30/01/2026 09:49:33 django.utils.autoreload run_with_reloader:668 - Watching for file changes with StatReloader
+[INFO] 30/01/2026 09:49:48 django.server log_message:212 - "GET /dashboard/ HTTP/1.1" 200 16867
+[INFO] 30/01/2026 09:50:09 django.server log_message:212 - "GET /admin/ HTTP/1.1" 200 5652
+[INFO] 30/01/2026 09:50:09 django.server log_message:212 - "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+[INFO] 30/01/2026 09:50:09 django.server log_message:212 - "GET /static/admin/css/base.css HTTP/1.1" 304 0
+[INFO] 30/01/2026 09:50:09 django.server log_message:212 - "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+[INFO] 30/01/2026 09:50:09 django.server log_message:212 - "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+[INFO] 30/01/2026 09:50:09 django.server log_message:212 - "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+[INFO] 30/01/2026 09:50:09 django.server log_message:212 - "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+[INFO] 30/01/2026 09:50:09 django.server log_message:212 - "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+[INFO] 30/01/2026 09:50:10 django.server log_message:212 - "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+[INFO] 30/01/2026 09:50:10 django.server log_message:212 - "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+[INFO] 30/01/2026 09:51:20 django.utils.autoreload trigger_reload:266 - C:\Users\lenovo\Django\cryptosafe\crypto_app\admin.py changed, reloading.
+[INFO] 30/01/2026 09:51:22 django.utils.autoreload run_with_reloader:668 - Watching for file changes with StatReloader
+[INFO] 30/01/2026 09:51:31 django.server log_message:212 - "GET /admin/ HTTP/1.1" 200 5652
+[INFO] 30/01/2026 09:51:33 django.server log_message:212 - "GET /admin/ HTTP/1.1" 200 5652
+[INFO] 30/01/2026 09:51:34 django.server log_message:212 - "GET /admin/ HTTP/1.1" 200 5652
+[INFO] 30/01/2026 09:51:34 django.server log_message:212 - "GET /admin/ HTTP/1.1" 200 5652
+[INFO] 30/01/2026 09:51:34 django.server log_message:212 - "GET /admin/ HTTP/1.1" 200 5652
+[INFO] 30/01/2026 09:51:35 django.server log_message:212 - "GET /admin/ HTTP/1.1" 200 5652
+[INFO] 30/01/2026 09:51:35 django.server log_message:212 - "GET /admin/ HTTP/1.1" 200 5652
+[INFO] 30/01/2026 09:51:35 django.server log_message:212 - "GET /admin/ HTTP/1.1" 200 5652
+[INFO] 30/01/2026 09:51:35 django.server log_message:212 - "GET /admin/ HTTP/1.1" 200 5652
+[INFO] 30/01/2026 09:53:16 django.utils.autoreload trigger_reload:266 - C:\Users\lenovo\Django\cryptosafe\crypto_app\admin.py changed, reloading.
+[INFO] 30/01/2026 09:53:22 django.utils.autoreload run_with_reloader:668 - Watching for file changes with StatReloader
+[INFO] 30/01/2026 09:53:38 django.server log_message:212 - "GET /admin/ HTTP/1.1" 200 5652
+[INFO] 30/01/2026 09:56:13 django.utils.autoreload trigger_reload:266 - C:\Users\lenovo\Django\cryptosafe\crypto_app\admin.py changed, reloading.
+[INFO] 30/01/2026 09:56:16 django.utils.autoreload run_with_reloader:668 - Watching for file changes with StatReloader
+[INFO] 30/01/2026 09:56:18 django.server log_message:212 - "GET /admin/ HTTP/1.1" 200 6373
+[INFO] 30/01/2026 09:59:45 django.utils.autoreload trigger_reload:266 - C:\Users\lenovo\Django\cryptosafe\crypto_app\admin.py changed, reloading.
+[INFO] 30/01/2026 09:59:47 django.utils.autoreload run_with_reloader:668 - Watching for file changes with StatReloader
+[INFO] 30/01/2026 09:59:53 django.server log_message:212 - "GET /admin/ HTTP/1.1" 200 7817
+[INFO] 30/01/2026 10:00:08 django.server log_message:212 - "GET /admin/crypto_app/userprofile/ HTTP/1.1" 200 10397
+[INFO] 30/01/2026 10:00:08 django.server log_message:212 - "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+[INFO] 30/01/2026 10:00:08 django.server log_message:212 - "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+[INFO] 30/01/2026 10:00:08 django.server log_message:212 - "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+[INFO] 30/01/2026 10:00:08 django.server log_message:212 - "GET /static/admin/js/core.js HTTP/1.1" 304 0
+[INFO] 30/01/2026 10:00:08 django.server log_message:212 - "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+[INFO] 30/01/2026 10:00:08 django.server log_message:212 - "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+[INFO] 30/01/2026 10:00:08 django.server log_message:212 - "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+[INFO] 30/01/2026 10:00:08 django.server log_message:212 - "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+[INFO] 30/01/2026 10:00:08 django.server log_message:212 - "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+[INFO] 30/01/2026 10:00:08 django.server log_message:212 - "GET /static/admin/js/filters.js HTTP/1.1" 304 0
+[INFO] 30/01/2026 10:00:08 django.server log_message:212 - "GET /admin/jsi18n/ HTTP/1.1" 200 8985
+[INFO] 30/01/2026 10:00:08 django.server log_message:212 - "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+[INFO] 30/01/2026 10:00:22 django.server log_message:212 - "GET /admin/crypto_app/userprofile/add/ HTTP/1.1" 200 11870
+[INFO] 30/01/2026 10:00:22 django.server log_message:212 - "GET /static/admin/css/forms.css HTTP/1.1" 304 0
+[INFO] 30/01/2026 10:00:22 django.server log_message:212 - "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 304 0
+[INFO] 30/01/2026 10:00:22 django.server log_message:212 - "GET /admin/jsi18n/ HTTP/1.1" 200 8985
+[INFO] 30/01/2026 10:00:22 django.server log_message:212 - "GET /static/admin/css/widgets.css HTTP/1.1" 304 0
+[INFO] 30/01/2026 10:00:22 django.server log_message:212 - "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 304 0
+[INFO] 30/01/2026 10:00:22 django.server log_message:212 - "GET /static/admin/js/change_form.js HTTP/1.1" 304 0
+[INFO] 30/01/2026 10:00:37 django.server log_message:212 - "GET /admin/auth/user/add/?_to_field=id&_popup=1 HTTP/1.1" 200 7020
+[INFO] 30/01/2026 10:00:37 django.server log_message:212 - "GET /admin/jsi18n/ HTTP/1.1" 200 8985
+[INFO] 30/01/2026 10:01:16 django.server log_message:212 - "GET /admin/crypto_app/encryptionkey/add/ HTTP/1.1" 200 14072
+[INFO] 30/01/2026 10:01:16 django.server log_message:212 - "GET /admin/jsi18n/ HTTP/1.1" 200 8985
+[INFO] 30/01/2026 10:01:17 django.server log_message:212 - "GET /static/admin/js/calendar.js HTTP/1.1" 200 9141
+[INFO] 30/01/2026 10:01:17 django.server log_message:212 - "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 200 19319
+[INFO] 30/01/2026 10:01:17 django.server log_message:212 - "GET /static/admin/img/icon-clock.svg HTTP/1.1" 200 677
+[INFO] 30/01/2026 10:01:17 django.server log_message:212 - "GET /static/admin/img/icon-calendar.svg HTTP/1.1" 200 1086
+[INFO] 30/01/2026 10:01:27 django.server log_message:212 - "GET /admin/auth/user/add/?_to_field=id&_popup=1 HTTP/1.1" 200 7020
+[INFO] 30/01/2026 10:01:27 django.server log_message:212 - "GET /admin/jsi18n/ HTTP/1.1" 200 8985
+[INFO] 30/01/2026 10:02:00 django.server log_message:212 - "GET /admin/crypto_app/activitylog/add/ HTTP/1.1" 200 13635
+[INFO] 30/01/2026 10:02:00 django.server log_message:212 - "GET /admin/jsi18n/ HTTP/1.1" 200 8985
+[INFO] 30/01/2026 10:02:00 django.server log_message:212 - "GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 200 392
+[INFO] 30/01/2026 10:02:09 django.server log_message:212 - "GET /admin/auth/user/add/?_to_field=id&_popup=1 HTTP/1.1" 200 7020
+[INFO] 30/01/2026 10:02:09 django.server log_message:212 - "GET /admin/jsi18n/ HTTP/1.1" 200 8985
+[INFO] 30/01/2026 10:02:34 django.server log_message:212 - "GET / HTTP/1.1" 302 0
+[INFO] 30/01/2026 10:02:34 django.server log_message:212 - "GET /dashboard/ HTTP/1.1" 200 16867
+[WARNING] 30/01/2026 10:02:55 django.request log_response:241 - Not Found: /dashboard/admin
+[WARNING] 30/01/2026 10:02:55 django.server log_message:212 - "GET /dashboard/admin HTTP/1.1" 404 4421
+[WARNING] 30/01/2026 10:03:07 django.request log_response:241 - Not Found: /dashboard/admin/
+[WARNING] 30/01/2026 10:03:07 django.server log_message:212 - "GET /dashboard/admin/ HTTP/1.1" 404 4424
+[WARNING] 30/01/2026 10:03:09 django.request log_response:241 - Not Found: /dashboard/admin/
+[WARNING] 30/01/2026 10:03:09 django.server log_message:212 - "GET /dashboard/admin/ HTTP/1.1" 404 4424
+[WARNING] 30/01/2026 10:03:11 django.request log_response:241 - Not Found: /dashboard/admin/
+[WARNING] 30/01/2026 10:03:11 django.server log_message:212 - "GET /dashboard/admin/ HTTP/1.1" 404 4424
+[WARNING] 30/01/2026 10:03:11 django.request log_response:241 - Not Found: /dashboard/admin/
+[WARNING] 30/01/2026 10:03:11 django.server log_message:212 - "GET /dashboard/admin/ HTTP/1.1" 404 4424
+[INFO] 30/01/2026 10:03:20 django.server log_message:212 - "GET /admin/crypto_app/activitylog/add/ HTTP/1.1" 200 13635
+[INFO] 30/01/2026 10:03:27 django.server log_message:212 - "GET /admin/crypto_app/activitylog/add/ HTTP/1.1" 200 13635
+[INFO] 30/01/2026 10:03:27 django.server log_message:212 - "GET /admin/jsi18n/ HTTP/1.1" 200 8985
+[INFO] 30/01/2026 10:03:57 django.server log_message:212 - "GET /admin/ HTTP/1.1" 200 7817
+[INFO] 30/01/2026 10:04:09 django.server log_message:212 - "GET /admin/crypto_app/encryptionkey/ HTTP/1.1" 200 10105
+[INFO] 30/01/2026 10:04:09 django.server log_message:212 - "GET /admin/jsi18n/ HTTP/1.1" 200 8985
+[INFO] 30/01/2026 10:04:37 django.server log_message:212 - "POST /admin/crypto_app/encryptionkey/ HTTP/1.1" 200 8810
+[INFO] 30/01/2026 10:04:37 django.server log_message:212 - "GET /static/admin/js/cancel.js HTTP/1.1" 200 884
+[INFO] 30/01/2026 10:04:47 django.server log_message:212 - "POST /admin/crypto_app/encryptionkey/ HTTP/1.1" 302 0
+[INFO] 30/01/2026 10:04:47 django.server log_message:212 - "GET /admin/crypto_app/encryptionkey/ HTTP/1.1" 200 8899
+[INFO] 30/01/2026 10:04:47 django.server log_message:212 - "GET /admin/jsi18n/ HTTP/1.1" 200 8985
+[INFO] 30/01/2026 10:04:47 django.server log_message:212 - "GET /static/admin/img/icon-yes.svg HTTP/1.1" 304 0
+[INFO] 30/01/2026 10:05:10 django.server log_message:212 - "GET / HTTP/1.1" 302 0
+[INFO] 30/01/2026 10:05:10 django.server log_message:212 - "GET /dashboard/ HTTP/1.1" 200 16867
+[INFO] 30/01/2026 10:05:15 django.server log_message:212 - "GET /keys/ HTTP/1.1" 200 6027
+[INFO] 30/01/2026 10:05:21 django.server log_message:212 - "GET /files/ HTTP/1.1" 200 24041
+[INFO] 30/01/2026 10:05:52 django.server log_message:212 - "GET /files/delete/2/ HTTP/1.1" 302 0
+[INFO] 30/01/2026 10:05:52 django.server log_message:212 - "GET /files/ HTTP/1.1" 200 19852
+[INFO] 30/01/2026 10:06:00 django.server log_message:212 - "GET /keys/ HTTP/1.1" 200 6027
+[INFO] 30/01/2026 10:06:22 django.server log_message:212 - "POST /keys/ HTTP/1.1" 302 0
+[INFO] 30/01/2026 10:06:22 django.server log_message:212 - "GET /keys/ HTTP/1.1" 200 6821
+[INFO] 30/01/2026 10:06:46 django.server log_message:212 - "GET /admin/crypto_app/encryptionkey/add/ HTTP/1.1" 200 14072
+[INFO] 30/01/2026 10:06:46 django.server log_message:212 - "GET /admin/jsi18n/ HTTP/1.1" 200 8985
+[INFO] 30/01/2026 10:07:23 django.server log_message:212 - "GET /static/admin/img/calendar-icons.svg HTTP/1.1" 200 1094
+[INFO] 30/01/2026 10:07:52 django.server log_message:212 - "POST /admin/crypto_app/encryptionkey/add/ HTTP/1.1" 302 0
+[INFO] 30/01/2026 10:07:52 django.server log_message:212 - "GET /admin/crypto_app/encryptionkey/ HTTP/1.1" 200 10622
+[INFO] 30/01/2026 10:07:52 django.server log_message:212 - "GET /admin/jsi18n/ HTTP/1.1" 200 8985
+[INFO] 30/01/2026 10:08:15 django.server log_message:212 - "GET /admin/crypto_app/encryptionkey/add/ HTTP/1.1" 200 14072
+[INFO] 30/01/2026 10:08:15 django.server log_message:212 - "GET /admin/jsi18n/ HTTP/1.1" 200 8985
+[INFO] 30/01/2026 10:08:39 django.server log_message:212 - "GET /admin/crypto_app/encryptedfile/add/ HTTP/1.1" 200 14538
+[INFO] 30/01/2026 10:08:39 django.server log_message:212 - "GET /admin/jsi18n/ HTTP/1.1" 200 8985
+[INFO] 30/01/2026 10:08:55 django.server log_message:212 - "GET /admin/auth/user/1/change/?_to_field=id HTTP/1.1" 200 24291
+[INFO] 30/01/2026 10:08:55 django.server log_message:212 - "GET /admin/jsi18n/ HTTP/1.1" 200 8985
+[INFO] 30/01/2026 10:08:55 django.server log_message:212 - "GET /static/admin/js/SelectFilter2.js HTTP/1.1" 200 15492
+[INFO] 30/01/2026 10:08:55 django.server log_message:212 - "GET /static/admin/js/SelectBox.js HTTP/1.1" 200 4530
+[INFO] 30/01/2026 10:08:55 django.server log_message:212 - "GET /static/admin/img/search.svg HTTP/1.1" 304 0
+[INFO] 30/01/2026 10:08:55 django.server log_message:212 - "GET /static/admin/img/icon-unknown.svg HTTP/1.1" 200 655
+[INFO] 30/01/2026 10:08:55 django.server log_message:212 - "GET /static/admin/img/selector-icons.svg HTTP/1.1" 200 3291
+[INFO] 30/01/2026 10:08:55 django.server log_message:212 - "GET /static/admin/img/icon-unknown-alt.svg HTTP/1.1" 200 655
+[INFO] 30/01/2026 10:09:04 django.server log_message:212 - "GET /admin/auth/user/1/history/ HTTP/1.1" 200 7592
+[INFO] 30/01/2026 10:09:14 django.server log_message:212 - "GET /admin/auth/user/1/change/?_to_field=id HTTP/1.1" 200 24291
+[INFO] 30/01/2026 10:09:16 django.server log_message:212 - "GET /admin/crypto_app/encryptedfile/add/ HTTP/1.1" 200 14538
+[INFO] 30/01/2026 10:09:51 django.server log_message:212 - "GET /decrypt/ HTTP/1.1" 200 17599
+[WARNING] 30/01/2026 10:10:53 crypto_app.views decrypt_file:169 - Decryption failed for user 1: Invalid padding bytes.
+[INFO] 30/01/2026 10:10:53 django.server log_message:212 - "POST /decrypt/ HTTP/1.1" 200 17896
+[INFO] 30/01/2026 10:11:17 django.server log_message:212 - "GET /keys/ HTTP/1.1" 200 7060
+[INFO] 30/01/2026 10:11:51 django.server log_message:212 - "GET /files/ HTTP/1.1" 200 19571
+[WARNING] 30/01/2026 10:12:10 django.request log_response:241 - Not Found: /files/cleanup/
+[WARNING] 30/01/2026 10:12:10 django.server log_message:212 - "POST /files/cleanup/ HTTP/1.1" 404 4419
+[INFO] 30/01/2026 10:12:30 django.server log_message:212 - "GET /dashboard/ HTTP/1.1" 200 16867
+[INFO] 30/01/2026 10:12:53 django.server log_message:212 - "GET /admin/crypto_app/encryptionkey/add/ HTTP/1.1" 200 14072
+[INFO] 30/01/2026 10:12:54 django.server log_message:212 - "GET /admin/jsi18n/ HTTP/1.1" 200 8985
+[INFO] 30/01/2026 10:13:14 django.server log_message:212 - "GET /admin/auth/user/1/change/?_to_field=id&_popup=1 HTTP/1.1" 200 18980
+[INFO] 30/01/2026 10:13:14 django.server log_message:212 - "GET /admin/jsi18n/ HTTP/1.1" 200 8985
+[INFO] 30/01/2026 10:13:28 django.server log_message:212 - "GET /admin/auth/user/1/change/?_to_field=id HTTP/1.1" 200 24291
+[INFO] 30/01/2026 10:13:28 django.server log_message:212 - "GET /admin/jsi18n/ HTTP/1.1" 200 8985
+[INFO] 30/01/2026 10:14:01 django.server log_message:212 - "GET /admin/crypto_app/encryptionkey/add/ HTTP/1.1" 200 14072
+[INFO] 30/01/2026 10:14:52 django.server log_message:212 - "POST /admin/crypto_app/encryptionkey/add/ HTTP/1.1" 200 14285
+[INFO] 30/01/2026 10:14:52 django.server log_message:212 - "GET /admin/jsi18n/ HTTP/1.1" 200 8985
+[INFO] 30/01/2026 10:15:14 django.server log_message:212 - "POST /admin/crypto_app/encryptionkey/add/ HTTP/1.1" 302 0
+[INFO] 30/01/2026 10:15:14 django.server log_message:212 - "GET /admin/crypto_app/encryptionkey/ HTTP/1.1" 200 10901
+[INFO] 30/01/2026 10:15:14 django.server log_message:212 - "GET /admin/jsi18n/ HTTP/1.1" 200 8985
+[INFO] 30/01/2026 10:15:35 django.server log_message:212 - "POST /admin/crypto_app/encryptionkey/ HTTP/1.1" 200 8973
+[INFO] 30/01/2026 10:15:38 django.server log_message:212 - "POST /admin/crypto_app/encryptionkey/ HTTP/1.1" 302 0
+[INFO] 30/01/2026 10:15:38 django.server log_message:212 - "GET /admin/crypto_app/encryptionkey/ HTTP/1.1" 200 10262
+[INFO] 30/01/2026 10:15:38 django.server log_message:212 - "GET /admin/jsi18n/ HTTP/1.1" 200 8985
+[INFO] 30/01/2026 10:15:51 django.server log_message:212 - "GET /dashboard/ HTTP/1.1" 200 16867
+[ERROR] 31/01/2026 09:11:50 django.request log_response:241 - Internal Server Error: /encrypt-text/
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 875, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'text'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 881, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(
+                                            ~~~~~~~^
+        type(current), bit
+        ^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+AttributeError: type object 'RequestContext' has no attribute 'text'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 891, in _resolve_lookup
+    current = current[int(bit)]
+                      ~~~^^^^^
+ValueError: invalid literal for int() with base 10: 'text'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py", line 203, in encrypt_text
+    return render(request, 'crypto_app/encrypt_text.html', {
+        'form': form,
+        'result': result,
+        'action': locals().get('action', None),
+    })
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 961, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 961, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 961, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1059, in render
+    output = self.filter_expression.resolve(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 731, in resolve
+    arg_vals.append(arg.resolve(context))
+                    ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 842, in resolve
+    value = self._resolve_lookup(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 898, in _resolve_lookup
+    raise VariableDoesNotExist(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+    )  # missing attribute
+    ^
+django.template.base.VariableDoesNotExist: Failed lookup for key [text] in [{'True': True, 'False': False, 'None': None}, {}, {}, {'form': <TextEncryptionForm bound=False, valid=False, fields=(text;password;action)>, 'result': None, 'action': None}]
+[ERROR] 31/01/2026 09:11:50 django.request log_response:241 - Internal Server Error: /encrypt-text/
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 875, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\context.py", line 83, in __getitem__
+    raise KeyError(key)
+KeyError: 'text'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 881, in _resolve_lookup
+    if isinstance(current, BaseContext) and getattr(
+                                            ~~~~~~~^
+        type(current), bit
+        ^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+AttributeError: type object 'RequestContext' has no attribute 'text'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 891, in _resolve_lookup
+    current = current[int(bit)]
+                      ~~~^^^^^
+ValueError: invalid literal for int() with base 10: 'text'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py", line 203, in encrypt_text
+    return render(request, 'crypto_app/encrypt_text.html', {
+        'form': form,
+        'result': result,
+        'action': locals().get('action', None),
+    })
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 961, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 961, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 961, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1059, in render
+    output = self.filter_expression.resolve(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 731, in resolve
+    arg_vals.append(arg.resolve(context))
+                    ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 842, in resolve
+    value = self._resolve_lookup(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 898, in _resolve_lookup
+    raise VariableDoesNotExist(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+    )  # missing attribute
+    ^
+django.template.base.VariableDoesNotExist: Failed lookup for key [text] in [{'True': True, 'False': False, 'None': None}, {}, {}, {'form': <TextEncryptionForm bound=False, valid=False, fields=(text;password;action)>, 'result': None, 'action': None}]
+[INFO] 31/01/2026 09:11:50 django.server handle_error:81 - - Broken pipe from ('127.0.0.1', 58972)
+[ERROR] 31/01/2026 09:11:50 django.server log_message:212 - "GET /encrypt-text/ HTTP/1.1" 500 185133
+[INFO] 31/01/2026 09:16:24 django.server log_message:212 - "GET /encrypt-text/ HTTP/1.1" 200 16078
+[INFO] 31/01/2026 09:19:00 django.server log_message:212 - "POST /encrypt-text/ HTTP/1.1" 200 19090
+[INFO] 31/01/2026 09:20:49 django.server log_message:212 - "POST /encrypt-text/ HTTP/1.1" 200 18738
+[INFO] 31/01/2026 09:21:47 django.server log_message:212 - "GET /files/ HTTP/1.1" 200 19571
+[INFO] 31/01/2026 09:22:28 django.server log_message:212 - "GET /keys/ HTTP/1.1" 200 6537
+[INFO] 31/01/2026 09:27:14 django.utils.autoreload trigger_reload:266 - C:\Users\lenovo\Django\cryptosafe\crypto_app\urls.py changed, reloading.
+[INFO] 31/01/2026 09:27:17 django.utils.autoreload run_with_reloader:668 - Watching for file changes with StatReloader
+[INFO] 31/01/2026 09:27:26 django.utils.autoreload trigger_reload:266 - C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py changed, reloading.
+[INFO] 31/01/2026 09:27:28 django.utils.autoreload run_with_reloader:668 - Watching for file changes with StatReloader
+[INFO] 31/01/2026 09:30:49 django.server log_message:212 - "GET /keys/ HTTP/1.1" 200 6890
+[INFO] 31/01/2026 09:30:53 django.server log_message:212 - "GET /keys/2/ HTTP/1.1" 200 5809
+[INFO] 31/01/2026 09:31:07 django.server log_message:212 - "GET /keys/ HTTP/1.1" 200 6890
+[INFO] 31/01/2026 09:32:00 django.server log_message:212 - "POST /keys/ HTTP/1.1" 302 0
+[INFO] 31/01/2026 09:32:00 django.server log_message:212 - "GET /keys/ HTTP/1.1" 200 8050
+[INFO] 31/01/2026 09:32:04 django.server log_message:212 - "GET /keys/5/ HTTP/1.1" 200 8040
+[INFO] 31/01/2026 09:32:25 django.server log_message:212 - "GET /keys/ HTTP/1.1" 200 7766
+[INFO] 31/01/2026 09:32:44 django.server log_message:212 - "POST /keys/ HTTP/1.1" 302 0
+[INFO] 31/01/2026 09:32:44 django.server log_message:212 - "GET /keys/ HTTP/1.1" 200 8933
+[INFO] 31/01/2026 09:32:49 django.server log_message:212 - "GET /keys/6/ HTTP/1.1" 200 5795
+[INFO] 31/01/2026 09:33:12 django.server log_message:212 - "GET /keys/ HTTP/1.1" 200 8648
+[INFO] 31/01/2026 09:33:19 django.server log_message:212 - "POST /keys/delete/5/ HTTP/1.1" 302 0
+[INFO] 31/01/2026 09:33:19 django.server log_message:212 - "GET /keys/ HTTP/1.1" 200 8055
+[INFO] 31/01/2026 09:33:30 django.server log_message:212 - "GET /dashboard/ HTTP/1.1" 200 16858
+[INFO] 31/01/2026 09:34:00 django.server log_message:212 - "GET /decrypt/ HTTP/1.1" 200 17599
+[INFO] 31/01/2026 09:34:11 django.server log_message:212 - "GET /encrypt/ HTTP/1.1" 200 7750
+[INFO] 31/01/2026 09:35:25 django.server log_message:212 - "POST /encrypt/ HTTP/1.1" 200 7909
+[INFO] 31/01/2026 09:37:10 django.server log_message:212 - "POST /encrypt/ HTTP/1.1" 200 7929
+[INFO] 31/01/2026 09:38:21 crypto_app.views encrypt_file:102 - Encryption successful for user 1: TP1.doc
+[INFO] 31/01/2026 09:38:21 django.server log_message:212 - "POST /encrypt/ HTTP/1.1" 302 0
+[INFO] 31/01/2026 09:38:21 django.server log_message:212 - "GET /files/ HTTP/1.1" 200 24330
+[INFO] 31/01/2026 09:39:02 django.server log_message:212 - "GET /encrypt/ HTTP/1.1" 200 7750
+[INFO] 31/01/2026 09:46:31 crypto_app.views encrypt_file:102 - Encryption successful for user 1: TP_7.pdf
+[INFO] 31/01/2026 09:46:31 django.server log_message:212 - "POST /encrypt/ HTTP/1.1" 302 0
+[INFO] 31/01/2026 09:46:31 django.server log_message:212 - "GET /files/ HTTP/1.1" 200 28311
+[INFO] 31/01/2026 09:48:03 django.server log_message:212 - "GET /files/ HTTP/1.1" 200 28021
+[INFO] 31/01/2026 09:48:13 django.server log_message:212 - "GET /files/download/4/ HTTP/1.1" 200 1346377
+[INFO] 31/01/2026 09:48:22 django.server log_message:212 - "GET /decrypt/ HTTP/1.1" 200 20144
+[INFO] 31/01/2026 09:49:26 crypto_app.views decrypt_file:162 - Decryption successful for user 1: ed754e5d-8bd3-48e9-a6f3-58ff1221e231.enc
+[INFO] 31/01/2026 09:49:26 django.server log_message:212 - "POST /decrypt/ HTTP/1.1" 200 1009644
+[WARNING] 31/01/2026 09:51:38 crypto_app.views decrypt_file:169 - Decryption failed for user 1: Invalid padding bytes.
+[INFO] 31/01/2026 09:51:38 django.server log_message:212 - "POST /decrypt/ HTTP/1.1" 200 20441
+[WARNING] 31/01/2026 09:52:37 crypto_app.views decrypt_file:169 - Decryption failed for user 1: Invalid padding bytes.
+[INFO] 31/01/2026 09:52:37 django.server log_message:212 - "POST /decrypt/ HTTP/1.1" 200 20441
+[INFO] 31/01/2026 09:53:44 crypto_app.views decrypt_file:162 - Decryption successful for user 1: ed754e5d-8bd3-48e9-a6f3-58ff1221e231.enc
+[INFO] 31/01/2026 09:53:44 django.server log_message:212 - "POST /decrypt/ HTTP/1.1" 200 1009644
+[INFO] 31/01/2026 09:54:04 django.server log_message:212 - "GET /files/ HTTP/1.1" 200 28021
+[INFO] 31/01/2026 09:54:17 django.server log_message:212 - "GET /files/delete/3/ HTTP/1.1" 302 0
+[INFO] 31/01/2026 09:54:17 django.server log_message:212 - "GET /files/ HTTP/1.1" 200 24321
+[WARNING] 31/01/2026 09:54:46 django.request log_response:241 - Not Found: /files/cleanup/
+[WARNING] 31/01/2026 09:54:46 django.server log_message:212 - "POST /files/cleanup/ HTTP/1.1" 404 4804
+[INFO] 31/01/2026 09:59:41 django.utils.autoreload trigger_reload:266 - C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py changed, reloading.
+[INFO] 31/01/2026 09:59:44 django.utils.autoreload run_with_reloader:668 - Watching for file changes with StatReloader
+[WARNING] 31/01/2026 09:59:53 django.request log_response:241 - Not Found: /files/delete-multiple/
+[WARNING] 31/01/2026 09:59:53 django.server log_message:212 - "POST /files/delete-multiple/ HTTP/1.1" 404 4828
+[INFO] 31/01/2026 09:59:55 django.utils.autoreload trigger_reload:266 - C:\Users\lenovo\Django\cryptosafe\crypto_app\urls.py changed, reloading.
+[INFO] 31/01/2026 09:59:57 django.utils.autoreload run_with_reloader:668 - Watching for file changes with StatReloader
+[INFO] 31/01/2026 10:01:50 django.server log_message:212 - "GET /files/ HTTP/1.1" 200 24040
+[INFO] 31/01/2026 10:02:00 django.server log_message:212 - "POST /files/cleanup/ HTTP/1.1" 200 68
+[INFO] 31/01/2026 10:02:25 django.server log_message:212 - "GET /files/ HTTP/1.1" 200 24040
+[INFO] 31/01/2026 10:02:39 django.server log_message:212 - "POST /files/cleanup/ HTTP/1.1" 200 68
+[INFO] 31/01/2026 10:02:41 django.server log_message:212 - "GET /files/ HTTP/1.1" 200 24040
+[INFO] 31/01/2026 10:03:31 django.server log_message:212 - "POST /files/delete-multiple/ HTTP/1.1" 200 31
+[INFO] 31/01/2026 10:03:31 django.server log_message:212 - "GET /files/ HTTP/1.1" 200 19571
+[INFO] 31/01/2026 10:04:45 django.server log_message:212 - "GET /dashboard/ HTTP/1.1" 200 16889
+[INFO] 31/01/2026 10:05:11 django.server log_message:212 - "GET /keys/ HTTP/1.1" 200 7772
+[INFO] 31/01/2026 10:05:19 django.server log_message:212 - "GET /keys/2/ HTTP/1.1" 200 5809
+[INFO] 31/01/2026 10:05:24 django.server log_message:212 - "GET /encrypt/ HTTP/1.1" 200 7750
+[INFO] 31/01/2026 10:05:26 django.server log_message:212 - "GET /dashboard/ HTTP/1.1" 200 16889
+[INFO] 31/01/2026 10:06:17 django.server log_message:212 - "GET /encrypt/ HTTP/1.1" 200 7750
+[INFO] 31/01/2026 10:09:07 crypto_app.views encrypt_file:105 - Encryption successful for user 1: TP1.doc
+[INFO] 31/01/2026 10:09:07 django.server log_message:212 - "POST /encrypt/ HTTP/1.1" 302 0
+[INFO] 31/01/2026 10:09:07 django.server log_message:212 - "GET /files/ HTTP/1.1" 200 24330
+[INFO] 31/01/2026 10:09:34 django.server log_message:212 - "GET /encrypt/ HTTP/1.1" 200 7750
+[INFO] 31/01/2026 10:09:42 django.server log_message:212 - "GET /dashboard/ HTTP/1.1" 200 16867
+[INFO] 31/01/2026 10:09:53 django.server log_message:212 - "GET /encrypt/ HTTP/1.1" 200 7750
+[INFO] 31/01/2026 10:09:59 django.server log_message:212 - "GET /encrypt/ HTTP/1.1" 200 7750
+[INFO] 31/01/2026 10:10:24 crypto_app.views encrypt_file:105 - Encryption successful for user 1: TP_7.pdf
+[INFO] 31/01/2026 10:10:24 django.server log_message:212 - "POST /encrypt/ HTTP/1.1" 302 0
+[INFO] 31/01/2026 10:10:24 django.server log_message:212 - "GET /files/ HTTP/1.1" 200 28311
+[INFO] 31/01/2026 10:11:42 django.server log_message:212 - "GET /files/download/6/ HTTP/1.1" 200 1346377
+[INFO] 31/01/2026 10:11:49 django.server log_message:212 - "GET /files/download/5/ HTTP/1.1" 200 41841
+[INFO] 31/01/2026 10:12:02 django.server log_message:212 - "GET /profile/ HTTP/1.1" 200 19320
+[INFO] 31/01/2026 10:13:14 django.server log_message:212 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 31/01/2026 10:13:14 django.server log_message:212 - "GET / HTTP/1.1" 200 9638
+[INFO] 31/01/2026 10:14:14 django.server log_message:212 - "GET /register/ HTTP/1.1" 200 14524
+[INFO] 31/01/2026 10:14:42 django.server log_message:212 - "GET /login/ HTTP/1.1" 200 7462
+[INFO] 31/01/2026 10:15:22 crypto_app.views user_login:425 - User mille logged in successfully
+[INFO] 31/01/2026 10:15:22 django.server log_message:212 - "POST /login/ HTTP/1.1" 302 0
+[INFO] 31/01/2026 10:15:22 django.server log_message:212 - "GET /dashboard/ HTTP/1.1" 200 15364
+[INFO] 31/01/2026 10:15:33 django.server log_message:212 - "GET /files/ HTTP/1.1" 200 19571
+[INFO] 31/01/2026 10:15:37 django.server log_message:212 - "GET /encrypt/ HTTP/1.1" 200 7750
+[INFO] 31/01/2026 10:15:39 django.server log_message:212 - "GET /dashboard/ HTTP/1.1" 200 15097
+[INFO] 31/01/2026 10:15:45 django.server log_message:212 - "GET /files/ HTTP/1.1" 200 19571
+[INFO] 31/01/2026 10:23:37 django.utils.autoreload trigger_reload:266 - C:\Users\lenovo\Django\cryptosafe\crypto_app\admin.py changed, reloading.
+[INFO] 31/01/2026 10:23:42 django.utils.autoreload run_with_reloader:668 - Watching for file changes with StatReloader
+[INFO] 31/01/2026 10:27:29 django.server log_message:212 - "GET /files/ HTTP/1.1" 200 19571
+[INFO] 31/01/2026 19:29:23 django.utils.autoreload trigger_reload:266 - C:\Users\lenovo\Django\cryptosafe\crypto_app\admin.py changed, reloading.
+[INFO] 31/01/2026 19:29:27 django.utils.autoreload run_with_reloader:668 - Watching for file changes with StatReloader
+[INFO] 31/01/2026 21:03:50 django.server log_message:212 - "GET /files/ HTTP/1.1" 200 19571
+[INFO] 31/01/2026 21:03:54 django.server log_message:212 - "GET /dashboard/ HTTP/1.1" 200 15112
+[INFO] 02/02/2026 19:44:32 django.server log_message:212 - "GET /dashboard/ HTTP/1.1" 200 15099
+[INFO] 02/02/2026 19:45:11 django.server log_message:212 - "GET /encrypt-text/ HTTP/1.1" 200 16078
+[INFO] 02/02/2026 19:45:28 django.server log_message:212 - "GET /files/ HTTP/1.1" 200 19571
+[INFO] 02/02/2026 19:45:41 django.server log_message:212 - "GET /decrypt/ HTTP/1.1" 200 17599
+[INFO] 02/02/2026 19:45:49 django.server log_message:212 - "GET /dashboard/ HTTP/1.1" 200 15099
+[INFO] 05/02/2026 19:11:00 django.utils.autoreload trigger_reload:266 - C:\Users\lenovo\Django\cryptosafe\crypto_app\admin.py changed, reloading.
+[INFO] 05/02/2026 19:11:05 django.utils.autoreload run_with_reloader:668 - Watching for file changes with StatReloader
+[INFO] 05/02/2026 19:17:13 django.utils.autoreload run_with_reloader:668 - Watching for file changes with StatReloader
+[INFO] 05/02/2026 19:17:20 django.server log_message:212 - "GET /dashboard/ HTTP/1.1" 200 15109
+[INFO] 05/02/2026 19:17:32 django.server log_message:212 - "GET /profile/ HTTP/1.1" 200 12989
+[INFO] 05/02/2026 19:25:09 django.utils.autoreload trigger_reload:266 - C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\conf\locale\fr\__init__.py changed, reloading.
+[INFO] 05/02/2026 19:53:16 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/02/2026 20:09:42 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/02/2026 20:09:51 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 15109
+[INFO] 05/02/2026 20:14:59 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 7750
+[INFO] 05/02/2026 20:15:52 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 15110
+[INFO] 05/02/2026 20:15:54 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 7750
+[INFO] 05/02/2026 20:16:32 django.server log_message:249 - "POST /encrypt/ HTTP/1.1" 200 7873
+[INFO] 05/02/2026 20:17:34 django.server log_message:249 - "POST /encrypt/ HTTP/1.1" 200 7929
+[INFO] 05/02/2026 20:18:33 crypto_app.views encrypt_file:105 - Encryption successful for user 2: TP1.doc
+[INFO] 05/02/2026 20:18:33 django.server log_message:249 - "POST /encrypt/ HTTP/1.1" 302 0
+[INFO] 05/02/2026 20:18:33 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 24330
+[INFO] 05/02/2026 20:18:52 django.server log_message:249 - "GET /files/download/7/ HTTP/1.1" 200 41841
+[INFO] 05/02/2026 20:19:01 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 15678
+[INFO] 05/02/2026 20:19:11 django.server log_message:249 - "GET /decrypt/ HTTP/1.1" 200 19101
+[INFO] 05/02/2026 20:20:21 crypto_app.views decrypt_file:165 - Decryption successful for user 2: 10df3ccc-f64f-4a6c-b36b-359e507b5cdc.enc
+[INFO] 05/02/2026 20:20:21 django.server log_message:249 - "POST /decrypt/ HTTP/1.1" 200 31232
+[INFO] 05/02/2026 20:20:32 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 24041
+[INFO] 05/02/2026 20:20:40 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16268
+[INFO] 05/02/2026 20:23:14 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 6027
+[INFO] 05/02/2026 20:23:47 django.server log_message:249 - "POST /keys/ HTTP/1.1" 302 0
+[INFO] 05/02/2026 20:23:47 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 7174
+[INFO] 05/02/2026 20:23:52 django.server log_message:249 - "GET /keys/7/ HTTP/1.1" 200 5809
+[INFO] 05/02/2026 20:24:06 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 6890
+[INFO] 05/02/2026 20:24:08 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16269
+[INFO] 05/02/2026 23:15:56 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/02/2026 23:16:06 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16293
+[INFO] 05/02/2026 23:16:41 django.server log_message:249 - "GET /admin/ HTTP/1.1" 302 0
+[INFO] 05/02/2026 23:16:42 django.server log_message:249 - "GET /admin/login/?next=/admin/ HTTP/1.1" 200 3694
+[INFO] 05/02/2026 23:16:42 django.server log_message:249 - "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 3538
+[INFO] 05/02/2026 23:16:42 django.server log_message:249 - "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+[INFO] 05/02/2026 23:16:42 django.server log_message:249 - "GET /static/admin/css/login.css HTTP/1.1" 200 951
+[INFO] 05/02/2026 23:16:42 django.server log_message:249 - "GET /static/admin/css/base.css HTTP/1.1" 200 23100
+[INFO] 05/02/2026 23:16:42 django.server log_message:249 - "GET /static/admin/css/responsive.css HTTP/1.1" 200 16273
+[INFO] 05/02/2026 23:16:42 django.server log_message:249 - "GET /static/admin/js/theme.js HTTP/1.1" 200 1653
+[INFO] 05/02/2026 23:16:42 django.server log_message:249 - "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+[INFO] 05/02/2026 23:16:58 django.server log_message:249 - "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+[INFO] 05/02/2026 23:16:58 django.server log_message:249 - "GET /admin/ HTTP/1.1" 200 11118
+[INFO] 05/02/2026 23:16:58 django.server log_message:249 - "GET /static/admin/css/dashboard.css HTTP/1.1" 200 441
+[INFO] 05/02/2026 23:16:58 django.server log_message:249 - "GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 200 689
+[INFO] 05/02/2026 23:16:58 django.server log_message:249 - "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 978
+[INFO] 05/02/2026 23:16:58 django.server log_message:249 - "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 593
+[INFO] 05/02/2026 23:17:14 django.server log_message:249 - "GET /admin/crypto_app/userprofile/ HTTP/1.1" 200 13519
+[INFO] 05/02/2026 23:17:14 django.server log_message:249 - "GET /static/admin/css/changelists.css HTTP/1.1" 200 7498
+[INFO] 05/02/2026 23:17:14 django.server log_message:249 - "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+[INFO] 05/02/2026 23:17:14 django.server log_message:249 - "GET /static/admin/js/urlify.js HTTP/1.1" 200 7887
+[INFO] 05/02/2026 23:17:14 django.server log_message:249 - "GET /static/admin/js/core.js HTTP/1.1" 200 6208
+[INFO] 05/02/2026 23:17:14 django.server log_message:249 - "GET /static/admin/js/actions.js HTTP/1.1" 200 8076
+[INFO] 05/02/2026 23:17:14 django.server log_message:249 - "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 9777
+[INFO] 05/02/2026 23:17:14 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 05/02/2026 23:17:14 django.server log_message:249 - "GET /static/admin/img/search.svg HTTP/1.1" 200 607
+[INFO] 05/02/2026 23:17:14 django.server log_message:249 - "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+[INFO] 05/02/2026 23:17:14 django.server log_message:249 - "GET /static/admin/img/icon-no.svg HTTP/1.1" 200 645
+[INFO] 05/02/2026 23:17:14 django.server log_message:249 - "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314
+[INFO] 05/02/2026 23:17:14 django.server log_message:249 - "GET /static/admin/js/filters.js HTTP/1.1" 200 978
+[INFO] 05/02/2026 23:17:15 django.server log_message:249 - "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171
+[INFO] 05/02/2026 23:17:15 django.server log_message:249 - "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 593
+[INFO] 05/02/2026 23:17:15 django.server log_message:249 - "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1761
+[INFO] 05/02/2026 23:17:41 django.server log_message:249 - "GET /admin/crypto_app/userprofile/add/ HTTP/1.1" 200 13293
+[INFO] 05/02/2026 23:17:41 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 05/02/2026 23:17:41 django.server log_message:249 - "GET /static/admin/css/forms.css HTTP/1.1" 200 8817
+[INFO] 05/02/2026 23:17:41 django.server log_message:249 - "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 586
+[INFO] 05/02/2026 23:17:41 django.server log_message:249 - "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 200 928
+[INFO] 05/02/2026 23:17:41 django.server log_message:249 - "GET /static/admin/css/widgets.css HTTP/1.1" 200 11811
+[INFO] 05/02/2026 23:17:41 django.server log_message:249 - "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+[INFO] 05/02/2026 23:18:08 django.server log_message:249 - "GET /admin/auth/user/add/?_to_field=id&_popup=1 HTTP/1.1" 200 8450
+[INFO] 05/02/2026 23:18:08 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 05/02/2026 23:18:08 django.server log_message:249 - "GET /static/admin/css/unusable_password_field.css HTTP/1.1" 200 663
+[INFO] 05/02/2026 23:18:21 django.server log_message:249 - "GET /admin/auth/user/1/change/?_to_field=id&_popup=1 HTTP/1.1" 200 20257
+[INFO] 05/02/2026 23:18:21 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 05/02/2026 23:18:21 django.server log_message:249 - "GET /static/admin/js/calendar.js HTTP/1.1" 200 9159
+[INFO] 05/02/2026 23:18:21 django.server log_message:249 - "GET /static/admin/js/SelectFilter2.js HTTP/1.1" 200 16428
+[INFO] 05/02/2026 23:18:21 django.server log_message:249 - "GET /static/admin/js/SelectBox.js HTTP/1.1" 200 4530
+[INFO] 05/02/2026 23:18:21 django.server log_message:249 - "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 200 19698
+[INFO] 05/02/2026 23:18:21 django.server log_message:249 - "GET /static/admin/img/selector-icons.svg HTTP/1.1" 200 2387
+[INFO] 05/02/2026 23:18:21 django.server log_message:249 - "GET /static/admin/img/icon-clock.svg HTTP/1.1" 200 805
+[INFO] 05/02/2026 23:18:21 django.server log_message:249 - "GET /static/admin/img/icon-calendar.svg HTTP/1.1" 200 1112
+[INFO] 05/02/2026 23:18:55 django.server log_message:249 - "GET /admin/crypto_app/encryptionkey/ HTTP/1.1" 200 15250
+[INFO] 05/02/2026 23:23:55 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/02/2026 23:24:22 django.server log_message:249 - "GET / HTTP/1.1" 302 0
+[INFO] 05/02/2026 23:24:22 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16898
+[INFO] 05/02/2026 23:24:46 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 28021
+[INFO] 06/02/2026 12:14:46 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 06/02/2026 12:15:11 django.server log_message:249 - "GET / HTTP/1.1" 302 0
+[INFO] 06/02/2026 12:15:11 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16893
+[INFO] 06/02/2026 12:15:23 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 28021
+[INFO] 06/02/2026 12:33:10 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 06/02/2026 12:34:25 django.server log_message:249 - "GET / HTTP/1.1" 302 0
+[INFO] 06/02/2026 12:34:25 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16893
+[INFO] 06/02/2026 12:34:32 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 28021
+[INFO] 06/02/2026 12:34:51 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 06/02/2026 12:34:51 django.server log_message:249 - "GET / HTTP/1.1" 200 9638
+[INFO] 06/02/2026 12:35:53 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462
+[INFO] 06/02/2026 12:36:00 crypto_app.views user_login:425 - User porna logged in successfully
+[INFO] 06/02/2026 12:36:00 django.server log_message:249 - "POST /login/ HTTP/1.1" 302 0
+[INFO] 06/02/2026 12:36:00 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 17129
+[INFO] 06/02/2026 13:41:28 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\forms.py changed, reloading.
+[INFO] 06/02/2026 13:41:31 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 06/02/2026 13:41:55 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\cryptosafe\settings.py changed, reloading.
+[INFO] 06/02/2026 13:41:57 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 06/02/2026 13:42:54 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py changed, reloading.
+[INFO] 06/02/2026 13:42:56 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 06/02/2026 13:49:18 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16874
+[INFO] 06/02/2026 13:50:22 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\forms.py changed, reloading.
+[INFO] 06/02/2026 13:50:26 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 06/02/2026 14:06:35 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\forms.py changed, reloading.
+[INFO] 06/02/2026 14:06:37 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 06/02/2026 15:06:27 django.server log_message:249 - "GET /encrypt-text/ HTTP/1.1" 200 16078
+[INFO] 06/02/2026 15:06:40 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16875
+[INFO] 06/02/2026 15:06:46 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 06/02/2026 15:06:46 django.server log_message:249 - "GET / HTTP/1.1" 200 9638
+[INFO] 06/02/2026 15:06:56 django.server log_message:249 - "GET /register/ HTTP/1.1" 200 14524
+[INFO] 06/02/2026 15:07:04 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462
+[INFO] 06/02/2026 15:07:15 crypto_app.views user_login:425 - User porna logged in successfully
+[INFO] 06/02/2026 15:07:15 django.server log_message:249 - "POST /login/ HTTP/1.1" 302 0
+[INFO] 06/02/2026 15:07:15 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 17111
+[INFO] 06/02/2026 16:46:12 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16856
+[INFO] 06/02/2026 16:46:20 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 28021
+[INFO] 06/02/2026 16:46:26 django.server log_message:249 - "GET /decrypt/ HTTP/1.1" 200 20144
+[INFO] 06/02/2026 16:46:31 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16856
+[INFO] 06/02/2026 16:46:49 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 06/02/2026 16:46:49 django.server log_message:249 - "GET / HTTP/1.1" 200 9638
+[INFO] 06/02/2026 16:47:28 django.server log_message:249 - "GET /register/ HTTP/1.1" 200 14524
+[INFO] 09/02/2026 08:52:43 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462
+[INFO] 09/02/2026 08:52:48 crypto_app.views user_login:425 - User porna logged in successfully
+[INFO] 09/02/2026 08:52:48 django.server log_message:249 - "POST /login/ HTTP/1.1" 302 0
+[INFO] 09/02/2026 08:52:48 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 17093
+[INFO] 11/02/2026 02:51:16 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 11/02/2026 02:51:26 django.server log_message:249 - "GET /decrypt/ HTTP/1.1" 200 20144
+[INFO] 17/02/2026 09:16:55 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 17/02/2026 09:17:17 django.server log_message:249 - "GET / HTTP/1.1" 302 0
+[INFO] 17/02/2026 09:17:18 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16840
+[WARNING] 17/02/2026 09:17:18 django.request log_message:249 - Not Found: /favicon.ico
+[WARNING] 17/02/2026 09:17:18 django.server log_message:249 - "GET /favicon.ico HTTP/1.1" 404 6740
+[INFO] 17/02/2026 09:19:29 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16840
+[INFO] 17/02/2026 09:19:54 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 7750
+[INFO] 17/02/2026 09:21:06 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16840
+[INFO] 17/02/2026 09:21:11 django.server log_message:249 - "GET /decrypt/ HTTP/1.1" 200 20144
+[INFO] 17/02/2026 09:22:33 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16840
+[INFO] 17/02/2026 09:22:42 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 7772
+[INFO] 17/02/2026 09:23:56 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 28021
+[INFO] 17/02/2026 09:24:54 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 17/02/2026 09:24:54 django.server log_message:249 - "GET / HTTP/1.1" 200 9638
+[INFO] 17/02/2026 09:25:00 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462
+[INFO] 17/02/2026 09:26:25 django.server log_message:249 - "GET /register/ HTTP/1.1" 200 14524
+[INFO] 17/02/2026 09:28:47 django.server log_message:249 - "GET /register/ HTTP/1.1" 200 13340
+[INFO] 17/02/2026 09:30:39 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462
+[INFO] 17/02/2026 09:30:59 crypto_app.views user_login:425 - User porna logged in successfully
+[INFO] 17/02/2026 09:30:59 django.server log_message:249 - "POST /login/ HTTP/1.1" 302 0
+[INFO] 17/02/2026 09:30:59 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 17086
+[INFO] 17/02/2026 16:38:19 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 28021
+[INFO] 17/02/2026 16:38:27 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16831
+[INFO] 21/02/2026 23:13:47 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16821
+[INFO] 21/02/2026 23:13:54 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 21/02/2026 23:13:54 django.server log_message:249 - "GET / HTTP/1.1" 200 16120
+[INFO] 21/02/2026 23:14:36 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462
+[INFO] 21/02/2026 23:15:01 crypto_app.views user_login:425 - User porna logged in successfully
+[INFO] 21/02/2026 23:15:01 django.server log_message:249 - "POST /login/ HTTP/1.1" 302 0
+[INFO] 21/02/2026 23:15:01 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 17076
+[INFO] 21/02/2026 23:22:34 django.server log_message:249 - "GET /login/ HTTP/1.1" 302 0
+[INFO] 21/02/2026 23:22:34 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16810
+[INFO] 21/02/2026 23:22:46 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 21/02/2026 23:22:46 django.server log_message:249 - "GET / HTTP/1.1" 200 16120
+[ERROR] 21/02/2026 23:22:52 django.request log_message:249 - Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py", line 432, in user_login
+    return render(request, 'crypto_app/login.html')
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 174, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 166, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1052, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader_tags.py", line 160, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 166, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1052, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader_tags.py", line 66, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1052, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\defaulttags.py", line 511, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\urls\resolvers.py", line 842, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'password_reset' not found. 'password_reset' is not a valid view function or pattern name.
+[ERROR] 21/02/2026 23:22:53 django.server log_message:249 - "GET /login/ HTTP/1.1" 500 154095
+[INFO] 21/02/2026 23:27:18 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462
+[ERROR] 21/02/2026 23:33:17 django.request log_message:249 - Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py", line 432, in user_login
+    return render(request, 'crypto_app/login.html')
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\engine.py", line 186, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 157, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 199, in compile_nodelist
+    nodelist = parser.parse()
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 585, in parse
+    raise self.error(token, e)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 583, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader_tags.py", line 307, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 585, in parse
+    raise self.error(token, e)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 583, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader_tags.py", line 235, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 585, in parse
+    raise self.error(token, e)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 583, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\defaulttags.py", line 994, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 585, in parse
+    raise self.error(token, e)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 583, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\defaulttags.py", line 894, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 556, in parse
+    raise self.error(token, e)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 554, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 676, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 776, in __init__
+    raise TemplateSyntaxError(
+    ...<2 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Template: C:\Users\lenovo\Django\cryptosafe\crypto_app\templates\crypto_app\login.html, Could not parse the remainder: ' == 'success' and 'check-circle' or 'exclamation-triangle'' from 'message.tags == 'success' and 'check-circle' or 'exclamation-triangle''
+[ERROR] 21/02/2026 23:33:17 django.server log_message:249 - "GET /login/ HTTP/1.1" 500 235434
+[ERROR] 21/02/2026 23:39:14 django.request log_message:249 - Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py", line 432, in user_login
+    return render(request, 'crypto_app/login.html')
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\engine.py", line 186, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 157, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 199, in compile_nodelist
+    nodelist = parser.parse()
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 585, in parse
+    raise self.error(token, e)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 583, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader_tags.py", line 307, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 585, in parse
+    raise self.error(token, e)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 583, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader_tags.py", line 235, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 585, in parse
+    raise self.error(token, e)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 583, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\defaulttags.py", line 994, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 585, in parse
+    raise self.error(token, e)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 583, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\defaulttags.py", line 894, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 556, in parse
+    raise self.error(token, e)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 554, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 676, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 776, in __init__
+    raise TemplateSyntaxError(
+    ...<2 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Template: C:\Users\lenovo\Django\cryptosafe\crypto_app\templates\crypto_app\login.html, Could not parse the remainder: ' == 'success' and 'check-circle' or 'exclamation-triangle'' from 'message.tags == 'success' and 'check-circle' or 'exclamation-triangle''
+[ERROR] 21/02/2026 23:39:14 django.server log_message:249 - "GET /login/ HTTP/1.1" 500 235434
+[ERROR] 21/02/2026 23:43:40 django.request log_message:249 - Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py", line 432, in user_login
+    return render(request, 'crypto_app/login.html')
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 174, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 166, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1052, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader_tags.py", line 160, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 166, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1052, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader_tags.py", line 66, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1052, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\defaulttags.py", line 511, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\urls\resolvers.py", line 842, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'password_reset' not found. 'password_reset' is not a valid view function or pattern name.
+[ERROR] 21/02/2026 23:43:40 django.server log_message:249 - "GET /login/ HTTP/1.1" 500 154968
+[INFO] 21/02/2026 23:46:06 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462
+[INFO] 21/02/2026 23:46:19 crypto_app.views user_login:425 - User porna logged in successfully
+[INFO] 21/02/2026 23:46:19 django.server log_message:249 - "POST /login/ HTTP/1.1" 302 0
+[INFO] 21/02/2026 23:46:19 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 17067
+[INFO] 22/02/2026 18:02:06 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py changed, reloading.
+[INFO] 22/02/2026 18:02:10 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 22/02/2026 18:11:18 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\urls.py changed, reloading.
+[INFO] 22/02/2026 18:11:20 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 22/02/2026 18:13:36 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\cryptosafe\urls.py changed, reloading.
+[INFO] 22/02/2026 18:13:38 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 22/02/2026 18:14:55 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16826
+[ERROR] 22/02/2026 18:15:34 django.request log_message:249 - Internal Server Error: /chat/
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py", line 516, in chat_gemini
+    return render(request, 'chat.html', {'reponse': reponse_texte})
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: chat.html
+[ERROR] 22/02/2026 18:15:34 django.server log_message:249 - "GET /chat/ HTTP/1.1" 500 84607
+[INFO] 22/02/2026 18:33:13 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16826
+[ERROR] 22/02/2026 18:33:40 django.request log_message:249 - Internal Server Error: /chat/
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py", line 516, in chat_gemini
+    return render(request, 'chat.html', {'reponse': reponse_texte})
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: chat.html
+[ERROR] 22/02/2026 18:33:40 django.server log_message:249 - "GET /chat/ HTTP/1.1" 500 84607
+[INFO] 22/02/2026 18:36:42 django.server log_message:249 - "GET /chat/ HTTP/1.1" 200 417
+[ERROR] 22/02/2026 18:36:56 django.request log_message:249 - Internal Server Error: /chat/
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py", line 507, in chat_gemini
+    client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\client.py", line 426, in __init__
+    self._api_client = self._get_api_client(
+                       ~~~~~~~~~~~~~~~~~~~~^
+        vertexai=vertexai,
+        ^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+        http_options=http_options,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\client.py", line 474, in _get_api_client
+    return BaseApiClient(
+        vertexai=vertexai,
+    ...<4 lines>...
+        http_options=http_options,
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 700, in __init__
+    raise ValueError(
+    ...<3 lines>...
+    )
+ValueError: Missing key inputs argument! To use the Google AI API, provide (`api_key`) arguments. To use the Google Cloud API, provide (`vertexai`, `project` & `location`) arguments.
+[ERROR] 22/02/2026 18:36:56 django.server log_message:249 - "POST /chat/ HTTP/1.1" 500 86808
+[INFO] 22/02/2026 18:51:58 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py changed, reloading.
+[INFO] 22/02/2026 18:52:04 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 22/02/2026 18:54:11 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py changed, reloading.
+[INFO] 22/02/2026 18:54:15 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[ERROR] 22/02/2026 18:55:53 django.request log_message:249 - Internal Server Error: /chat/
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py", line 516, in chat_gemini
+    response = client.models.generate_content(
+        model="gemini-2.0-flash",
+        contents=prompt_utilisateur,
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\models.py", line 5621, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\models.py", line 4283, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1396, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1232, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1209, in _request_once
+    errors.APIError.raise_for_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\errors.py", line 134, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\errors.py", line 159, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'API key not valid. Please pass a valid API key.', 'status': 'INVALID_ARGUMENT', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'API_KEY_INVALID', 'domain': 'googleapis.com', 'metadata': {'service': 'generativelanguage.googleapis.com'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'API key not valid. Please pass a valid API key.'}]}}
+[ERROR] 22/02/2026 18:55:53 django.server log_message:249 - "POST /chat/ HTTP/1.1" 500 146749
+[INFO] 22/02/2026 19:21:45 django.server log_message:249 - "GET /chat/ HTTP/1.1" 200 417
+[ERROR] 22/02/2026 19:22:20 django.request log_message:249 - Internal Server Error: /chat/
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py", line 516, in chat_gemini
+    response = client.models.generate_content(
+        model="gemini-2.0-flash",
+        contents=prompt_utilisateur,
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\models.py", line 5621, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\models.py", line 4283, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1396, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1232, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1209, in _request_once
+    errors.APIError.raise_for_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\errors.py", line 134, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\errors.py", line 159, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'API key not valid. Please pass a valid API key.', 'status': 'INVALID_ARGUMENT', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'API_KEY_INVALID', 'domain': 'googleapis.com', 'metadata': {'service': 'generativelanguage.googleapis.com'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'API key not valid. Please pass a valid API key.'}]}}
+[ERROR] 22/02/2026 19:22:20 django.server log_message:249 - "POST /chat/ HTTP/1.1" 500 146749
+[ERROR] 22/02/2026 19:24:00 django.request log_message:249 - Internal Server Error: /chat/
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_transports\default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+        pool_request.request
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectTimeout: [WinError 10060] Une tentative de connexion a échoué car le parti connecté n’a pas répondu convenablement au-delà d’une certaine durée ou une connexion établie a échoué car l’hôte de connexion n’a pas répondu
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py", line 516, in chat_gemini
+    response = client.models.generate_content(
+        model="gemini-2.0-flash",
+        contents=prompt_utilisateur,
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\models.py", line 5621, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\models.py", line 4283, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1396, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1232, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1202, in _request_once
+    response = self._httpx_client.request(
+        method=http_request.method,
+    ...<3 lines>...
+        timeout=http_request.timeout,
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_client.py", line 825, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+        request,
+    ...<2 lines>...
+        history=[],
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+        request,
+        follow_redirects=follow_redirects,
+        history=history,
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_transports\default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectTimeout: [WinError 10060] Une tentative de connexion a échoué car le parti connecté n’a pas répondu convenablement au-delà d’une certaine durée ou une connexion établie a échoué car l’hôte de connexion n’a pas répondu
+[INFO] 22/02/2026 19:24:00 django.server handle_error:82 - - Broken pipe from ('127.0.0.1', 49943)
+[ERROR] 22/02/2026 19:26:23 django.request log_message:249 - Internal Server Error: /chat/
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py", line 516, in chat_gemini
+    response = client.models.generate_content(
+        model="gemini-2.0-flash",
+        contents=prompt_utilisateur,
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\models.py", line 5621, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\models.py", line 4283, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1396, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1232, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1209, in _request_once
+    errors.APIError.raise_for_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\errors.py", line 134, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\errors.py", line 159, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'API key not valid. Please pass a valid API key.', 'status': 'INVALID_ARGUMENT', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'API_KEY_INVALID', 'domain': 'googleapis.com', 'metadata': {'service': 'generativelanguage.googleapis.com'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'API key not valid. Please pass a valid API key.'}]}}
+[ERROR] 22/02/2026 19:26:23 django.server log_message:249 - "POST /chat/ HTTP/1.1" 500 146749
+[INFO] 22/02/2026 19:58:13 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[ERROR] 22/02/2026 19:59:41 django.request log_message:249 - Internal Server Error: /chat/
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py", line 516, in chat_gemini
+    response = client.models.generate_content(
+        model="gemini-2.0-flash",
+        contents=prompt_utilisateur,
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\models.py", line 5621, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\models.py", line 4283, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1396, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1232, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1209, in _request_once
+    errors.APIError.raise_for_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\errors.py", line 134, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\errors.py", line 159, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\nPlease retry in 18.286468064s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '18s'}]}}
+[ERROR] 22/02/2026 19:59:41 django.server log_message:249 - "POST /chat/ HTTP/1.1" 500 168060
+[INFO] 22/02/2026 19:59:45 django.server log_message:249 - "GET / HTTP/1.1" 302 0
+[INFO] 22/02/2026 19:59:46 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16827
+[ERROR] 22/02/2026 20:02:49 django.request log_message:249 - Internal Server Error: /chat/
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py", line 516, in chat_gemini
+    response = client.models.generate_content(
+        model="gemini-2.0-flash",
+        contents=prompt_utilisateur,
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\models.py", line 5621, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\models.py", line 4283, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1396, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1232, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1209, in _request_once
+    errors.APIError.raise_for_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\errors.py", line 134, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\errors.py", line 159, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\nPlease retry in 11.035602414s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash', 'location': 'global'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '11s'}]}}
+[ERROR] 22/02/2026 20:02:49 django.server log_message:249 - "POST /chat/ HTTP/1.1" 500 168060
+[INFO] 22/02/2026 20:12:52 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 22/02/2026 20:14:00 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16827
+[INFO] 22/02/2026 20:14:03 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16827
+[INFO] 22/02/2026 20:14:27 django.server log_message:249 - "GET /chat/ HTTP/1.1" 200 417
+[ERROR] 22/02/2026 20:16:35 django.request log_message:249 - Internal Server Error: /chat/
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py", line 516, in chat_gemini
+    response = client.models.generate_content(
+        model="gemini-2.0-flash",
+        contents=prompt_utilisateur,
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\models.py", line 5621, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\models.py", line 4283, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1396, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1232, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1209, in _request_once
+    errors.APIError.raise_for_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\errors.py", line 134, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\errors.py", line 159, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\nPlease retry in 25.123445921s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '25s'}]}}
+[ERROR] 22/02/2026 20:16:35 django.server log_message:249 - "POST /chat/ HTTP/1.1" 500 167713
+[INFO] 22/02/2026 20:20:26 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py changed, reloading.
+[INFO] 22/02/2026 20:20:31 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[ERROR] 22/02/2026 20:20:49 django.request log_message:249 - Internal Server Error: /chat/
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_transports\default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+        pool_request.request
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpcore\_sync\connection.py", line 156, in _connect
+    stream = stream.start_tls(**kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpcore\_backends\sync.py", line 154, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1032)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py", line 516, in chat_gemini
+    response = client.models.generate_content(
+        model="gemini-2.0-flash",
+        contents=prompt_utilisateur,
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\models.py", line 5621, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\models.py", line 4283, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1396, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1232, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1202, in _request_once
+    response = self._httpx_client.request(
+        method=http_request.method,
+    ...<3 lines>...
+        timeout=http_request.timeout,
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_client.py", line 825, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+        request,
+    ...<2 lines>...
+        history=[],
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+        request,
+        follow_redirects=follow_redirects,
+        history=history,
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_transports\default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1032)
+[ERROR] 22/02/2026 20:20:49 django.server log_message:249 - "POST /chat/ HTTP/1.1" 500 219711
+[ERROR] 23/02/2026 12:20:47 django.request log_message:249 - Internal Server Error: /chat/
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_transports\default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+        pool_request.request
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpcore\_sync\connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpcore\_backends\sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py", line 516, in chat_gemini
+    response = client.models.generate_content(
+        model="gemini-2.0-flash",
+        contents=prompt_utilisateur,
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\models.py", line 5621, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\models.py", line 4283, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1396, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1232, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\google\genai\_api_client.py", line 1202, in _request_once
+    response = self._httpx_client.request(
+        method=http_request.method,
+    ...<3 lines>...
+        timeout=http_request.timeout,
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_client.py", line 825, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+        request,
+    ...<2 lines>...
+        history=[],
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+        request,
+        follow_redirects=follow_redirects,
+        history=history,
+    )
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_transports\default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno 11001] getaddrinfo failed
+[ERROR] 23/02/2026 12:20:47 django.server log_message:249 - "POST /chat/ HTTP/1.1" 500 218917
+[INFO] 23/02/2026 12:21:00 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 19177
+[INFO] 23/02/2026 12:21:37 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 7772
+[INFO] 23/02/2026 12:22:13 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 23/02/2026 12:22:13 django.server log_message:249 - "GET / HTTP/1.1" 200 16120
+[INFO] 23/02/2026 12:22:53 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462
+[INFO] 23/02/2026 12:22:59 django.server log_message:249 - "GET /register/ HTTP/1.1" 200 13340
+[INFO] 23/02/2026 12:23:02 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462
+[INFO] 23/02/2026 12:23:12 crypto_app.views user_login:425 - User porna logged in successfully
+[INFO] 23/02/2026 12:23:12 django.server log_message:249 - "POST /login/ HTTP/1.1" 302 0
+[INFO] 23/02/2026 12:23:12 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 17064
+[INFO] 23/02/2026 12:23:16 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 28021
+[WARNING] 23/02/2026 12:38:13 django.security.csrf log_message:249 - Forbidden (CSRF token from POST incorrect.): /chat/
+[WARNING] 23/02/2026 12:38:13 django.server log_message:249 - "POST /chat/ HTTP/1.1" 403 2526
+[INFO] 23/02/2026 12:39:06 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 28021
+[INFO] 23/02/2026 12:39:09 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 28021
+[INFO] 23/02/2026 12:39:18 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 28021
+[INFO] 23/02/2026 12:39:20 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 7750
+[INFO] 23/02/2026 12:39:26 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16799
+[INFO] 23/02/2026 12:41:44 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[WARNING] 23/02/2026 12:42:04 django.security.csrf log_message:249 - Forbidden (CSRF token from POST incorrect.): /chat/
+[WARNING] 23/02/2026 12:42:04 django.server log_message:249 - "POST /chat/ HTTP/1.1" 403 2526
+[WARNING] 23/02/2026 12:42:10 django.security.csrf log_message:249 - Forbidden (CSRF token from POST incorrect.): /chat/
+[WARNING] 23/02/2026 12:42:10 django.server log_message:249 - "POST /chat/ HTTP/1.1" 403 2526
+[WARNING] 23/02/2026 12:49:35 django.security.csrf log_message:249 - Forbidden (CSRF token from POST incorrect.): /chat/
+[WARNING] 23/02/2026 12:49:35 django.server log_message:249 - "POST /chat/ HTTP/1.1" 403 2526
+[INFO] 24/02/2026 10:54:44 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 24/02/2026 10:55:21 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 10:55:22 django.server log_message:249 - "GET /login/?next=/dashboard/ HTTP/1.1" 200 7462
+[INFO] 24/02/2026 10:55:39 crypto_app.views user_login:434 - User porna logged in successfully
+[INFO] 24/02/2026 10:55:39 django.server log_message:249 - "POST /login/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 10:55:39 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 17069
+[INFO] 24/02/2026 10:55:56 django.server log_message:249 - "GET /encrypt-text/ HTTP/1.1" 200 16078
+[INFO] 24/02/2026 10:57:03 django.server log_message:249 - "POST /encrypt-text/ HTTP/1.1" 200 19015
+[INFO] 24/02/2026 10:58:36 django.server log_message:249 - "POST /encrypt-text/ HTTP/1.1" 200 18673
+[INFO] 24/02/2026 10:59:32 django.server log_message:249 - "POST /encrypt-text/ HTTP/1.1" 200 18874
+[INFO] 24/02/2026 11:00:05 django.server log_message:249 - "POST /encrypt-text/ HTTP/1.1" 200 18673
+[INFO] 24/02/2026 11:00:21 django.server log_message:249 - "GET /decrypt/ HTTP/1.1" 200 20144
+[INFO] 24/02/2026 11:00:31 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16803
+[INFO] 24/02/2026 11:00:44 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 28021
+[INFO] 24/02/2026 11:01:05 django.server log_message:249 - "POST /files/delete-multiple/ HTTP/1.1" 200 31
+[INFO] 24/02/2026 11:01:05 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 19571
+[INFO] 24/02/2026 11:01:21 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16819
+[INFO] 24/02/2026 11:01:53 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 19147
+[INFO] 24/02/2026 11:02:07 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16819
+[INFO] 24/02/2026 11:02:22 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 7750
+[INFO] 24/02/2026 11:02:41 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16819
+[INFO] 24/02/2026 11:02:47 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 11:02:47 django.server log_message:249 - "GET / HTTP/1.1" 200 16120
+[INFO] 24/02/2026 11:09:05 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 24/02/2026 11:09:29 django.server log_message:249 - "GET / HTTP/1.1" 200 15845
+[INFO] 24/02/2026 11:15:20 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462
+[INFO] 24/02/2026 11:15:56 django.server log_message:249 - "GET /register/ HTTP/1.1" 200 13340
+[INFO] 24/02/2026 11:20:01 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462
+[INFO] 24/02/2026 11:20:20 crypto_app.views user_login:434 - User porna logged in successfully
+[INFO] 24/02/2026 11:20:20 django.server log_message:249 - "POST /login/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 11:20:20 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 17078
+[INFO] 24/02/2026 11:20:35 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 19137
+[INFO] 24/02/2026 11:21:43 django.server log_message:249 - "GET /encrypt-text/ HTTP/1.1" 200 16078
+[INFO] 24/02/2026 11:22:11 django.server log_message:249 - "POST /encrypt-text/ HTTP/1.1" 200 19018
+[INFO] 24/02/2026 11:22:54 django.server log_message:249 - "POST /encrypt-text/ HTTP/1.1" 200 18673
+[INFO] 24/02/2026 11:23:34 django.server log_message:249 - "POST /encrypt-text/ HTTP/1.1" 200 19018
+[INFO] 24/02/2026 11:24:42 django.server log_message:249 - "POST /encrypt-text/ HTTP/1.1" 200 18682
+[INFO] 24/02/2026 11:26:28 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16811
+[INFO] 24/02/2026 11:26:36 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 7750
+[INFO] 24/02/2026 11:26:38 django.server log_message:249 - "GET /decrypt/ HTTP/1.1" 200 17599
+[INFO] 24/02/2026 11:26:39 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 19571
+[INFO] 24/02/2026 11:26:42 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 7750
+[INFO] 24/02/2026 11:28:46 django.server log_message:249 - "POST /encrypt/ HTTP/1.1" 200 7873
+[INFO] 24/02/2026 11:29:49 django.server log_message:249 - "POST /encrypt/ HTTP/1.1" 200 7929
+[INFO] 24/02/2026 11:30:45 django.server log_message:249 - "POST /encrypt/ HTTP/1.1" 200 7873
+[INFO] 24/02/2026 11:31:51 crypto_app.views encrypt_file:114 - Encryption successful for user 1: fichier.txt
+[INFO] 24/02/2026 11:31:51 django.server log_message:249 - "POST /encrypt/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 11:31:51 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 24344
+[INFO] 24/02/2026 11:32:20 django.server log_message:249 - "GET /files/download/8/ HTTP/1.1" 200 25225
+[INFO] 24/02/2026 11:33:16 django.server log_message:249 - "GET /decrypt/ HTTP/1.1" 200 19105
+[INFO] 24/02/2026 11:34:03 crypto_app.views decrypt_file:174 - Decryption successful for user 1: e468c757-f9a5-4d0e-b7bb-0e7e3bcc8377.enc
+[INFO] 24/02/2026 11:34:03 django.server log_message:249 - "POST /decrypt/ HTTP/1.1" 200 18783
+[INFO] 24/02/2026 14:28:32 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16889
+[INFO] 24/02/2026 14:28:40 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 19195
+[INFO] 24/02/2026 14:28:52 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 19195
+[INFO] 24/02/2026 14:29:41 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16889
+[INFO] 24/02/2026 14:29:55 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16889
+[INFO] 24/02/2026 14:31:12 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 19195
+[INFO] 24/02/2026 14:32:58 django.server log_message:249 - "GET /chat/ HTTP/1.1" 200 417
+[INFO] 24/02/2026 14:33:04 django.server log_message:249 - "POST /chat/ HTTP/1.1" 200 549
+[INFO] 24/02/2026 14:33:29 django.server log_message:249 - "POST /chat/ HTTP/1.1" 200 549
+[INFO] 24/02/2026 14:33:30 django.server log_message:249 - "POST /chat/ HTTP/1.1" 200 549
+[INFO] 24/02/2026 14:33:30 django.server log_message:249 - "POST /chat/ HTTP/1.1" 200 549
+[INFO] 24/02/2026 14:33:31 django.server log_message:249 - "POST /chat/ HTTP/1.1" 200 549
+[INFO] 24/02/2026 14:33:31 django.server log_message:249 - "POST /chat/ HTTP/1.1" 200 549
+[INFO] 24/02/2026 14:33:40 django.server log_message:249 - "GET /chat/ HTTP/1.1" 200 417
+[INFO] 24/02/2026 14:33:53 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16889
+[INFO] 24/02/2026 14:42:00 django.server log_message:249 - "GET /admin/ HTTP/1.1" 200 11118
+[INFO] 24/02/2026 14:42:00 django.server log_message:249 - "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+[INFO] 24/02/2026 14:42:00 django.server log_message:249 - "GET /static/admin/css/dashboard.css HTTP/1.1" 200 441
+[INFO] 24/02/2026 14:42:00 django.server log_message:249 - "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 3538
+[INFO] 24/02/2026 14:42:00 django.server log_message:249 - "GET /static/admin/css/responsive.css HTTP/1.1" 200 16273
+[INFO] 24/02/2026 14:42:00 django.server log_message:249 - "GET /static/admin/css/base.css HTTP/1.1" 200 23100
+[INFO] 24/02/2026 14:42:00 django.server log_message:249 - "GET /static/admin/js/theme.js HTTP/1.1" 200 1653
+[INFO] 24/02/2026 14:42:00 django.server log_message:249 - "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+[INFO] 24/02/2026 14:42:00 django.server log_message:249 - "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 593
+[INFO] 24/02/2026 14:42:00 django.server log_message:249 - "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 978
+[INFO] 24/02/2026 14:42:00 django.server log_message:249 - "GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 200 689
+[INFO] 24/02/2026 14:42:08 django.server log_message:249 - "GET /admin/ HTTP/1.1" 200 11118
+[INFO] 24/02/2026 14:42:20 django.server log_message:249 - "GET /admin/crypto_app/userprofile/ HTTP/1.1" 200 13519
+[INFO] 24/02/2026 14:42:20 django.server log_message:249 - "GET /static/admin/css/changelists.css HTTP/1.1" 200 7498
+[INFO] 24/02/2026 14:42:20 django.server log_message:249 - "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+[INFO] 24/02/2026 14:42:20 django.server log_message:249 - "GET /static/admin/js/core.js HTTP/1.1" 200 6208
+[INFO] 24/02/2026 14:42:20 django.server log_message:249 - "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 9777
+[INFO] 24/02/2026 14:42:20 django.server log_message:249 - "GET /static/admin/js/actions.js HTTP/1.1" 200 8076
+[INFO] 24/02/2026 14:42:21 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 24/02/2026 14:42:21 django.server log_message:249 - "GET /static/admin/js/urlify.js HTTP/1.1" 200 7887
+[INFO] 24/02/2026 14:42:21 django.server log_message:249 - "GET /static/admin/img/search.svg HTTP/1.1" 200 607
+[INFO] 24/02/2026 14:42:21 django.server log_message:249 - "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+[INFO] 24/02/2026 14:42:21 django.server log_message:249 - "GET /static/admin/img/icon-no.svg HTTP/1.1" 200 645
+[INFO] 24/02/2026 14:42:21 django.server log_message:249 - "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314
+[INFO] 24/02/2026 14:42:21 django.server log_message:249 - "GET /static/admin/js/filters.js HTTP/1.1" 200 978
+[INFO] 24/02/2026 14:42:21 django.server log_message:249 - "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171
+[INFO] 24/02/2026 14:42:21 django.server log_message:249 - "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 593
+[INFO] 24/02/2026 14:42:21 django.server log_message:249 - "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1761
+[INFO] 24/02/2026 14:43:20 django.server log_message:249 - "GET /admin/ HTTP/1.1" 200 11118
+[INFO] 24/02/2026 14:43:30 django.server log_message:249 - "GET /admin/crypto_app/userprofile/ HTTP/1.1" 200 13519
+[INFO] 24/02/2026 14:43:30 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 24/02/2026 14:43:44 django.server log_message:249 - "GET /admin/crypto_app/userprofile/?o= HTTP/1.1" 200 13402
+[INFO] 24/02/2026 14:43:44 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 24/02/2026 14:43:52 django.server log_message:249 - "GET /admin/crypto_app/userprofile/ HTTP/1.1" 200 13519
+[INFO] 24/02/2026 14:44:08 django.server log_message:249 - "GET /admin/crypto_app/userprofile/add/ HTTP/1.1" 200 13293
+[INFO] 24/02/2026 14:44:09 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 24/02/2026 14:44:09 django.server log_message:249 - "GET /static/admin/css/forms.css HTTP/1.1" 200 8817
+[INFO] 24/02/2026 14:44:09 django.server log_message:249 - "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 586
+[INFO] 24/02/2026 14:44:09 django.server log_message:249 - "GET /static/admin/css/widgets.css HTTP/1.1" 200 11811
+[INFO] 24/02/2026 14:44:09 django.server log_message:249 - "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 200 928
+[INFO] 24/02/2026 14:44:09 django.server log_message:249 - "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+[INFO] 24/02/2026 14:44:25 django.server log_message:249 - "GET /admin/auth/user/2/change/?_to_field=id&_popup=1 HTTP/1.1" 200 20238
+[INFO] 24/02/2026 14:44:25 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 24/02/2026 14:44:25 django.server log_message:249 - "GET /static/admin/js/calendar.js HTTP/1.1" 200 9159
+[INFO] 24/02/2026 14:44:25 django.server log_message:249 - "GET /static/admin/js/SelectFilter2.js HTTP/1.1" 200 16428
+[INFO] 24/02/2026 14:44:25 django.server log_message:249 - "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 200 19698
+[INFO] 24/02/2026 14:44:25 django.server log_message:249 - "GET /static/admin/js/SelectBox.js HTTP/1.1" 200 4530
+[INFO] 24/02/2026 14:44:25 django.server log_message:249 - "GET /static/admin/img/icon-clock.svg HTTP/1.1" 200 805
+[INFO] 24/02/2026 14:44:25 django.server log_message:249 - "GET /static/admin/img/icon-calendar.svg HTTP/1.1" 200 1112
+[INFO] 24/02/2026 14:44:25 django.server log_message:249 - "GET /static/admin/img/selector-icons.svg HTTP/1.1" 200 2387
+[INFO] 24/02/2026 14:45:19 django.server log_message:249 - "GET /admin/auth/user/1/change/?_to_field=id&_popup=1 HTTP/1.1" 200 20257
+[INFO] 24/02/2026 14:45:19 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 24/02/2026 14:46:24 django.server log_message:249 - "POST /admin/auth/user/1/change/?_to_field=id&_popup=1 HTTP/1.1" 200 420
+[INFO] 24/02/2026 14:46:24 django.server log_message:249 - "GET /static/admin/js/popup_response.js HTTP/1.1" 200 532
+[INFO] 24/02/2026 14:46:56 django.server log_message:249 - "GET /profile/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 14:46:56 django.server log_message:249 - "GET /login/?next=/profile/ HTTP/1.1" 200 7462
+[WARNING] 24/02/2026 14:47:04 crypto_app.views user_login:438 - Failed login attempt for username: porna from IP: 127.0.0.1
+[INFO] 24/02/2026 14:47:04 django.server log_message:249 - "POST /login/ HTTP/1.1" 200 7734
+[INFO] 24/02/2026 14:47:39 django.server log_message:249 - "GET /admin/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 14:47:39 django.server log_message:249 - "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4158
+[INFO] 24/02/2026 14:47:39 django.server log_message:249 - "GET /static/admin/css/login.css HTTP/1.1" 200 951
+[INFO] 24/02/2026 14:47:45 django.server log_message:249 - "POST /admin/login/?next=/admin/ HTTP/1.1" 200 4404
+[INFO] 24/02/2026 14:48:04 django.server log_message:249 - "POST /admin/login/?next=/admin/ HTTP/1.1" 200 4404
+[INFO] 24/02/2026 14:48:44 django.server log_message:249 - "GET /profile/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 14:48:44 django.server log_message:249 - "GET /login/?next=/profile/ HTTP/1.1" 200 7462
+[INFO] 24/02/2026 14:48:52 crypto_app.views user_login:434 - User mille logged in successfully
+[INFO] 24/02/2026 14:48:52 django.server log_message:249 - "POST /login/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 14:48:52 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 17118
+[INFO] 24/02/2026 14:54:40 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 24/02/2026 14:54:50 django.server log_message:249 - "GET /admin/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 14:54:50 django.server log_message:249 - "GET /admin/login/?next=/admin/ HTTP/1.1" 200 3694
+[INFO] 24/02/2026 14:55:00 django.server log_message:249 - "POST /admin/login/?next=/admin/ HTTP/1.1" 200 3940
+[INFO] 24/02/2026 14:55:32 django.server log_message:249 - "POST /admin/login/?next=/admin/ HTTP/1.1" 200 3940
+[INFO] 24/02/2026 14:57:41 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 24/02/2026 14:58:00 django.server log_message:249 - "POST /admin/login/?next=/admin/ HTTP/1.1" 200 3940
+[INFO] 24/02/2026 14:58:34 django.server log_message:249 - "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 14:58:34 django.server log_message:249 - "GET /admin/ HTTP/1.1" 200 9380
+[INFO] 24/02/2026 15:00:37 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 10923
+[INFO] 24/02/2026 15:00:52 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 14247
+[INFO] 24/02/2026 15:00:58 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 19570
+[INFO] 24/02/2026 15:01:06 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 15:01:06 django.server log_message:249 - "GET / HTTP/1.1" 200 16121
+[INFO] 24/02/2026 15:01:27 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462
+[WARNING] 24/02/2026 15:01:39 crypto_app.views user_login:438 - Failed login attempt for username: porna from IP: 127.0.0.1
+[INFO] 24/02/2026 15:01:39 django.server log_message:249 - "POST /login/ HTTP/1.1" 200 7734
+[WARNING] 24/02/2026 15:02:10 crypto_app.views user_login:438 - Failed login attempt for username: porna from IP: 127.0.0.1
+[INFO] 24/02/2026 15:02:10 django.server log_message:249 - "POST /login/ HTTP/1.1" 200 7734
+[INFO] 24/02/2026 15:02:30 crypto_app.views user_login:434 - User kone logged in successfully
+[INFO] 24/02/2026 15:02:30 django.server log_message:249 - "POST /login/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 15:02:30 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 14793
+[INFO] 24/02/2026 15:02:55 django.server log_message:249 - "GET /admin/ HTTP/1.1" 200 9380
+[INFO] 24/02/2026 15:02:59 django.server log_message:249 - "GET /admin/crypto_app/userprofile/ HTTP/1.1" 200 14001
+[INFO] 24/02/2026 15:02:59 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 24/02/2026 15:03:16 django.server log_message:249 - "GET /admin/crypto_app/userprofile/add/ HTTP/1.1" 200 13363
+[INFO] 24/02/2026 15:03:16 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 24/02/2026 15:03:32 django.server log_message:249 - "GET /admin/auth/user/1/change/?_to_field=id&_popup=1 HTTP/1.1" 200 20241
+[INFO] 24/02/2026 15:03:32 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 24/02/2026 15:03:58 django.server log_message:249 - "POST /admin/auth/user/1/change/?_to_field=id&_popup=1 HTTP/1.1" 200 420
+[INFO] 24/02/2026 15:04:12 django.server log_message:249 - "GET /admin/crypto_app/userprofile/ HTTP/1.1" 200 14001
+[INFO] 24/02/2026 15:04:22 django.server log_message:249 - "GET /admin/crypto_app/userprofile/ HTTP/1.1" 200 14001
+[INFO] 24/02/2026 15:04:22 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 24/02/2026 15:04:53 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 12214
+[INFO] 24/02/2026 15:05:02 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 15:05:02 django.server log_message:249 - "GET / HTTP/1.1" 200 16121
+[INFO] 24/02/2026 15:05:14 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462
+[INFO] 24/02/2026 15:05:27 crypto_app.views user_login:434 - User porna logged in successfully
+[INFO] 24/02/2026 15:05:27 django.server log_message:249 - "POST /login/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 15:05:27 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 17143
+[INFO] 24/02/2026 15:06:37 django.server log_message:249 - "GET /admin/ HTTP/1.1" 200 11468
+[INFO] 24/02/2026 15:06:44 django.server log_message:249 - "POST /admin/logout/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 15:06:44 django.server log_message:249 - "GET / HTTP/1.1" 200 15845
+[INFO] 24/02/2026 15:07:09 django.server log_message:249 - "GET /admin/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 15:07:09 django.server log_message:249 - "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4158
+[INFO] 24/02/2026 15:07:20 django.server log_message:249 - "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 15:07:20 django.server log_message:249 - "GET /admin/ HTTP/1.1" 200 11468
+[INFO] 24/02/2026 15:07:28 django.server log_message:249 - "GET /admin/login/?next=/admin/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 15:07:28 django.server log_message:249 - "GET /admin/ HTTP/1.1" 200 11468
+[INFO] 24/02/2026 15:07:40 django.server log_message:249 - "GET /admin/ HTTP/1.1" 200 11468
+[INFO] 24/02/2026 15:08:25 django.server log_message:249 - "GET /admin/crypto_app/userprofile/ HTTP/1.1" 200 14002
+[INFO] 24/02/2026 15:08:25 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 24/02/2026 15:08:58 django.server log_message:249 - "POST /admin/logout/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 15:08:58 django.server log_message:249 - "GET / HTTP/1.1" 200 15845
+[INFO] 24/02/2026 15:09:21 django.server log_message:249 - "GET /admin/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 15:09:21 django.server log_message:249 - "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4158
+[INFO] 24/02/2026 15:10:06 django.server log_message:249 - "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 15:10:06 django.server log_message:249 - "GET /admin/ HTTP/1.1" 200 11468
+[INFO] 24/02/2026 15:10:14 django.server log_message:249 - "GET /admin/crypto_app/userprofile/ HTTP/1.1" 200 14002
+[INFO] 24/02/2026 15:10:14 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 24/02/2026 15:10:30 django.server log_message:249 - "POST /admin/crypto_app/userprofile/ HTTP/1.1" 200 10105
+[INFO] 24/02/2026 15:10:31 django.server log_message:249 - "GET /static/admin/js/cancel.js HTTP/1.1" 200 884
+[INFO] 24/02/2026 15:10:47 django.server log_message:249 - "POST /admin/crypto_app/userprofile/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 15:10:47 django.server log_message:249 - "GET /admin/crypto_app/userprofile/ HTTP/1.1" 200 13674
+[INFO] 24/02/2026 15:10:47 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 24/02/2026 15:10:47 django.server log_message:249 - "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 558
+[INFO] 24/02/2026 15:11:04 django.server log_message:249 - "GET /admin/crypto_app/userprofile/add/ HTTP/1.1" 200 13364
+[INFO] 24/02/2026 15:11:04 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 24/02/2026 15:11:20 django.server log_message:249 - "GET /admin/auth/user/4/change/?_to_field=id&_popup=1 HTTP/1.1" 200 20245
+[INFO] 24/02/2026 15:11:21 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 24/02/2026 15:12:34 django.server log_message:249 - "GET /admin/crypto_app/userprofile/ HTTP/1.1" 200 13519
+[INFO] 24/02/2026 15:13:03 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 19195
+[INFO] 24/02/2026 15:13:09 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 15:13:09 django.server log_message:249 - "GET / HTTP/1.1" 200 16121
+[INFO] 24/02/2026 15:13:23 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462
+[INFO] 24/02/2026 15:13:32 crypto_app.views user_login:434 - User kone logged in successfully
+[INFO] 24/02/2026 15:13:32 django.server log_message:249 - "POST /login/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 15:13:32 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 15354
+[INFO] 24/02/2026 15:13:54 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 19570
+[INFO] 24/02/2026 15:13:57 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 7749
+[INFO] 24/02/2026 15:14:02 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 15088
+[INFO] 24/02/2026 15:14:23 django.server log_message:249 - "GET /decrypt/ HTTP/1.1" 200 17598
+[INFO] 24/02/2026 15:14:25 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 19570
+[INFO] 24/02/2026 15:14:28 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 15088
+[INFO] 24/02/2026 15:14:48 django.server log_message:249 - "GET /admin/ HTTP/1.1" 200 9758
+[INFO] 24/02/2026 15:14:52 django.server log_message:249 - "GET /admin/crypto_app/userprofile/ HTTP/1.1" 200 13518
+[INFO] 24/02/2026 15:14:52 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 24/02/2026 15:15:01 django.server log_message:249 - "GET /admin/crypto_app/userprofile/add/ HTTP/1.1" 200 13363
+[INFO] 24/02/2026 15:15:01 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 24/02/2026 15:15:13 django.server log_message:249 - "GET /admin/auth/user/4/change/?_to_field=id&_popup=1 HTTP/1.1" 200 20245
+[INFO] 24/02/2026 15:15:13 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 24/02/2026 15:15:27 django.server log_message:249 - "GET /admin/auth/user/4/password/ HTTP/1.1" 200 11536
+[INFO] 24/02/2026 15:15:27 django.server log_message:249 - "GET /static/admin/css/unusable_password_field.css HTTP/1.1" 200 663
+[INFO] 24/02/2026 15:16:14 django.server log_message:249 - "POST /admin/auth/user/4/password/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 15:16:14 django.server log_message:249 - "GET /admin/auth/user/4/change/ HTTP/1.1" 200 27011
+[INFO] 24/02/2026 15:16:14 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 24/02/2026 15:16:52 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 12980
+[INFO] 24/02/2026 15:16:59 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 15:16:59 django.server log_message:249 - "GET / HTTP/1.1" 200 16121
+[INFO] 24/02/2026 15:17:11 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462
+[WARNING] 24/02/2026 15:17:18 crypto_app.views user_login:438 - Failed login attempt for username: kone from IP: 127.0.0.1
+[INFO] 24/02/2026 15:17:18 django.server log_message:249 - "POST /login/ HTTP/1.1" 200 7734
+[INFO] 24/02/2026 15:17:38 crypto_app.views user_login:434 - User kone logged in successfully
+[INFO] 24/02/2026 15:17:38 django.server log_message:249 - "POST /login/ HTTP/1.1" 302 0
+[INFO] 24/02/2026 15:17:39 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 15914
+[INFO] 24/02/2026 15:17:59 django.server log_message:249 - "GET /admin/ HTTP/1.1" 200 10107
+[INFO] 26/02/2026 10:08:10 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 26/02/2026 10:10:15 django.server log_message:249 - "GET /admin/crypto_app/encryptedfile/ HTTP/1.1" 200 14744
+[INFO] 26/02/2026 10:10:15 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 10:10:39 django.server log_message:249 - "GET /admin/crypto_app/encryptedfile/add/ HTTP/1.1" 200 16167
+[INFO] 26/02/2026 10:10:39 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 10:11:15 django.server log_message:249 - "GET /admin/auth/user/1/change/?_to_field=id&_popup=1 HTTP/1.1" 200 20257
+[INFO] 26/02/2026 10:11:15 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 10:14:48 django.server log_message:249 - "GET /admin/crypto_app/encryptedfile/ HTTP/1.1" 200 14744
+[INFO] 26/02/2026 10:14:48 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 10:14:56 django.server log_message:249 - "GET /admin/crypto_app/encryptedfile/?_facets=True HTTP/1.1" 200 15098
+[INFO] 26/02/2026 10:14:56 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 10:14:56 django.server log_message:249 - "GET /static/admin/img/icon-hidelink.svg HTTP/1.1" 200 1131
+[INFO] 26/02/2026 10:15:53 django.server log_message:249 - "GET /admin/crypto_app/encryptedfile/?_facets=True&o=6.-5 HTTP/1.1" 200 15629
+[INFO] 26/02/2026 10:15:53 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 10:15:57 django.server log_message:249 - "GET /admin/crypto_app/encryptedfile/?_facets=True&o=-6.-5 HTTP/1.1" 200 15644
+[INFO] 26/02/2026 10:15:57 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 10:15:58 django.server log_message:249 - "GET /admin/crypto_app/encryptedfile/?_facets=True&o=6.-5 HTTP/1.1" 200 15629
+[INFO] 26/02/2026 10:15:58 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 10:15:59 django.server log_message:249 - "GET /admin/crypto_app/encryptedfile/?_facets=True&o=-6.-5 HTTP/1.1" 200 15644
+[INFO] 26/02/2026 10:16:00 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 10:16:55 django.server log_message:249 - "GET /admin/crypto_app/encryptionkey/ HTTP/1.1" 200 15249
+[INFO] 26/02/2026 10:16:55 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 10:17:17 django.server log_message:249 - "GET /admin/crypto_app/encryptionkey/?o=5 HTTP/1.1" 200 15449
+[INFO] 26/02/2026 10:17:17 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 10:17:18 django.server log_message:249 - "GET /admin/crypto_app/encryptionkey/?o=-5 HTTP/1.1" 200 15466
+[INFO] 26/02/2026 10:17:18 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 10:17:46 django.server log_message:249 - "GET /admin/crypto_app/encryptionkey/add/?_changelist_filters=o%3D-5 HTTP/1.1" 200 15934
+[INFO] 26/02/2026 10:17:46 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 10:18:42 django.server log_message:249 - "GET /admin/crypto_app/userprofile/add/ HTTP/1.1" 200 13363
+[INFO] 26/02/2026 10:18:43 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 10:19:10 django.server log_message:249 - "POST /admin/crypto_app/userprofile/add/ HTTP/1.1" 200 13601
+[INFO] 26/02/2026 10:19:10 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 10:19:57 django.server log_message:249 - "POST /admin/crypto_app/userprofile/add/ HTTP/1.1" 200 13601
+[INFO] 26/02/2026 10:19:58 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 10:19:59 django.server log_message:249 - "POST /admin/crypto_app/userprofile/add/ HTTP/1.1" 200 13601
+[INFO] 26/02/2026 10:19:59 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 10:20:08 django.server log_message:249 - "POST /admin/crypto_app/userprofile/add/ HTTP/1.1" 200 13601
+[INFO] 26/02/2026 10:20:08 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 10:20:12 django.server log_message:249 - "GET /admin/crypto_app/encryptionkey/ HTTP/1.1" 200 15249
+[INFO] 26/02/2026 10:20:12 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 10:20:50 django.server log_message:249 - "POST /admin/crypto_app/encryptionkey/ HTTP/1.1" 200 10107
+[INFO] 26/02/2026 10:20:54 django.server log_message:249 - "POST /admin/crypto_app/encryptionkey/ HTTP/1.1" 302 0
+[INFO] 26/02/2026 10:20:54 django.server log_message:249 - "GET /admin/crypto_app/encryptionkey/ HTTP/1.1" 200 14912
+[INFO] 26/02/2026 10:20:54 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 10:22:43 django.server log_message:249 - "GET /admin/crypto_app/encryptedfile/add/ HTTP/1.1" 200 16167
+[INFO] 26/02/2026 10:22:43 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 10:23:23 django.server log_message:249 - "GET /admin/auth/user/2/change/?_to_field=id&_popup=1 HTTP/1.1" 200 20239
+[INFO] 26/02/2026 10:23:23 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 11:15:14 django.server log_message:249 - "GET /admin/crypto_app/encryptedfile/add/ HTTP/1.1" 200 16167
+[INFO] 26/02/2026 11:15:14 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 11:15:21 django.server log_message:249 - "GET /admin/crypto_app/encryptedfile/add/ HTTP/1.1" 200 16167
+[INFO] 26/02/2026 11:17:23 django.server log_message:249 - "GET /admin/auth/group/add/ HTTP/1.1" 200 15620
+[INFO] 26/02/2026 11:17:23 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 11:18:55 django.server log_message:249 - "POST /admin/auth/group/add/ HTTP/1.1" 302 0
+[INFO] 26/02/2026 11:18:55 django.server log_message:249 - "GET /admin/auth/group/ HTTP/1.1" 200 12155
+[INFO] 26/02/2026 11:18:55 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 11:19:24 django.server log_message:249 - "GET /admin/auth/group/add/ HTTP/1.1" 200 15620
+[INFO] 26/02/2026 11:19:24 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 11:19:46 django.server log_message:249 - "GET /admin/auth/group/ HTTP/1.1" 200 11951
+[INFO] 26/02/2026 11:19:50 django.server log_message:249 - "GET /admin/auth/group/add/ HTTP/1.1" 200 15620
+[INFO] 26/02/2026 11:20:02 django.server log_message:249 - "GET /admin/ HTTP/1.1" 200 10768
+[INFO] 26/02/2026 11:20:11 django.server log_message:249 - "GET /admin/auth/group/ HTTP/1.1" 200 11951
+[INFO] 26/02/2026 11:20:11 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 26/02/2026 11:20:21 django.server log_message:249 - "GET /admin/ HTTP/1.1" 200 10768
+[INFO] 26/02/2026 11:20:54 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 13746
+[INFO] 26/02/2026 11:21:20 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 15675
+[INFO] 26/02/2026 11:25:48 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 7749
+[INFO] 26/02/2026 11:25:51 django.server log_message:249 - "GET /decrypt/ HTTP/1.1" 200 17598
+[INFO] 26/02/2026 11:26:18 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 6026
+[INFO] 26/02/2026 11:26:50 django.server log_message:249 - "POST /keys/ HTTP/1.1" 302 0
+[INFO] 26/02/2026 11:26:50 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 7173
+[INFO] 26/02/2026 11:26:58 django.server log_message:249 - "GET /keys/8/ HTTP/1.1" 200 5808
+[INFO] 26/02/2026 11:27:17 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 6889
+[INFO] 26/02/2026 11:27:20 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 7749
+[INFO] 26/02/2026 11:28:12 crypto_app.views encrypt_file:114 - Encryption successful for user 4: Download (8).mp4
+[INFO] 26/02/2026 11:28:12 django.server log_message:249 - "POST /encrypt/ HTTP/1.1" 302 0
+[INFO] 26/02/2026 11:28:12 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 24353
+[INFO] 26/02/2026 11:28:30 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 24055
+[INFO] 26/02/2026 11:28:38 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16252
+[INFO] 26/02/2026 16:24:18 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[WARNING] 26/02/2026 16:24:33 django.request log_message:249 - Not Found: /favicon.ico
+[WARNING] 26/02/2026 16:24:33 django.server log_message:249 - "GET /favicon.ico HTTP/1.1" 404 11784
+[INFO] 26/02/2026 16:24:34 django.server log_message:249 - "GET /admin/crypto_app/encryptedfile/add/ HTTP/1.1" 200 16167
+[INFO] 26/02/2026 16:24:41 django.server log_message:249 - "GET /encrypt-text/ HTTP/1.1" 200 16077
+[INFO] 26/02/2026 16:25:30 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16262
+[INFO] 27/02/2026 08:13:58 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16269
+[INFO] 27/02/2026 15:38:42 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\forms.py changed, reloading.
+[INFO] 27/02/2026 15:38:46 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 27/02/2026 15:43:31 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\models.py changed, reloading.
+[INFO] 27/02/2026 15:43:33 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 27/02/2026 15:47:46 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 27/02/2026 15:48:56 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\models.py changed, reloading.
+[INFO] 27/02/2026 15:48:59 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 27/02/2026 15:49:56 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 27/02/2026 15:51:43 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\models.py changed, reloading.
+[INFO] 27/02/2026 15:51:44 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 27/02/2026 15:51:58 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py changed, reloading.
+[INFO] 27/02/2026 15:51:59 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 27/02/2026 15:52:30 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 27/02/2026 15:53:12 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py changed, reloading.
+[INFO] 27/02/2026 15:53:13 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 27/02/2026 16:05:21 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 27/02/2026 16:05:32 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16238
+[INFO] 27/02/2026 16:05:44 django.server log_message:249 - "GET /decrypt/ HTTP/1.1" 200 19108
+[INFO] 27/02/2026 16:05:56 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16238
+[INFO] 27/02/2026 16:06:10 django.server log_message:249 - "GET /encrypt-text/ HTTP/1.1" 200 16077
+[INFO] 27/02/2026 16:06:25 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16238
+[INFO] 27/02/2026 16:07:24 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 6889
+[INFO] 27/02/2026 16:07:28 django.server log_message:249 - "GET /keys/8/ HTTP/1.1" 200 5808
+[INFO] 27/02/2026 16:07:31 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 6889
+[INFO] 27/02/2026 16:07:58 django.server log_message:249 - "POST /keys/ HTTP/1.1" 302 0
+[INFO] 27/02/2026 16:07:58 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 8053
+[INFO] 27/02/2026 16:08:03 django.server log_message:249 - "GET /keys/9/ HTTP/1.1" 200 5810
+[INFO] 27/02/2026 16:08:12 django.server log_message:249 - "POST /keys/delete/9/ HTTP/1.1" 302 0
+[INFO] 27/02/2026 16:08:12 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 7174
+[INFO] 27/02/2026 16:10:51 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16813
+[INFO] 27/02/2026 16:10:55 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 7749
+[INFO] 27/02/2026 16:11:01 django.server log_message:249 - "GET /decrypt/ HTTP/1.1" 200 19108
+[INFO] 27/02/2026 16:11:14 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 6889
+[INFO] 27/02/2026 16:11:18 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 7749
+[INFO] 27/02/2026 16:11:22 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16813
+[INFO] 27/02/2026 16:11:30 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 15311

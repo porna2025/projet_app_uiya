@@ -1,0 +1,220 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (malloc) failed to allocate 1048576 bytes for AllocateHeap
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Unscaled Compressed Oops mode in which the Java heap is
+#     placed in the first 4GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 4GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (allocation.cpp:44), pid=23360, tid=20816
+#
+# JRE version:  (19.0.2+7) (build )
+# Java VM: OpenJDK 64-Bit Server VM (19.0.2+7, mixed mode, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: --add-modules=ALL-SYSTEM --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED -Declipse.application=org.python.pydev.pydev_lsp.application -Dosgi.bundles.defaultStartLevel=4 -Declipse.product=org.python.pydev.pydev_lsp.product -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication c:\Users\lenovo\.vscode\extensions\fabioz.vscode-pydev-0.16.0\server\plugins\org.eclipse.equinox.launcher_1.6.700.v20240213-1244.jar -configuration c:\Users\lenovo\.vscode\extensions\fabioz.vscode-pydev-0.16.0\server\config_win -data c:\Users\lenovo\AppData\Roaming\Code\User\workspaceStorage\240435d0fa89db6fcbcb1b59095e7c16\fabioz.vscode-pydev\pydev_ws
+
+Host: Intel(R) Core(TM) i5-8350U CPU @ 1.70GHz, 8 cores, 7G,  Windows 11 , 64 bit Build 26100 (10.0.26100.7653)
+Time: Mon Feb  9 22:52:56 2026 Greenwich elapsed time: 0.170562 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000012aef6153c0):  JavaThread "Unknown thread" [_thread_in_vm, id=20816, stack(0x0000002745f00000,0x0000002746000000)]
+
+Stack: [0x0000002745f00000,0x0000002746000000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x6e9e1a]
+V  [jvm.dll+0x8a36c0]
+V  [jvm.dll+0x8a50ae]
+V  [jvm.dll+0x8a5763]
+V  [jvm.dll+0x27bcdf]
+V  [jvm.dll+0xbc6eb]
+V  [jvm.dll+0x3308f9]
+V  [jvm.dll+0x328ac4]
+V  [jvm.dll+0x86e230]
+V  [jvm.dll+0x3bdb31]
+V  [jvm.dll+0x84eb31]
+V  [jvm.dll+0x44583f]
+V  [jvm.dll+0x447321]
+C  [jli.dll+0x5267]
+C  [ucrtbase.dll+0x37b0]
+C  [KERNEL32.DLL+0x2e8d7]
+C  [ntdll.dll+0x8c40c]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x00007ffd740905a8, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+
+Other Threads:
+  0x0000012aef659ab0 WorkerThread "GC Thread#0" [stack: 0x0000002746000000,0x0000002746100000] [id=4936]
+
+[error occurred during error reporting (printing all threads), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffd73815bf0]
+
+VM state: not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x0000012aef6124f0] Heap_lock - owner thread: 0x0000012aef6153c0
+
+Heap address: 0x00000000c0000000, size: 1024 MB, Compressed Oops mode: 32-bit
+
+CDS archive(s) mapped at: [0x0000000000000000-0x0000000000000000-0x0000000000000000), size 0, SharedBaseAddress: 0x0000000800000000, ArchiveRelocationMode: 0.
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0, Narrow klass range: 0x0
+
+GC Precious Log:
+ CardTable entry size: 512
+ Card Set container configuration: InlinePtr #cards 5 size 8 Array Of Cards #cards 12 size 40 Howl #buckets 4 coarsen threshold 1843 Howl Bitmap #cards 512 size 80 coarsen threshold 460 Card regions per heap region 1 cards per card region 2048
+
+Heap:
+ garbage-first heap   total 0K, used 0K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 0 young (0K), 0 survivors (0K)
+
+[error occurred during error reporting (printing heap information), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffd73c22899]
+
+GC Heap History (0 events):
+No events
+
+Dll operation events (1 events):
+Event: 0.030 Loaded shared library C:\Users\lenovo\.pydev_vscode\java19\jdk-19.0.2+7-jre\bin\java.dll
+
+Deoptimization events (0 events):
+No events
+
+Classes loaded (0 events):
+No events
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+VM Operations (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+0x00007ff62ea90000 - 0x00007ff62ea9e000 	C:\Users\lenovo\.pydev_vscode\java19\jdk-19.0.2+7-jre\bin\java.exe
+0x00007ffe4d3a0000 - 0x00007ffe4d608000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ffe4c020000 - 0x00007ffe4c0e9000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007ffe4a910000 - 0x00007ffe4ad01000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007ffe4aff0000 - 0x00007ffe4b13b000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007ffe30cb0000 - 0x00007ffe30cc7000 	C:\Users\lenovo\.pydev_vscode\java19\jdk-19.0.2+7-jre\bin\jli.dll
+0x00007ffe4bdd0000 - 0x00007ffe4bf96000 	C:\WINDOWS\System32\USER32.dll
+0x00007ffe4af30000 - 0x00007ffe4af57000 	C:\WINDOWS\System32\win32u.dll
+0x00007ffe2f040000 - 0x00007ffe2f2d3000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.26100.7653_none_3e0b88a0e3318624\COMCTL32.dll
+0x00007ffe4b150000 - 0x00007ffe4b17b000 	C:\WINDOWS\System32\GDI32.dll
+0x00007ffe4ba40000 - 0x00007ffe4bae9000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007ffe49f70000 - 0x00007ffe4a09b000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007ffe4ad10000 - 0x00007ffe4adb3000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007ffe3f4c0000 - 0x00007ffe3f4d9000 	C:\Users\lenovo\.pydev_vscode\java19\jdk-19.0.2+7-jre\bin\VCRUNTIME140.dll
+0x00007ffe4cba0000 - 0x00007ffe4cbd1000 	C:\WINDOWS\System32\IMM32.DLL
+0x00007ffe41420000 - 0x00007ffe4142c000 	C:\Users\lenovo\.pydev_vscode\java19\jdk-19.0.2+7-jre\bin\vcruntime140_1.dll
+0x00007ffdfe240000 - 0x00007ffdfe2d1000 	C:\Users\lenovo\.pydev_vscode\java19\jdk-19.0.2+7-jre\bin\msvcp140.dll
+0x00007ffd734e0000 - 0x00007ffd741d1000 	C:\Users\lenovo\.pydev_vscode\java19\jdk-19.0.2+7-jre\bin\server\jvm.dll
+0x00007ffe4cc00000 - 0x00007ffe4ccb4000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007ffe4bb20000 - 0x00007ffe4bbc6000 	C:\WINDOWS\System32\sechost.dll
+0x00007ffe4ca80000 - 0x00007ffe4cb98000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007ffe27a30000 - 0x00007ffe27a3a000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007ffe4bfa0000 - 0x00007ffe4c014000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007ffe33f90000 - 0x00007ffe33fc5000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ffe3e470000 - 0x00007ffe3e47b000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ffe489f0000 - 0x00007ffe48a0b000 	C:\WINDOWS\SYSTEM32\kernel.appcore.dll
+0x00007ffe41400000 - 0x00007ffe4140a000 	C:\Users\lenovo\.pydev_vscode\java19\jdk-19.0.2+7-jre\bin\jimage.dll
+0x00007ffe47db0000 - 0x00007ffe47ff2000 	C:\WINDOWS\SYSTEM32\DBGHELP.DLL
+0x00007ffe4ccc0000 - 0x00007ffe4d046000 	C:\WINDOWS\System32\combase.dll
+0x00007ffe4c1e0000 - 0x00007ffe4c2b7000 	C:\WINDOWS\System32\OLEAUT32.dll
+0x00007ffe33e20000 - 0x00007ffe33e5b000 	C:\WINDOWS\SYSTEM32\dbgcore.DLL
+0x00007ffe4ae80000 - 0x00007ffe4af25000 	C:\WINDOWS\System32\bcryptPrimitives.dll
+0x00007ffe413d0000 - 0x00007ffe413f6000 	C:\Users\lenovo\.pydev_vscode\java19\jdk-19.0.2+7-jre\bin\java.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Users\lenovo\.pydev_vscode\java19\jdk-19.0.2+7-jre\bin;C:\WINDOWS\SYSTEM32;C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.26100.7653_none_3e0b88a0e3318624;C:\Users\lenovo\.pydev_vscode\java19\jdk-19.0.2+7-jre\bin\server
+
+VM Arguments:
+jvm_args: --add-modules=ALL-SYSTEM --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED -Declipse.application=org.python.pydev.pydev_lsp.application -Dosgi.bundles.defaultStartLevel=4 -Declipse.product=org.python.pydev.pydev_lsp.product -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication 
+java_command: c:\Users\lenovo\.vscode\extensions\fabioz.vscode-pydev-0.16.0\server\plugins\org.eclipse.equinox.launcher_1.6.700.v20240213-1244.jar -configuration c:\Users\lenovo\.vscode\extensions\fabioz.vscode-pydev-0.16.0\server\config_win -data c:\Users\lenovo\AppData\Roaming\Code\User\workspaceStorage\240435d0fa89db6fcbcb1b59095e7c16\fabioz.vscode-pydev\pydev_ws
+java_class_path (initial): c:\Users\lenovo\.vscode\extensions\fabioz.vscode-pydev-0.16.0\server\plugins\org.eclipse.equinox.launcher_1.6.700.v20240213-1244.jar
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 4                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 2                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 8                                         {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 1048576                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 132120576                                 {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 1073741824                                {product} {command line}
+   size_t MinHeapDeltaBytes                        = 1048576                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5839372                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122909434                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122909434                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 1073741824                             {manageable} {ergonomic}
+     bool UseCompressedClassPointers               = true                           {product lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {command line}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+     bool UseStringDeduplication                   = true                                      {product} {command line}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags foldmultilines=false
+ #1: stderr all=off uptime,level,tags foldmultilines=false
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk-24
+PATH=C:\app\lenovo\product\21c\dbhomeXE\bin;C:\Program Files\Python313\Scripts\;C:\Program Files\Python313\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\VMware\VMware Workstation\bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Java\jdk-24;C:\Program Files\Java\jdk-24\bin;C:\Program Files (x86)\Microsoft SQL Server\160\Tools\Binn\;C:\Program Files\Microsoft SQL Server\160\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\Microsoft SQL Server\160\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\Program Files\MongoDB\Server\8.2\mongosh-2.5.9-win32-x64\mongosh-2.5.9-win32-x64\bin;C:\Program Files\MongoDB\Server\8.2\mongodb-database-tools-windows-x86_64-100.13.0;C:\Program Files\MongoDB\Server\8.2\mongodb-database-tools-windows-x86_64-100.13.0\mongodb-database-tools-windows-x86_64-100.13.0\bin;C:\Program Files\PowerShell\7\;C:\Program Files\PowerShell\7-preview\preview;C:\Users\lenovo\.config\herd\bin\nvm;C:\Program Files\nodejs;C:\ProgramData\ComposerSetup\bin;C:\Users\lenovo\AppData\Roaming\Composer\vendor\bin;C:\wamp\bin\php\php8.2.0;C:\app\lenovo\product\21c\dbhomeXE\bin;C:\Program Files\Python313\Scripts\;C:\Program Files\Python313\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\VMware\VMware Workstation\bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Java\jdk-24;C:\Program Files\Java\jdk-24\bin;C:\Program Files (x86)\Microsoft SQL Server\160\Tools\Binn\;C:\Program Files\Microsoft SQL Server\160\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\Microsoft SQL Server\160\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\Program Files\MongoDB\Server\8.2\mongosh-2.5.9-win32-x64\mongosh-2.5.9-win32-x64\bin;C:\Program Files\MongoD;C:\Users\lenovo\AppData\Local\Programs\Microsoft VS Code\bin
+USERNAME=lenovo
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
+TMP=C:\Users\lenovo\AppData\Local\Temp
+TEMP=C:\Users\lenovo\AppData\Local\Temp
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 11 , 64 bit Build 26100 (10.0.26100.7653)
+OS uptime: 14 days 20:19 hours
+Hyper-V role detected
+
+CPU: total 8 (initial active 8) (4 cores per cpu, 2 threads per core) family 6 model 142 stepping 10 microcode 0xf6, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, erms, clmul, bmi1, bmi2, rtm, adx, fma, vzeroupper, clflush, clflushopt, hv, rdtscp
+
+Memory: 4k page, system-wide physical 8035M (838M free)
+TotalPageFile size 32084M (AvailPageFile size 4M)
+current process WorkingSet (physical memory assigned to process): 12M, peak: 12M
+current process commit charge ("private bytes"): 54M, peak: 54M
+
+vm_info: OpenJDK 64-Bit Server VM (19.0.2+7) for windows-amd64 JRE (19.0.2+7), built on 2023-01-17T00:00:00Z by "temurin" with MS VC++ 16.7 (VS2019)
+
+END.

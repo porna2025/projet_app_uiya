@@ -1,0 +1,56 @@
+{% extends 'crypto_app/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Clés - CryptoSafe{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0"><i class="bi bi-key"></i> Gérer les clés</h5>
+        </div>
+        <div class="card-body">
+          <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+              <button class="btn btn-primary" type="submit">Générer</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="card mt-4">
+        <div class="card-header">
+          <h5 class="mb-0">Clés existantes</h5>
+        </div>
+        <div class="card-body">
+          {% if keys %}
+            <ul class="list-group">
+              {% for key in keys %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <div>
+                    <strong>{{ key.name }}</strong>
+                    <div class="small text-muted">{{ key.key_type }} • Créée le {{ key.created_at|date:"d/m/Y" }}</div>
+                  </div>
+                  <div>
+                    <a href="{% url 'view_key' key.id %}" class="btn btn-sm btn-outline-secondary">Voir</a>
+                    <form method="post" action="{% url 'delete_key' key.id %}" class="d-inline" onsubmit="return confirm('Voulez-vous vraiment supprimer cette clé ?');">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-sm btn-outline-danger">Supprimer</button>
+                    </form>
+                  </div>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <div class="text-center py-4 text-muted">Aucune clé disponible</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

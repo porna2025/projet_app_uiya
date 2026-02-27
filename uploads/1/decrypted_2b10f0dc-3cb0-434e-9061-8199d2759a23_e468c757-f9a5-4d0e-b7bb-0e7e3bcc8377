@@ -1,0 +1,489 @@
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, logout, authenticate
+from django.contrib import messages
+from django.http import FileResponse, JsonResponse
+from django.utils.text import get_valid_filename
+from django.core.paginator import Paginator
+from django.db.models import Sum
+from django.views.decorators.http import require_POST
+from django.utils import timezone
+from datetime import timedelta
+import logging
+import os
+import uuid
+import json
+import base64
+from .forms import (
+    UserRegistrationForm,
+    EncryptFileForm,
+    DecryptFileForm,
+    TextEncryptionForm,
+    KeyGenerationForm,
+)
+from .models import (
+    UserProfile,
+    EncryptionKey,
+    EncryptedFile,
+    ActivityLog,
+)
+from .utils import CryptoUtils
+
+logger = logging.getLogger(__name__)
+
+
+def home(request):
+    """Page d'accueil"""
+    if request.user.is_authenticated:
+        return redirect('dashboard')
+    return render(request, 'crypto_app/home.html')
+
+
+@login_required
+def dashboard(request):
+    """Tableau de bord"""
+    stats = {
+        'total_files': EncryptedFile.objects.filter(user=request.user).count(),
+        'active_keys': EncryptionKey.objects.filter(user=request.user, is_active=True).count(),
+        'recent_activities': ActivityLog.objects.filter(user=request.user).order_by('-timestamp')[:5]
+    }
+    return render(request, 'crypto_app/dashboard.html', {'stats': stats})
+
+
+@login_required
+def encrypt_file(request):
+    """Chiffrer un fichier avec validation robuste"""
+    if request.method == 'POST':
+        form = EncryptFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            try:
+                uploaded_file = request.FILES['file']
+                safe_name = get_valid_filename(uploaded_file.name)
+                password = form.cleaned_data['password']
+                
+                # Créer un répertoire pour l'utilisateur
+                user_dir = f"uploads/{request.user.id}"
+                os.makedirs(user_dir, exist_ok=True)
+                
+                # Sauvegarder le fichier original temporairement
+                original_path = os.path.join(user_dir, safe_name)
+                with open(original_path, 'wb+') as destination:
+                    for chunk in uploaded_file.chunks():
+                        destination.write(chunk)
+                
+                # Générer un nom pour le fichier chiffré
+                encrypted_filename = f"{uuid.uuid4()}.enc"
+                encrypted_path = os.path.join(user_dir, encrypted_filename)
+                
+                # Chiffrer le fichier
+                result = CryptoUtils.encrypt_file(original_path, encrypted_path, password)
+                
+                if result['success']:
+                    # Enregistrer dans la base de données
+                    EncryptedFile.objects.create(
+                        user=request.user,
+                        original_name=uploaded_file.name,
+                        encrypted_name=encrypted_filename,
+                        file_path=encrypted_path,
+                        file_size=os.path.getsize(encrypted_path),
+                        is_encrypted=True
+                    )
+                    
+                    # Journaliser l'activité
+                    ActivityLog.objects.create(
+                        user=request.user,
+                        action='ENCRYPTION',
+                        description=f"Chiffrement de {uploaded_file.name}",
+                        severity='INFO',
+                        ip_address=request.META.get('REMOTE_ADDR')
+                    )
+                    
+                    # Supprimer le fichier original
+                    os.remove(original_path)
+                    
+                    messages.success(request, f"Fichier {uploaded_file.name} chiffré avec succès!")
+                    logger.info(f"Encryption successful for user {request.user.id}: {uploaded_file.name}")
+                    return redirect('file_list')
+                else:
+                    logger.error(f"Encryption failed: {result['error']}")
+                    messages.error(request, f"Erreur de chiffrement: {result['error']}")
+                    if os.path.exists(original_path):
+                        os.remove(original_path)
+            except Exception as e:
+                logger.exception(f"Unexpected error during encryption for user {request.user.id}")
+                messages.error(request, f"Une erreur est survenue: {str(e)}")
+    else:
+        form = EncryptFileForm()
+    
+    return render(request, 'crypto_app/encrypt.html', {'form': form})
+
+
+@login_required
+def decrypt_file(request):
+    """Déchiffrer un fichier avec validation robuste"""
+    if request.method == 'POST':
+        form = DecryptFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            try:
+                uploaded_file = request.FILES['file']
+                safe_name = get_valid_filename(uploaded_file.name)
+                password = form.cleaned_data['password']
+                
+                # Sauvegarder le fichier chiffré temporairement
+                user_dir = f"uploads/{request.user.id}"
+                os.makedirs(user_dir, exist_ok=True)
+                
+                encrypted_path = os.path.join(user_dir, safe_name)
+                with open(encrypted_path, 'wb+') as destination:
+                    for chunk in uploaded_file.chunks():
+                        destination.write(chunk)
+                
+                # Générer un nom pour le fichier déchiffré
+                decrypted_filename = f"decrypted_{uuid.uuid4()}_{uploaded_file.name.replace('.enc', '')}"
+                decrypted_path = os.path.join(user_dir, decrypted_filename)
+                
+                # Déchiffrer le fichier
+                result = CryptoUtils.decrypt_file(encrypted_path, decrypted_path, password)
+                
+                if result['success']:
+                    # Proposer le téléchargement
+                    response = FileResponse(
+                        open(decrypted_path, 'rb'),
+                        as_attachment=True,
+                        filename=decrypted_filename
+                    )
+                    
+                    # Journaliser
+                    ActivityLog.objects.create(
+                        user=request.user,
+                        action='DECRYPTION',
+                        description=f"Déchiffrement de {uploaded_file.name}",
+                        severity='INFO',
+                        ip_address=request.META.get('REMOTE_ADDR')
+                    )
+                    
+                    logger.info(f"Decryption successful for user {request.user.id}: {uploaded_file.name}")
+                    
+                    # Nettoyer les fichiers temporaires
+                    os.remove(encrypted_path)
+                    
+                    return response
+                else:
+                    logger.warning(f"Decryption failed for user {request.user.id}: {result['error']}")
+                    messages.error(request, f"Erreur de déchiffrement: {result['error']}")
+                    if os.path.exists(encrypted_path):
+                        os.remove(encrypted_path)
+            except Exception as e:
+                logger.exception(f"Unexpected error during decryption for user {request.user.id}")
+                messages.error(request, f"Une erreur est survenue: {str(e)}")
+    else:
+        form = DecryptFileForm()
+    
+    recent_files = EncryptedFile.objects.filter(user=request.user).order_by('-encrypted_at')[:3]
+    return render(request, 'crypto_app/decrypt.html', {'form': form, 'recent_files': recent_files})
+
+
+@login_required
+def encrypt_text(request):
+    """Chiffrer/Déchiffrer du texte"""
+    result = None
+    if request.method == 'POST':
+        form = TextEncryptionForm(request.POST)
+        if form.is_valid():
+            text = form.cleaned_data['text']
+            password = form.cleaned_data['password']
+            action = form.cleaned_data['action']
+            
+            if action == 'encrypt':
+                result = CryptoUtils.encrypt_text(text, password)
+                messages.success(request, "Texte chiffré avec succès!")
+            else:
+                result = CryptoUtils.decrypt_text(text, password)
+                messages.info(request, "Texte déchiffré!")
+    else:
+        form = TextEncryptionForm()
+
+    return render(request, 'crypto_app/encrypt_text.html', {
+        'form': form,
+        'result': result,
+        'action': locals().get('action', None),
+    })
+
+
+@login_required
+def manage_keys(request):
+    """Gérer les clés de chiffrement"""
+    if request.method == 'POST':
+        form = KeyGenerationForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            key_type = form.cleaned_data['key_type']
+            
+            if key_type == 'AES':
+                key_value = CryptoUtils.generate_aes_key()
+            elif key_type == 'RSA':
+                key_pair = CryptoUtils.generate_rsa_keypair()
+                key_value = json.dumps(key_pair, indent=2)
+            else:  # PASSWORD
+                key_value = base64.b64encode(os.urandom(16)).decode()
+            
+            EncryptionKey.objects.create(
+                user=request.user,
+                name=name,
+                key_type=key_type,
+                key_value=key_value
+            )
+            
+            messages.success(request, f"Clé {name} générée avec succès!")
+            return redirect('manage_keys')
+    else:
+        form = KeyGenerationForm()
+    
+    keys = EncryptionKey.objects.filter(user=request.user)
+    return render(request, 'crypto_app/keys.html', {
+        'form': form,
+        'keys': keys
+    })
+
+
+@login_required
+def view_key(request, key_id):
+    """Afficher le détail d'une clé (propriétaire seulement)"""
+    key = get_object_or_404(EncryptionKey, id=key_id, user=request.user)
+    return render(request, 'crypto_app/key_detail.html', {'key': key})
+
+
+@login_required
+def delete_key(request, key_id):
+    """Supprimer une clé (confirmation via POST)"""
+    key = get_object_or_404(EncryptionKey, id=key_id, user=request.user)
+    if request.method == 'POST':
+        name = key.name
+        key.delete()
+        ActivityLog.objects.create(
+            user=request.user,
+            action='DELETE_KEY',
+            description=f"Suppression de la clé {name}",
+            severity='INFO',
+            ip_address=request.META.get('REMOTE_ADDR')
+        )
+        messages.success(request, f"Clé {name} supprimée avec succès")
+        return redirect('manage_keys')
+    return render(request, 'crypto_app/confirm_delete_key.html', {'key': key})
+
+
+@login_required
+def file_list(request):
+    """Liste des fichiers"""
+    qs = EncryptedFile.objects.filter(user=request.user).order_by('-encrypted_at')
+
+    # Pagination
+    paginator = Paginator(qs, 10)
+    page_number = request.GET.get('page')
+    files = paginator.get_page(page_number)
+
+    # Statistics
+    total_size = qs.aggregate(total_size=Sum('file_size'))['total_size'] or 0
+    encrypted_count = qs.filter(is_encrypted=True).count()
+    decrypted_count = qs.filter(is_encrypted=False).count()
+    # Example quota: 1 GB
+    quota = 1024 * 1024 * 1024
+    used_percentage = int(min(100, (total_size / quota) * 100)) if quota > 0 else 0
+
+    def human_readable_size(size: int) -> str:
+        s = float(size)
+        for unit in ['B', 'KB', 'MB', 'GB', 'TB']:
+            if s < 1024.0:
+                return f"{s:.2f} {unit}"
+            s /= 1024.0
+        return f"{s:.2f} PB"
+
+    total_size_display = human_readable_size(total_size)
+
+    return render(request, 'crypto_app/files.html', {
+        'files': files,
+        'total_size': total_size,
+        'total_size_display': total_size_display,
+        'encrypted_count': encrypted_count,
+        'decrypted_count': decrypted_count,
+        'used_percentage': used_percentage,
+    })
+
+
+@login_required
+def download_file(request, file_id):
+    """Télécharger un fichier"""
+    encrypted_file = get_object_or_404(EncryptedFile, id=file_id, user=request.user)
+    
+    if os.path.exists(encrypted_file.file_path):
+        response = FileResponse(
+            open(encrypted_file.file_path, 'rb'),
+            as_attachment=True,
+            filename=encrypted_file.encrypted_name
+        )
+        return response
+    
+    messages.error(request, "Fichier non trouvé")
+    return redirect('file_list')
+
+
+@login_required
+def delete_file(request, file_id):
+    """Supprimer un fichier"""
+    encrypted_file = get_object_or_404(EncryptedFile, id=file_id, user=request.user)
+    encrypted_file.delete_file()
+    encrypted_file.delete()
+    
+    messages.success(request, "Fichier supprimé avec succès")
+    return redirect('file_list')
+
+
+@login_required
+@require_POST
+def delete_multiple_files(request):
+    """Supprimer plusieurs fichiers envoyés en JSON (IDs)"""
+    try:
+        data = json.loads(request.body)
+        file_ids = data.get('file_ids', [])
+        if not isinstance(file_ids, list):
+            return JsonResponse({'success': False, 'error': 'file_ids must be a list'}, status=400)
+
+        deleted = 0
+        for fid in file_ids:
+            try:
+                ef = EncryptedFile.objects.get(id=int(fid), user=request.user)
+                ef.delete_file()
+                ef.delete()
+                deleted += 1
+            except EncryptedFile.DoesNotExist:
+                continue
+
+        ActivityLog.objects.create(
+            user=request.user,
+            action='DELETE_MULTIPLE',
+            description=f"Suppression de {deleted} fichiers",
+            severity='INFO',
+            ip_address=request.META.get('REMOTE_ADDR')
+        )
+
+        return JsonResponse({'success': True, 'deleted': deleted})
+    except Exception as e:
+        logger.exception('Error deleting multiple files')
+        return JsonResponse({'success': False, 'error': str(e)}, status=500)
+
+
+@login_required
+@require_POST
+def cleanup_old_files(request):
+    """Supprimer les fichiers de plus de 30 jours pour l'utilisateur connecté"""
+    try:
+        cutoff = timezone.now() - timedelta(days=30)
+        old_files = EncryptedFile.objects.filter(user=request.user, encrypted_at__lt=cutoff)
+        deleted = 0
+        for f in old_files:
+            f.delete_file()
+            f.delete()
+            deleted += 1
+
+        ActivityLog.objects.create(
+            user=request.user,
+            action='CLEANUP_FILES',
+            description=f"Nettoyage de {deleted} fichiers anciens",
+            severity='INFO',
+            ip_address=request.META.get('REMOTE_ADDR')
+        )
+
+        return JsonResponse({'success': True, 'message': f'{deleted} fichier(s) anciens supprimés.'})
+    except Exception as e:
+        logger.exception('Error during cleanup')
+        return JsonResponse({'success': False, 'error': str(e)}, status=500)
+
+
+def user_login(request):
+    """Connexion utilisateur avec logging de sécurité"""
+    if request.user.is_authenticated:
+        return redirect('dashboard')
+    
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            login(request, user)
+            messages.success(request, f"Bienvenue {username}!")
+            
+            # Journaliser la connexion
+            ActivityLog.objects.create(
+                user=user,
+                action='LOGIN',
+                description="Connexion réussie",
+                severity='INFO',
+                ip_address=request.META.get('REMOTE_ADDR')
+            )
+            
+            logger.info(f"User {username} logged in successfully")
+            return redirect('dashboard')
+        else:
+            # Enregistrer les tentatives échouées
+            logger.warning(f"Failed login attempt for username: {username} from IP: {request.META.get('REMOTE_ADDR')}")
+            messages.error(request, "Identifiants incorrects")
+    
+    return render(request, 'crypto_app/login.html')
+
+
+def user_register(request):
+    """Inscription utilisateur avec gestion robuste des erreurs"""
+    if request.user.is_authenticated:
+        return redirect('dashboard')
+    
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            try:
+                user = form.save()
+                login(request, user)
+                
+                # Créer le profil utilisateur
+                UserProfile.objects.create(user=user)
+                
+                logger.info(f"New user registered: {user.username}")
+                messages.success(request, "Compte créé avec succès!")
+                return redirect('dashboard')
+            except Exception as e:
+                logger.exception(f"Error creating user account")
+                messages.error(request, f"Erreur lors de la création du compte: {str(e)}")
+    else:
+        form = UserRegistrationForm()
+    
+    return render(request, 'crypto_app/register.html', {'form': form})
+
+
+@login_required
+def user_logout(request):
+    """Déconnexion"""
+    logout(request)
+    messages.info(request, "Vous avez été déconnecté")
+    return redirect('home')
+
+
+@login_required
+def user_profile(request):
+    """Profil utilisateur avec statistiques"""
+    try:
+        userprofile = UserProfile.objects.get(user=request.user)
+    except UserProfile.DoesNotExist:
+        userprofile = UserProfile.objects.create(user=request.user)
+    
+    # Statistiques
+    total_files = EncryptedFile.objects.filter(user=request.user).count()
+    active_keys = EncryptionKey.objects.filter(user=request.user, is_active=True).count()
+    recent_activities = ActivityLog.objects.filter(user=request.user).order_by('-timestamp')[:10]
+    
+    context = {
+        'userprofile': userprofile,
+        'total_files': total_files,
+        'active_keys': active_keys,
+        'recent_activities': recent_activities,
+    }
+    return render(request, 'crypto_app/profile.html', context)

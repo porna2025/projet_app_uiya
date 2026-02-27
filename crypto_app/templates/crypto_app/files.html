@@ -1,0 +1,541 @@
+{% extends 'crypto_app/base.html' %}
+
+{% block title %}Mes fichiers - CryptoSafe{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- En-tête avec statistiques -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h2 class="mb-2">
+                                <i class="bi bi-folder me-2"></i>
+                                Mes fichiers chiffrés
+                            </h2>
+                            <p class="text-muted mb-0">
+                                Gérez tous vos fichiers chiffrés en un seul endroit
+                            </p>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <a href="{% url 'encrypt_file' %}" class="btn btn-primary">
+                                <i class="bi bi-plus-circle me-2"></i>
+                                Nouveau chiffrement
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Filtres et recherche -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-search"></i>
+                                </span>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="searchInput" 
+                                       placeholder="Rechercher un fichier...">
+                                <button class="btn btn-outline-secondary" type="button" onclick="searchFiles()">
+                                    Rechercher
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select" id="sortSelect" onchange="sortFiles()">
+                                <option value="newest">Plus récents</option>
+                                <option value="oldest">Plus anciens</option>
+                                <option value="name_asc">Nom (A-Z)</option>
+                                <option value="name_desc">Nom (Z-A)</option>
+                                <option value="size_asc">Taille (petit-grand)</option>
+                                <option value="size_desc">Taille (grand-petit)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select" id="filterSelect" onchange="filterFiles()">
+                                <option value="all">Tous les fichiers</option>
+                                <option value="encrypted">Chiffrés</option>
+                                <option value="decrypted">Déchiffrés</option>
+                                <option value="last_week">7 derniers jours</option>
+                                <option value="last_month">30 derniers jours</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Liste des fichiers -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            <i class="bi bi-list-ul me-2"></i>
+                            Fichiers ({{ files.paginator.count }})
+                        </h5>
+                        <div>
+                            <button class="btn btn-sm btn-outline-secondary me-2" onclick="selectAll()">
+                                <i class="bi bi-check-square me-1"></i>
+                                Tout sélectionner
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger" onclick="deleteSelected()">
+                                <i class="bi bi-trash me-1"></i>
+                                Supprimer la sélection
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {% if files %}
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="filesTable">
+                            <thead>
+                                <tr>
+                                    <th width="40">
+                                        <input type="checkbox" class="form-check-input" id="selectAllCheckbox">
+                                    </th>
+                                    <th>Nom du fichier</th>
+                                    <th>Taille</th>
+                                    <th>Type</th>
+                                    <th>Date</th>
+                                    <th>Statut</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for file in files %}
+                                <tr data-file-id="{{ file.id }}" 
+                                    data-name="{{ file.original_name|lower }}" 
+                                    data-size="{{ file.file_size }}"
+                                    data-date="{{ file.encrypted_at|date:'U' }}"
+                                    data-status="{% if file.is_encrypted %}encrypted{% else %}decrypted{% endif %}">
+                                    <td>
+                                        <input type="checkbox" class="form-check-input file-checkbox" value="{{ file.id }}">
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi {% if file.is_encrypted %}bi-file-earmark-lock text-primary{% else %}bi-file-earmark-text text-success{% endif %} me-3 fs-5"></i>
+                                            <div>
+                                                <h6 class="mb-0">{{ file.original_name|truncatechars:30 }}</h6>
+                                                <small class="text-muted">
+                                                    {{ file.encryption_method }}
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-secondary">
+                                            {{ file.get_file_size_display }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {% with ext=file.original_name|slice:"-4:"|lower %}
+                                            {% if ext == '.pdf' %}
+                                                <span class="badge bg-danger">PDF</span>
+                                            {% elif ext == '.doc' or ext == 'docx' %}
+                                                <span class="badge bg-info">Document</span>
+                                            {% elif ext == '.jpg' or ext == '.png' or ext == '.gif' %}
+                                                <span class="badge bg-success">Image</span>
+                                            {% elif ext == '.txt' %}
+                                                <span class="badge bg-secondary">Texte</span>
+                                            {% else %}
+                                                <span class="badge bg-dark">Autre</span>
+                                            {% endif %}
+                                        {% endwith %}
+                                    </td>
+                                    <td>
+                                        <small>
+                                            {{ file.encrypted_at|date:"d/m/Y" }}<br>
+                                            <span class="text-muted">{{ file.encrypted_at|date:"H:i" }}</span>
+                                        </small>
+                                    </td>
+                                    <td>
+                                        {% if file.is_encrypted %}
+                                            <span class="badge bg-primary">
+                                                <i class="bi bi-lock me-1"></i>
+                                                Chiffré
+                                            </span>
+                                        {% else %}
+                                            <span class="badge bg-success">
+                                                <i class="bi bi-unlock me-1"></i>
+                                                Déchiffré
+                                            </span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            {% if file.is_encrypted %}
+                                                <a href="{% url 'download_file' file.id %}" 
+                                                   class="btn btn-outline-primary" 
+                                                   title="Télécharger">
+                                                    <i class="bi bi-download"></i>
+                                                </a>
+                                                <a href="{% url 'decrypt_file' %}" 
+                                                   class="btn btn-outline-success" 
+                                                   title="Déchiffrer">
+                                                    <i class="bi bi-unlock"></i>
+                                                </a>
+                                            {% else %}
+                                                <a href="{% url 'download_file' file.id %}" 
+                                                   class="btn btn-outline-primary" 
+                                                   title="Télécharger">
+                                                    <i class="bi bi-download"></i>
+                                                </a>
+                                            {% endif %}
+                                            <a href="{% url 'delete_file' file.id %}" 
+                                               class="btn btn-outline-danger btn-delete" 
+                                               title="Supprimer">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    {% if files.has_other_pages %}
+                    <nav aria-label="Pagination">
+                        <ul class="pagination justify-content-center mt-4">
+                            {% if files.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=1">
+                                        <i class="bi bi-chevron-double-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ files.previous_page_number }}">
+                                        <i class="bi bi-chevron-left"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            
+                            {% for num in files.paginator.page_range %}
+                                {% if files.number == num %}
+                                    <li class="page-item active">
+                                        <span class="page-link">{{ num }}</span>
+                                    </li>
+                                {% elif num > files.number|add:'-3' and num < files.number|add:'3' %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                            
+                            {% if files.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ files.next_page_number }}">
+                                        <i class="bi bi-chevron-right"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ files.paginator.num_pages }}">
+                                        <i class="bi bi-chevron-double-right"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                    {% endif %}
+                    
+                    {% else %}
+                    <div class="text-center py-5">
+                        <i class="bi bi-folder-x fs-1 text-muted d-block mb-3"></i>
+                        <h5>Aucun fichier chiffré</h5>
+                        <p class="text-muted mb-4">
+                            Commencez par chiffrer votre premier fichier
+                        </p>
+                        <a href="{% url 'encrypt_file' %}" class="btn btn-primary">
+                            <i class="bi bi-lock me-2"></i>
+                            Chiffrer un fichier
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Statistiques -->
+    <div class="row mt-4">
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="bi bi-pie-chart me-2"></i>
+                        Statistiques
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6 text-center mb-3">
+                            <div class="stat-number">{{ total_size_display }}</div>
+                            <div class="stat-label">Espace utilisé</div>
+                        </div>
+                        <div class="col-6 text-center mb-3">
+                            <div class="stat-number">{{ files.paginator.count }}</div>
+                            <div class="stat-label">Fichiers totaux</div>
+                        </div>
+                        <div class="col-6 text-center">
+                            <div class="stat-number">{{ encrypted_count }}</div>
+                            <div class="stat-label">Chiffrés</div>
+                        </div>
+                        <div class="col-6 text-center">
+                            <div class="stat-number">{{ decrypted_count }}</div>
+                            <div class="stat-label">Déchiffrés</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="bi bi-gear me-2"></i>
+                        Gestion de l'espace
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Espace utilisé</span>
+                            <span>{{ used_percentage }}%</span>
+                        </div>
+                        <div class="progress" style="height: 10px;">
+                            <div class="progress-bar" style="width: {{ used_percentage }}%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-info small">
+                        <i class="bi bi-info-circle me-2"></i>
+                        <strong>Conseil :</strong>
+                        Supprimez régulièrement les fichiers dont vous n'avez plus besoin pour libérer de l'espace.
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button class="btn btn-outline-danger" onclick="cleanupOldFiles()">
+                            <i class="bi bi-trash me-2"></i>
+                            Nettoyer les fichiers anciens
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let allFiles = [];
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialiser la liste des fichiers
+        const rows = document.querySelectorAll('#filesTable tbody tr');
+        rows.forEach(row => {
+            allFiles.push({
+                element: row,
+                name: row.dataset.name,
+                size: parseInt(row.dataset.size),
+                date: parseInt(row.dataset.date),
+                status: row.dataset.status
+            });
+        });
+        
+        // Sélectionner/désélectionner tous
+        const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+        selectAllCheckbox.addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('.file-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = this.checked;
+            });
+        });
+        
+        // Vérifier si tous sont sélectionnés
+        document.querySelectorAll('.file-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const allChecked = Array.from(document.querySelectorAll('.file-checkbox'))
+                    .every(cb => cb.checked);
+                selectAllCheckbox.checked = allChecked;
+            });
+        });
+    });
+    
+    function selectAll() {
+        const checkboxes = document.querySelectorAll('.file-checkbox');
+        const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+        
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = !allChecked;
+        });
+        
+        document.getElementById('selectAllCheckbox').checked = !allChecked;
+    }
+    
+    function deleteSelected() {
+        const selectedIds = Array.from(document.querySelectorAll('.file-checkbox:checked'))
+            .map(cb => cb.value);
+        
+        if (selectedIds.length === 0) {
+            alert('Veuillez sélectionner au moins un fichier à supprimer.');
+            return;
+        }
+        
+        if (confirm(`Êtes-vous sûr de vouloir supprimer ${selectedIds.length} fichier(s) ?`)) {
+            // Envoyer une requête pour supprimer les fichiers sélectionnés
+            fetch('/files/delete-multiple/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify({ file_ids: selectedIds })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Recharger la page
+                    location.reload();
+                } else {
+                    alert('Erreur lors de la suppression : ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Une erreur est survenue lors de la suppression.');
+            });
+        }
+    }
+    
+    function searchFiles() {
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        const rows = document.querySelectorAll('#filesTable tbody tr');
+        
+        rows.forEach(row => {
+            const fileName = row.querySelector('h6').textContent.toLowerCase();
+            if (fileName.includes(searchTerm)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+    
+    function sortFiles() {
+        const sortBy = document.getElementById('sortSelect').value;
+        const tbody = document.querySelector('#filesTable tbody');
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+        
+        rows.sort((a, b) => {
+            const aData = allFiles.find(f => f.element === a);
+            const bData = allFiles.find(f => f.element === b);
+            
+            switch (sortBy) {
+                case 'newest':
+                    return bData.date - aData.date;
+                case 'oldest':
+                    return aData.date - bData.date;
+                case 'name_asc':
+                    return aData.name.localeCompare(bData.name);
+                case 'name_desc':
+                    return bData.name.localeCompare(aData.name);
+                case 'size_asc':
+                    return aData.size - bData.size;
+                case 'size_desc':
+                    return bData.size - aData.size;
+                default:
+                    return 0;
+            }
+        });
+        
+        // Réorganiser les lignes
+        rows.forEach(row => tbody.appendChild(row));
+    }
+    
+    function filterFiles() {
+        const filterBy = document.getElementById('filterSelect').value;
+        const rows = document.querySelectorAll('#filesTable tbody tr');
+        
+        rows.forEach(row => {
+            const fileData = allFiles.find(f => f.element === row);
+            let show = true;
+            
+            switch (filterBy) {
+                case 'encrypted':
+                    show = fileData.status === 'encrypted';
+                    break;
+                case 'decrypted':
+                    show = fileData.status === 'decrypted';
+                    break;
+                case 'last_week':
+                    const oneWeekAgo = Date.now() / 1000 - (7 * 24 * 60 * 60);
+                    show = fileData.date > oneWeekAgo;
+                    break;
+                case 'last_month':
+                    const oneMonthAgo = Date.now() / 1000 - (30 * 24 * 60 * 60);
+                    show = fileData.date > oneMonthAgo;
+                    break;
+                default:
+                    show = true;
+            }
+            
+            row.style.display = show ? '' : 'none';
+        });
+    }
+    
+    function cleanupOldFiles() {
+        if (confirm('Supprimer tous les fichiers de plus de 30 jours ?')) {
+            fetch('/files/cleanup/', {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken')
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    location.reload();
+                } else {
+                    alert('Erreur : ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Une erreur est survenue.');
+            });
+        }
+    }
+    
+    // Fonction utilitaire pour récupérer le token CSRF
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+</script>
+{% endblock %}

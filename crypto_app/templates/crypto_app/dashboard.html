@@ -1,0 +1,298 @@
+{% extends 'crypto_app/base.html' %}
+
+{% block title %}Tableau de bord - CryptoSafe{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Bienvenue -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card bg-gradient-primary text-white">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h2 class="fw-bold mb-2">
+                                <i class="bi bi-shield-check me-2"></i>
+                                Bienvenue, {{ user.username }} !
+                            </h2>
+                            <p class="mb-0">
+                                Gérez et protégez vos fichiers sensibles avec notre système de chiffrement AES-256.
+                            </p>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <span class="badge bg-light text-primary fs-6 p-3">
+                                <i class="bi bi-calendar-check me-2"></i>
+                                {% now "d F Y" %}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Statistiques rapides -->
+    <div class="row mb-4">
+        <div class="col-md-3 col-6 mb-3">
+            <div class="stat-card">
+                <div class="stat-number">{{ stats.total_files }}</div>
+                <div class="stat-label">Fichiers chiffrés</div>
+                <div class="mt-2">
+                    <i class="bi bi-folder text-primary"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-6 mb-3">
+            <div class="stat-card">
+                <div class="stat-number">{{ stats.active_keys }}</div>
+                <div class="stat-label">Clés actives</div>
+                <div class="mt-2">
+                    <i class="bi bi-key text-primary"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-6 mb-3">
+            <div class="stat-card">
+                <div class="stat-number">AES-256</div>
+                <div class="stat-label">Niveau sécurité</div>
+                <div class="mt-2">
+                    <i class="bi bi-shield-check text-primary"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-6 mb-3">
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Protection</div>
+                <div class="mt-2">
+                    <i class="bi bi-lock text-primary"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Actions rapides -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">
+                        <i class="bi bi-lightning me-2"></i>
+                        Actions rapides
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 mb-3">
+                            <a href="{% url 'encrypt_file' %}" class="btn btn-primary w-100 py-3">
+                                <i class="bi bi-lock fs-4 d-block mb-2"></i>
+                                Chiffrer un fichier
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-3">
+                            <a href="{% url 'decrypt_file' %}" class="btn btn-success w-100 py-3">
+                                <i class="bi bi-unlock fs-4 d-block mb-2"></i>
+                                Déchiffrer un fichier
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-3">
+                            <a href="{% url 'encrypt_text' %}" class="btn btn-info w-100 py-3">
+                                <i class="bi bi-chat-left-text fs-4 d-block mb-2"></i>
+                                Chiffrer du texte
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-3">
+                            <a href="{% url 'manage_keys' %}" class="btn btn-warning w-100 py-3">
+                                <i class="bi bi-key fs-4 d-block mb-2"></i>
+                                Gérer les clés
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <!-- Fichiers récents -->
+        <div class="col-lg-8 mb-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h4 class="mb-0">
+                        <i class="bi bi-folder me-2"></i>
+                        Fichiers récents
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nom du fichier</th>
+                                    <th>Taille</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for file in stats.recent_files|slice:":5" %}
+                                <tr>
+                                    <td>
+                                        <i class="bi bi-file-earmark-lock me-2"></i>
+                                        {{ file.original_name|truncatechars:20 }}
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-secondary">
+                                            {{ file.get_file_size_display }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <small>{{ file.encrypted_at|date:"d/m/Y" }}</small>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="{% url 'download_file' file.id %}" class="btn btn-outline-primary">
+                                                <i class="bi bi-download"></i>
+                                            </a>
+                                            <a href="{% url 'delete_file' file.id %}" class="btn btn-outline-danger btn-delete">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="4" class="text-center py-4">
+                                        <i class="bi bi-folder-x fs-1 text-muted d-block mb-2"></i>
+                                        <p class="text-muted">Aucun fichier chiffré</p>
+                                        <a href="{% url 'encrypt_file' %}" class="btn btn-sm btn-primary">
+                                            Chiffrer mon premier fichier
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% if stats.total_files > 5 %}
+                    <div class="text-end">
+                        <a href="{% url 'file_list' %}" class="btn btn-sm btn-outline-primary">
+                            Voir tous les fichiers
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Activité récente -->
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h4 class="mb-0">
+                        <i class="bi bi-activity me-2"></i>
+                        Activité récente
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="activity-timeline">
+                        {% for activity in stats.recent_activities %}
+                        <div class="activity-item">
+                            <div class="d-flex justify-content-between">
+                                <strong>{{ activity.action }}</strong>
+                                <small class="text-muted">{{ activity.timestamp|timesince }}</small>
+                            </div>
+                            <p class="mb-0 small">{{ activity.description|truncatechars:40 }}</p>
+                            <span class="badge bg-{% if activity.severity == 'INFO' %}info{% elif activity.severity == 'WARNING' %}warning{% elif activity.severity == 'ERROR' %}danger{% else %}secondary{% endif %} badge-sm">
+                                {{ activity.severity }}
+                            </span>
+                        </div>
+                        {% empty %}
+                        <div class="text-center py-4">
+                            <i class="bi bi-activity fs-1 text-muted d-block mb-2"></i>
+                            <p class="text-muted">Aucune activité récente</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Conseils de sécurité -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">
+                        <i class="bi bi-shield-check me-2"></i>
+                        Conseils de sécurité
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <i class="bi bi-key fs-4 text-primary"></i>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6>Mots de passe forts</h6>
+                                    <p class="small text-muted mb-0">
+                                        Utilisez toujours des mots de passe complexes avec majuscules, chiffres et caractères spéciaux.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <i class="bi bi-arrows-angle-contract fs-4 text-primary"></i>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6>Clés de chiffrement</h6>
+                                    <p class="small text-muted mb-0">
+                                        Générez régulièrement de nouvelles clés de chiffrement pour renforcer la sécurité.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <i class="bi bi-cloud-arrow-up fs-4 text-primary"></i>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6>Sauvegarde</h6>
+                                    <p class="small text-muted mb-0">
+                                        Sauvegardez vos clés de déchiffrement dans un endroit sécurisé hors ligne.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border-radius: 12px;
+    }
+    
+    .badge-sm {
+        font-size: 0.7em;
+        padding: 2px 8px;
+    }
+    
+    .btn-delete:hover {
+        background-color: #ef4444;
+        color: white;
+    }
+</style>
+{% endblock %}

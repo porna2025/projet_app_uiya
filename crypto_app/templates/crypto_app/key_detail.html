@@ -1,0 +1,48 @@
+{% extends 'crypto_app/base.html' %}
+
+{% block title %}Détail de la clé - CryptoSafe{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0"><i class="bi bi-key"></i> Détail de la clé</h5>
+        </div>
+        <div class="card-body">
+          <h6><strong>{{ key.name }}</strong></h6>
+          <p class="small text-muted">{{ key.key_type }} • Créée le {{ key.created_at|date:"d/m/Y H:i" }}</p>
+
+          <div class="mb-3">
+            <label class="form-label">Valeur de la clé</label>
+            <div class="position-relative">
+              <textarea class="form-control" rows="6" id="keyValue" readonly style="background-color: #f8f9fa;">{{ key.key_value }}</textarea>
+              <button class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2" onclick="copyKey()">
+                <i class="bi bi-clipboard"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="d-flex gap-2">
+            <a href="{% url 'manage_keys' %}" class="btn btn-outline-secondary">Retour</a>
+            <form method="post" action="{% url 'delete_key' key.id %}" onsubmit="return confirm('Voulez-vous vraiment supprimer cette clé ?');">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger">Supprimer</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function copyKey() {
+  const el = document.getElementById('keyValue');
+  navigator.clipboard.writeText(el.value).then(() => {
+    alert('Valeur de la clé copiée dans le presse-papier');
+  }).catch(err => console.error('Erreur copie:', err));
+}
+</script>
+{% endblock %}

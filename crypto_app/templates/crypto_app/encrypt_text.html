@@ -1,0 +1,325 @@
+{% extends 'crypto_app/base.html' %}
+
+{% block title %}Chiffrer du texte - CryptoSafe{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center py-4">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">
+                        <i class="bi bi-chat-left-text me-2"></i>
+                        Chiffrer/Déchiffrer du texte
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" id="textForm">
+                        {% csrf_token %}
+                        {% if form and form.non_field_errors %}
+                        <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+                        {% endif %}
+                        
+                        <!-- Texte à chiffrer/déchiffrer -->
+                        <div class="mb-4">
+                            <label for="text" class="form-label">
+                                <i class="bi bi-text-paragraph me-1"></i>
+                                Texte
+                            </label>
+                            <textarea class="form-control"
+                                      id="text"
+                                      name="text"
+                                      rows="6"
+                                      placeholder="Saisissez le texte à chiffrer ou collez le texte chiffré à déchiffrer"
+                                      required>{{ form.text.value|default:"" }}</textarea>
+                            {% if form and form.text.errors %}
+                                <div class="text-danger small mt-1">{{ form.text.errors }}</div>
+                            {% endif %}
+                            <div class="form-text">
+                                Caractères restants : <span id="charCount">0</span>/5000
+                            </div>
+                        </div>
+                        
+                        <!-- Mot de passe -->
+                        <div class="mb-4">
+                            <label for="password" class="form-label">
+                                <i class="bi bi-key me-1"></i>
+                                Mot de passe
+                            </label>
+                            <div class="input-group">
+                                    <input type="password"
+                                        class="form-control"
+                                        id="password"
+                                        name="password"
+                                        required
+                                        placeholder="Entrez le mot de passe de chiffrement">
+                                    {% if form and form.password.errors %}
+                                     <div class="text-danger small mt-1">{{ form.password.errors }}</div>
+                                    {% endif %}
+                                <button class="btn btn-outline-secondary toggle-password" type="button">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Action -->
+                        <div class="mb-4">
+                            <label class="form-label d-block">
+                                <i class="bi bi-arrow-left-right me-1"></i>
+                                Action
+                            </label>
+                            <div class="btn-group w-100" role="group">
+                                <input type="radio" 
+                                       class="btn-check" 
+                                       name="action" 
+                                       id="encrypt" 
+                                       value="encrypt" 
+                                       autocomplete="off" 
+                                       checked>
+                                <label class="btn btn-outline-primary" for="encrypt">
+                                    <i class="bi bi-lock me-2"></i>
+                                    Chiffrer
+                                </label>
+                                
+                                <input type="radio" 
+                                       class="btn-check" 
+                                       name="action" 
+                                       id="decrypt" 
+                                       value="decrypt" 
+                                       autocomplete="off">
+                                <label class="btn btn-outline-success" for="decrypt">
+                                    <i class="bi bi-unlock me-2"></i>
+                                    Déchiffrer
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Options -->
+                        <div class="mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="showPassword">
+                                <label class="form-check-label" for="showPassword">
+                                    Afficher le mot de passe
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-outline-secondary" id="clearBtn">
+                                <i class="bi bi-trash me-2"></i>
+                                Effacer tout
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-arrow-right-circle me-2"></i>
+                                Exécuter
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Résultat -->
+            {% if result %}
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="bi bi-clipboard-check me-2"></i>
+                        Résultat
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label">
+                            {% if action == 'encrypt' %}
+                                <i class="bi bi-lock-fill text-success me-1"></i>
+                                Texte chiffré
+                            {% else %}
+                                <i class="bi bi-unlock-fill text-primary me-1"></i>
+                                Texte déchiffré
+                            {% endif %}
+                        </label>
+                        <div class="position-relative">
+                            <textarea class="form-control" 
+                                      rows="6" 
+                                      id="resultText" 
+                                      readonly 
+                                      style="background-color: #f8f9fa;">{{ result }}</textarea>
+                            <button class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2 btn-copy" 
+                                    data-text="{{ result }}">
+                                <i class="bi bi-clipboard"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex flex-wrap gap-2">
+                        <button class="btn btn-outline-primary btn-copy" data-text="{{ result }}">
+                            <i class="bi bi-clipboard me-2"></i>
+                            Copier le résultat
+                        </button>
+                        <button class="btn btn-outline-success" onclick="downloadText()">
+                            <i class="bi bi-download me-2"></i>
+                            Télécharger
+                        </button>
+                        <button class="btn btn-outline-info" onclick="shareText()">
+                            <i class="bi bi-share me-2"></i>
+                            Partager
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
+            <!-- Guide -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="bi bi-info-circle me-2"></i>
+                        Comment utiliser le chiffrement de texte
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <h6>
+                                <i class="bi bi-lock text-success me-2"></i>
+                                Pour chiffrer
+                            </h6>
+                            <ol class="small text-muted">
+                                <li>Saisissez votre texte confidentiel</li>
+                                <li>Choisissez un mot de passe fort</li>
+                                <li>Sélectionnez "Chiffrer"</li>
+                                <li>Copiez le résultat chiffré</li>
+                            </ol>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h6>
+                                <i class="bi bi-unlock text-primary me-2"></i>
+                                Pour déchiffrer
+                            </h6>
+                            <ol class="small text-muted">
+                                <li>Collez le texte chiffré</li>
+                                <li>Saisissez le même mot de passe</li>
+                                <li>Sélectionnez "Déchiffrer"</li>
+                                <li>Récupérez le texte original</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <h6>
+                            <i class="bi bi-lightbulb me-2"></i>
+                            Conseils pratiques
+                        </h6>
+                        <ul class="mb-0">
+                            <li>
+                                <strong>Utilisez un mot de passe différent</strong> pour chaque message
+                            </li>
+                            <li>
+                                <strong>Partagez le mot de passe</strong> par un canal séparé (pas dans le même message)
+                            </li>
+                            <li>
+                                <strong>Vérifiez le format</strong> : le texte chiffré est au format JSON
+                            </li>
+                            <li>
+                                <strong>Sauvegardez vos mots de passe</strong> dans un gestionnaire sécurisé
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const textArea = document.getElementById('text');
+        const charCount = document.getElementById('charCount');
+        const clearBtn = document.getElementById('clearBtn');
+        const showPassword = document.getElementById('showPassword');
+        const passwordInput = document.getElementById('password');
+        
+        // Compteur de caractères
+        function updateCharCount() {
+            const count = textArea.value.length;
+            charCount.textContent = count;
+            
+            if (count > 5000) {
+                charCount.style.color = '#ef4444';
+                textArea.style.borderColor = '#ef4444';
+            } else if (count > 4000) {
+                charCount.style.color = '#f59e0b';
+                textArea.style.borderColor = '#f59e0b';
+            } else {
+                charCount.style.color = '';
+                textArea.style.borderColor = '';
+            }
+        }
+        
+        textArea.addEventListener('input', updateCharCount);
+        updateCharCount();
+        
+        // Effacer tout
+        clearBtn.addEventListener('click', function() {
+            if (confirm('Voulez-vous vraiment effacer tout le texte ?')) {
+                textArea.value = '';
+                passwordInput.value = '';
+                updateCharCount();
+            }
+        });
+        
+        // Afficher/masquer le mot de passe
+        showPassword.addEventListener('change', function() {
+            passwordInput.type = this.checked ? 'text' : 'password';
+        });
+        
+        // Auto-détection du type de texte
+        textArea.addEventListener('input', function() {
+            const text = this.value.trim();
+            
+            // Si le texte commence par { et contient des clés de chiffrement JSON
+            if (text.startsWith('{') && text.includes('"ciphertext"') && text.includes('"salt"')) {
+                // Probablement du texte chiffré
+                document.getElementById('decrypt').checked = true;
+            } else if (text.length > 0) {
+                // Probablement du texte en clair
+                document.getElementById('encrypt').checked = true;
+            }
+        });
+    });
+    
+    function downloadText() {
+        const resultText = document.getElementById('resultText').value;
+        if (!resultText) return;
+        
+        const blob = new Blob([resultText], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        
+        a.href = url;
+        a.download = `cryptosafe_${Date.now()}.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+    
+    function shareText() {
+        const resultText = document.getElementById('resultText').value;
+        if (!resultText) return;
+        
+        if (navigator.share) {
+            navigator.share({
+                title: 'Texte chiffré CryptoSafe',
+                text: resultText.substring(0, 100) + '...',
+            })
+            .catch(error => console.log('Erreur de partage:', error));
+        } else {
+            // Fallback pour les navigateurs qui ne supportent pas Web Share API
+            navigator.clipboard.writeText(resultText)
+                .then(() => alert('Texte copié dans le presse-papier !'))
+                .catch(err => console.error('Erreur de copie:', err));
+        }
+    }
+</script>
+{% endblock %}

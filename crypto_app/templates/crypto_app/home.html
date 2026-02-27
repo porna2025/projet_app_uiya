@@ -1,0 +1,528 @@
+{% extends 'crypto_app/base.html' %}
+
+{% block title %}Accueil - CryptoSafe{% endblock %}
+
+{% block content %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  :root {
+    --navy: #0D1B2A;
+    --slate: #1C2D3F;
+    --accent: #00C2FF;
+    --accent-dim: rgba(0, 194, 255, 0.12);
+    --text: #E8EDF2;
+    --muted: #8A9BB0;
+    --border: rgba(255,255,255,0.07);
+    --card-bg: rgba(28, 45, 63, 0.6);
+    --radius: 12px;
+  }
+
+  body, .container-fluid, main {
+    background: var(--navy);
+    color: var(--text);
+    font-family: 'Sora', sans-serif;
+  }
+
+  /* ---- HERO ---- */
+  .cs-hero {
+    min-height: 88vh;
+    display: flex;
+    align-items: center;
+    padding: 80px 0 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cs-hero::before {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,194,255,0.08) 0%, transparent 70%);
+    top: -100px;
+    right: -100px;
+    pointer-events: none;
+  }
+
+  .cs-hero-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent-dim);
+    border: 1px solid rgba(0,194,255,0.3);
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+  }
+
+  .cs-hero-label::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  .cs-hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+
+  .cs-hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .cs-hero p.lead {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.75;
+    margin-bottom: 36px;
+  }
+
+  .cs-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: var(--accent);
+    color: var(--navy);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 13px 26px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: none;
+  }
+
+  .cs-btn-primary:hover {
+    background: #fff;
+    color: var(--navy);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(0,194,255,0.25);
+  }
+
+  .cs-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: transparent;
+    color: var(--text);
+    font-weight: 400;
+    font-size: 0.9rem;
+    padding: 13px 24px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .cs-btn-ghost:hover {
+    border-color: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.04);
+    color: #fff;
+  }
+
+  /* ---- STEPS CARD ---- */
+  .cs-steps-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 36px 32px;
+    backdrop-filter: blur(12px);
+  }
+
+  .cs-steps-card h5 {
+    font-size: 0.78rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+
+  .cs-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cs-step:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .cs-step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    background: var(--accent-dim);
+    border: 1px solid rgba(0,194,255,0.2);
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .cs-step-title {
+    font-weight: 600;
+    font-size: 0.92rem;
+    margin-bottom: 3px;
+    color: #fff;
+  }
+
+  .cs-step-desc {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ---- FEATURES ---- */
+  .cs-section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .cs-section-title {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin-bottom: 14px;
+  }
+
+  .cs-section-sub {
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 480px;
+    line-height: 1.65;
+    font-size: 0.97rem;
+  }
+
+  .cs-feature-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 26px;
+    height: 100%;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cs-feature-card:hover {
+    border-color: rgba(0,194,255,0.2);
+    transform: translateY(-3px);
+  }
+
+  .cs-feature-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--accent-dim);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    font-size: 1.2rem;
+    color: var(--accent);
+  }
+
+  .cs-feature-card h5 {
+    font-weight: 600;
+    font-size: 0.97rem;
+    margin-bottom: 8px;
+    color: #fff;
+  }
+
+  .cs-feature-card p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* ---- METRICS ---- */
+  .cs-metrics {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 0;
+  }
+
+  .cs-metric {
+    text-align: center;
+    padding: 0 24px;
+    border-right: 1px solid var(--border);
+  }
+
+  .cs-metric:last-child { border-right: none; }
+
+  .cs-metric-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: -0.01em;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .cs-metric-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+
+  /* ---- CTA ---- */
+  .cs-cta {
+    background: linear-gradient(135deg, var(--slate) 0%, rgba(0,194,255,0.07) 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 60px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cs-cta::after {
+    content: '';
+    position: absolute;
+    bottom: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,194,255,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cs-cta h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+
+  .cs-cta p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    font-weight: 300;
+    margin-bottom: 30px;
+  }
+
+  /* ---- DIVIDERS ---- */
+  .cs-section { padding: 80px 0; }
+
+  /* Fix for inherited Bootstrap overrides */
+  .btn-group-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+</style>
+
+<div class="container-fluid px-0" style="background: var(--navy);">
+<div class="container" style="max-width: 1100px;">
+
+  <!-- HERO -->
+  <section class="cs-hero">
+    <div class="row align-items-center g-5 w-100">
+      <div class="col-lg-6">
+        <div class="cs-hero-label">Chiffrement AES-256</div>
+        <h1>
+          Protégez vos fichiers<br>avec une sécurité <em>militaire</em>
+        </h1>
+        <p class="lead">
+          CryptoSafe chiffre vos documents directement dans votre navigateur.
+          Aucun fichier n'est envoyé à nos serveurs — votre vie privée est garantie.
+        </p>
+        <div class="btn-group-actions">
+          {% if user.is_authenticated %}
+            <a href="{% url 'encrypt_file' %}" class="cs-btn-primary">
+              <i class="bi bi-lock-fill"></i> Chiffrer un fichier
+            </a>
+            <a href="{% url 'dashboard' %}" class="cs-btn-ghost">
+              <i class="bi bi-speedometer2"></i> Tableau de bord
+            </a>
+          {% else %}
+            <a href="{% url 'register' %}" class="cs-btn-primary">
+              <i class="bi bi-person-plus-fill"></i> Créer un compte gratuit
+            </a>
+            <a href="{% url 'login' %}" class="cs-btn-ghost">
+              <i class="bi bi-box-arrow-in-right"></i> Se connecter
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="cs-steps-card">
+          <h5>Comment ça marche</h5>
+
+          <div class="cs-step">
+            <div class="cs-step-num">01</div>
+            <div>
+              <div class="cs-step-title">Choisissez votre fichier</div>
+              <div class="cs-step-desc">PDF, image, document — tout type de fichier est accepté.</div>
+            </div>
+          </div>
+
+          <div class="cs-step">
+            <div class="cs-step-num">02</div>
+            <div>
+              <div class="cs-step-title">Définissez un mot de passe</div>
+              <div class="cs-step-desc">Seul vous connaissez la clé. Nous ne la stockons jamais.</div>
+            </div>
+          </div>
+
+          <div class="cs-step">
+            <div class="cs-step-num">03</div>
+            <div>
+              <div class="cs-step-title">Téléchargez le fichier sécurisé</div>
+              <div class="cs-step-desc">Votre fichier est chiffré et prêt à être partagé ou archivé.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METRICS -->
+  <div class="cs-metrics">
+    <div class="row g-0">
+      <div class="col-6 col-md-3">
+        <div class="cs-metric">
+          <div class="cs-metric-value">AES-256</div>
+          <div class="cs-metric-label">Standard de chiffrement</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="cs-metric">
+          <div class="cs-metric-value">100%</div>
+          <div class="cs-metric-label">Traitement local</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="cs-metric">
+          <div class="cs-metric-value">0 FCFA</div>
+          <div class="cs-metric-label">Frais cachés</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="cs-metric">
+          <div class="cs-metric-value">∞</div>
+          <div class="cs-metric-label">Fichiers pris en charge</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="cs-section">
+    <div class="row mb-5">
+      <div class="col-lg-6">
+        <div class="cs-section-label">Pourquoi CryptoSafe</div>
+        <h2 class="cs-section-title">Conçu pour la confidentialité,<br>pas la complexité.</h2>
+      </div>
+      <div class="col-lg-6 d-flex align-items-center">
+        <p class="cs-section-sub">
+          Pas besoin d'être expert. CryptoSafe rend le chiffrement professionnel
+          accessible à tous, depuis n'importe quel appareil.
+        </p>
+      </div>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="cs-feature-card">
+          <div class="cs-feature-icon"><i class="bi bi-shield-check"></i></div>
+          <h5>Sécurité de bout en bout</h5>
+          <p>AES-256 avec mode CBC et padding PKCS7 — le même standard utilisé par les gouvernements et institutions financières.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="cs-feature-card">
+          <div class="cs-feature-icon"><i class="bi bi-cpu"></i></div>
+          <h5>Traitement 100% local</h5>
+          <p>Le chiffrement s'effectue dans votre navigateur. Vos fichiers ne transitent jamais par nos serveurs.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="cs-feature-card">
+          <div class="cs-feature-icon"><i class="bi bi-device-ssd"></i></div>
+          <h5>Multi-plateforme</h5>
+          <p>Fonctionne sur ordinateur, tablette et smartphone. Aucune installation requise — tout depuis votre navigateur.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="cs-feature-card">
+          <div class="cs-feature-icon"><i class="bi bi-key"></i></div>
+          <h5>Clé uniquement en votre possession</h5>
+          <p>Nous ne stockons jamais vos mots de passe. Si vous perdez votre clé, personne ne peut déchiffrer vos fichiers.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="cs-feature-card">
+          <div class="cs-feature-icon"><i class="bi bi-lightning-charge"></i></div>
+          <h5>Rapide et intuitif</h5>
+          <p>Chiffrez un fichier en moins de 10 secondes. Interface claire, sans jargon technique inutile.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="cs-feature-card">
+          <div class="cs-feature-icon"><i class="bi bi-file-earmark-lock"></i></div>
+          <h5>Tous types de fichiers</h5>
+          <p>PDF, images, archives, documents Office — CryptoSafe chiffre n'importe quel format sans restriction.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding-bottom: 80px;">
+    <div class="cs-cta">
+      <h2>Prêt à protéger vos données ?</h2>
+      <p>Rejoignez des milliers d'utilisateurs qui sécurisent leurs fichiers avec CryptoSafe.</p>
+      {% if user.is_authenticated %}
+        <a href="{% url 'encrypt_file' %}" class="cs-btn-primary">
+          <i class="bi bi-lock-fill"></i> Commencer à chiffrer
+        </a>
+      {% else %}
+        <a href="{% url 'register' %}" class="cs-btn-primary">
+          <i class="bi bi-person-plus-fill"></i> S'inscrire gratuitement
+        </a>
+      {% endif %}
+    </div>
+  </section>
+
+</div>
+</div>
+{% endblock %}

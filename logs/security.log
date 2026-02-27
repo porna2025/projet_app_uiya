@@ -1,0 +1,36 @@
+[WARNING] 28/01/2026 11:32:06 crypto_app.views decrypt_file:169 - Decryption failed for user 1: Invalid padding bytes.
+[WARNING] 28/01/2026 11:33:17 crypto_app.views decrypt_file:169 - Decryption failed for user 1: Invalid padding bytes.
+[INFO] 28/01/2026 11:34:24 crypto_app.views encrypt_file:102 - Encryption successful for user 1: TP1.doc
+[WARNING] 30/01/2026 10:10:53 crypto_app.views decrypt_file:169 - Decryption failed for user 1: Invalid padding bytes.
+[INFO] 31/01/2026 09:38:21 crypto_app.views encrypt_file:102 - Encryption successful for user 1: TP1.doc
+[INFO] 31/01/2026 09:46:31 crypto_app.views encrypt_file:102 - Encryption successful for user 1: TP_7.pdf
+[INFO] 31/01/2026 09:49:26 crypto_app.views decrypt_file:162 - Decryption successful for user 1: ed754e5d-8bd3-48e9-a6f3-58ff1221e231.enc
+[WARNING] 31/01/2026 09:51:38 crypto_app.views decrypt_file:169 - Decryption failed for user 1: Invalid padding bytes.
+[WARNING] 31/01/2026 09:52:37 crypto_app.views decrypt_file:169 - Decryption failed for user 1: Invalid padding bytes.
+[INFO] 31/01/2026 09:53:44 crypto_app.views decrypt_file:162 - Decryption successful for user 1: ed754e5d-8bd3-48e9-a6f3-58ff1221e231.enc
+[INFO] 31/01/2026 10:09:07 crypto_app.views encrypt_file:105 - Encryption successful for user 1: TP1.doc
+[INFO] 31/01/2026 10:10:24 crypto_app.views encrypt_file:105 - Encryption successful for user 1: TP_7.pdf
+[INFO] 31/01/2026 10:15:22 crypto_app.views user_login:425 - User mille logged in successfully
+[INFO] 05/02/2026 20:18:33 crypto_app.views encrypt_file:105 - Encryption successful for user 2: TP1.doc
+[INFO] 05/02/2026 20:20:21 crypto_app.views decrypt_file:165 - Decryption successful for user 2: 10df3ccc-f64f-4a6c-b36b-359e507b5cdc.enc
+[INFO] 06/02/2026 12:36:00 crypto_app.views user_login:425 - User porna logged in successfully
+[INFO] 06/02/2026 15:07:15 crypto_app.views user_login:425 - User porna logged in successfully
+[INFO] 09/02/2026 08:52:48 crypto_app.views user_login:425 - User porna logged in successfully
+[INFO] 17/02/2026 09:30:59 crypto_app.views user_login:425 - User porna logged in successfully
+[INFO] 21/02/2026 23:15:01 crypto_app.views user_login:425 - User porna logged in successfully
+[INFO] 21/02/2026 23:46:19 crypto_app.views user_login:425 - User porna logged in successfully
+[INFO] 23/02/2026 12:23:12 crypto_app.views user_login:425 - User porna logged in successfully
+[INFO] 24/02/2026 10:55:39 crypto_app.views user_login:434 - User porna logged in successfully
+[INFO] 24/02/2026 11:20:20 crypto_app.views user_login:434 - User porna logged in successfully
+[INFO] 24/02/2026 11:31:51 crypto_app.views encrypt_file:114 - Encryption successful for user 1: fichier.txt
+[INFO] 24/02/2026 11:34:03 crypto_app.views decrypt_file:174 - Decryption successful for user 1: e468c757-f9a5-4d0e-b7bb-0e7e3bcc8377.enc
+[WARNING] 24/02/2026 14:47:04 crypto_app.views user_login:438 - Failed login attempt for username: porna from IP: 127.0.0.1
+[INFO] 24/02/2026 14:48:52 crypto_app.views user_login:434 - User mille logged in successfully
+[WARNING] 24/02/2026 15:01:39 crypto_app.views user_login:438 - Failed login attempt for username: porna from IP: 127.0.0.1
+[WARNING] 24/02/2026 15:02:10 crypto_app.views user_login:438 - Failed login attempt for username: porna from IP: 127.0.0.1
+[INFO] 24/02/2026 15:02:30 crypto_app.views user_login:434 - User kone logged in successfully
+[INFO] 24/02/2026 15:05:27 crypto_app.views user_login:434 - User porna logged in successfully
+[INFO] 24/02/2026 15:13:32 crypto_app.views user_login:434 - User kone logged in successfully
+[WARNING] 24/02/2026 15:17:18 crypto_app.views user_login:438 - Failed login attempt for username: kone from IP: 127.0.0.1
+[INFO] 24/02/2026 15:17:38 crypto_app.views user_login:434 - User kone logged in successfully
+[INFO] 26/02/2026 11:28:12 crypto_app.views encrypt_file:114 - Encryption successful for user 4: Download (8).mp4

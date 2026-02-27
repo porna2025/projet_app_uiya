@@ -1,0 +1,13 @@
+creer une application desktop(winforms avec C#) capable de:
+1) Faire la liste
+a) 5 matiere
+b) 5  Etudiants
+c) 3 notes par matieres, par etudiant
+
+2) calculer la moyenne de chaque etudiant
+3) Faire un tableau de bord pour affichier:
+a) la moyenne la plus elevé 
+b) la moyenne la plus faible 
+c) le nom de l'etudiant major de tous les matiere
+
+NB: comme base de donnee je vais utiliser MySQL(wampserver)
