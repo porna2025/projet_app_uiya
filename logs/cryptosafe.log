@@ -2102,3 +2102,80 @@ httpx.ConnectError: [Errno 11001] getaddrinfo failed
 [INFO] 27/02/2026 16:11:18 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 7749
 [INFO] 27/02/2026 16:11:22 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16813
 [INFO] 27/02/2026 16:11:30 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 15311
+[INFO] 27/02/2026 22:14:30 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 27/02/2026 22:14:38 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 15311
+[INFO] 27/02/2026 22:14:42 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16848
+[INFO] 28/02/2026 23:41:34 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 28/02/2026 23:41:39 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16842
+[INFO] 28/02/2026 23:41:46 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 28/02/2026 23:41:46 django.server log_message:249 - "GET / HTTP/1.1" 200 16121
+[INFO] 28/02/2026 23:42:35 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462
+[WARNING] 28/02/2026 23:42:43 crypto_app.views user_login:429 - Failed login attempt for username: kone from IP: 127.0.0.1
+[INFO] 28/02/2026 23:42:43 django.server log_message:249 - "POST /login/ HTTP/1.1" 200 7734
+[INFO] 28/02/2026 23:43:02 crypto_app.views user_login:425 - User kone logged in successfully
+[INFO] 28/02/2026 23:43:02 django.server log_message:249 - "POST /login/ HTTP/1.1" 302 0
+[INFO] 28/02/2026 23:43:02 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 17098
+[INFO] 28/02/2026 23:43:43 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16832
+[INFO] 28/02/2026 23:43:45 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16832
+[INFO] 28/02/2026 23:43:46 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16832
+[INFO] 28/02/2026 23:43:46 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16832
+[INFO] 28/02/2026 23:43:47 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16832
+[INFO] 28/02/2026 23:43:47 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16832
+[INFO] 28/02/2026 23:43:47 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16832
+[INFO] 28/02/2026 23:43:47 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16832
+[INFO] 28/02/2026 23:43:49 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16832
+[INFO] 28/02/2026 23:43:49 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16832
+[INFO] 28/02/2026 23:43:49 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16832
+[INFO] 02/03/2026 11:25:53 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 02/03/2026 11:26:17 django.server log_message:249 - "GET / HTTP/1.1" 302 0
+[INFO] 02/03/2026 11:26:18 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16846
+[WARNING] 02/03/2026 11:26:18 django.request log_message:249 - Not Found: /favicon.ico
+[WARNING] 02/03/2026 11:26:18 django.server log_message:249 - "GET /favicon.ico HTTP/1.1" 404 6740
+[INFO] 02/03/2026 11:26:25 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16846
+[INFO] 02/03/2026 11:26:28 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16846
+[INFO] 02/03/2026 11:26:30 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16846
+[INFO] 02/03/2026 11:26:30 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16846
+[INFO] 02/03/2026 11:27:33 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 24055
+[INFO] 02/03/2026 11:27:58 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16846
+[INFO] 03/03/2026 15:02:38 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 03/03/2026 15:03:25 django.server log_message:249 - "GET / HTTP/1.1" 302 0
+[INFO] 03/03/2026 15:03:26 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16846
+[WARNING] 03/03/2026 15:03:27 django.request log_message:249 - Not Found: /favicon.ico
+[WARNING] 03/03/2026 15:03:27 django.server log_message:249 - "GET /favicon.ico HTTP/1.1" 404 6740
+[INFO] 03/03/2026 15:03:55 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 03/03/2026 15:03:55 django.server log_message:249 - "GET / HTTP/1.1" 200 16121
+[INFO] 03/03/2026 15:04:31 django.server log_message:249 - "GET /register/ HTTP/1.1" 200 13340
+[INFO] 03/03/2026 15:04:40 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462
+[WARNING] 03/03/2026 15:05:06 crypto_app.views user_login:429 - Failed login attempt for username: kone from IP: 127.0.0.1
+[INFO] 03/03/2026 15:05:06 django.server log_message:249 - "POST /login/ HTTP/1.1" 200 7734
+[WARNING] 03/03/2026 15:05:21 crypto_app.views user_login:429 - Failed login attempt for username: kone from IP: 127.0.0.1
+[INFO] 03/03/2026 15:05:21 django.server log_message:249 - "POST /login/ HTTP/1.1" 200 7734
+[INFO] 03/03/2026 15:05:57 crypto_app.views user_login:425 - User kone logged in successfully
+[INFO] 03/03/2026 15:05:57 django.server log_message:249 - "POST /login/ HTTP/1.1" 302 0
+[INFO] 03/03/2026 15:05:57 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 17101
+[INFO] 03/03/2026 15:06:14 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 24055
+[INFO] 03/03/2026 15:06:29 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 6889
+[INFO] 03/03/2026 15:06:48 django.server log_message:249 - "GET /decrypt/ HTTP/1.1" 200 19108
+[INFO] 03/03/2026 15:07:16 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 24055
+[INFO] 03/03/2026 15:07:24 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 7749
+[INFO] 03/03/2026 15:07:32 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16835
+[INFO] 03/03/2026 15:08:03 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 16843
+[INFO] 03/03/2026 15:08:21 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 24055
+[INFO] 03/03/2026 15:08:22 django.server log_message:249 - "GET /decrypt/ HTTP/1.1" 200 19108
+[INFO] 03/03/2026 15:08:24 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 7749
+[INFO] 03/03/2026 15:08:26 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16836
+[INFO] 03/03/2026 15:08:56 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 03/03/2026 15:08:56 django.server log_message:249 - "GET / HTTP/1.1" 200 16121
+[INFO] 03/03/2026 15:09:35 django.server log_message:249 - "GET /register/ HTTP/1.1" 200 13340
+[INFO] 03/03/2026 15:10:16 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462
+[INFO] 03/03/2026 15:11:00 django.server log_message:249 - "GET /register/ HTTP/1.1" 200 13340
+[INFO] 03/03/2026 15:11:46 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462
+[INFO] 03/03/2026 15:13:21 crypto_app.views user_login:425 - User kone logged in successfully
+[INFO] 03/03/2026 15:13:21 django.server log_message:249 - "POST /login/ HTTP/1.1" 302 0
+[INFO] 03/03/2026 15:13:21 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 17091
+[INFO] 03/03/2026 15:13:37 django.server log_message:249 - "GET /encrypt-text/ HTTP/1.1" 200 16077
+[INFO] 03/03/2026 15:14:42 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 03/03/2026 15:14:42 django.server log_message:249 - "GET / HTTP/1.1" 200 16121
+[INFO] 03/03/2026 15:14:58 django.server log_message:249 - "GET /register/ HTTP/1.1" 200 13340
+[INFO] 03/03/2026 15:15:16 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462
+[INFO] 03/03/2026 15:17:52 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462
