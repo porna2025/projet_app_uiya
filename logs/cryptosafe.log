@@ -2206,3 +2206,159 @@ httpx.ConnectError: [Errno 11001] getaddrinfo failed
 [INFO] 04/03/2026 10:26:54 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
 [INFO] 04/03/2026 10:26:54 django.server log_message:249 - "GET / HTTP/1.1" 200 16121
 [INFO] 04/03/2026 10:26:56 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462
+[INFO] 04/03/2026 10:38:04 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 10514
+[INFO] 04/03/2026 10:39:06 crypto_app.views user_login:425 - User kone logged in successfully
+[INFO] 04/03/2026 10:39:06 django.server log_message:249 - "POST /login/ HTTP/1.1" 302 0
+[INFO] 04/03/2026 10:39:07 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 17066
+[INFO] 04/03/2026 10:39:32 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 04/03/2026 10:39:32 django.server log_message:249 - "GET / HTTP/1.1" 200 16121
+[INFO] 04/03/2026 10:39:43 django.server log_message:249 - "GET /register/ HTTP/1.1" 200 13340
+[INFO] 04/03/2026 10:44:13 django.server log_message:249 - "GET /register/ HTTP/1.1" 200 16552
+[INFO] 04/03/2026 10:45:59 django.server log_message:249 - "POST /register/ HTTP/1.1" 200 16805
+[INFO] 04/03/2026 10:47:07 crypto_app.views user_register:450 - New user registered: kone1
+[INFO] 04/03/2026 10:47:07 django.server log_message:249 - "POST /register/ HTTP/1.1" 302 0
+[INFO] 04/03/2026 10:47:07 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 14523
+[INFO] 04/03/2026 10:47:52 django.server log_message:249 - "GET /admin/ HTTP/1.1" 302 0
+[INFO] 04/03/2026 10:47:52 django.server log_message:249 - "GET /admin/login/?next=/admin/ HTTP/1.1" 200 3694
+[INFO] 04/03/2026 10:47:52 django.server log_message:249 - "GET /static/admin/css/base.css HTTP/1.1" 304 0
+[INFO] 04/03/2026 10:47:52 django.server log_message:249 - "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+[INFO] 04/03/2026 10:47:52 django.server log_message:249 - "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+[INFO] 04/03/2026 10:47:52 django.server log_message:249 - "GET /static/admin/css/login.css HTTP/1.1" 304 0
+[INFO] 04/03/2026 10:47:52 django.server log_message:249 - "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+[INFO] 04/03/2026 10:47:52 django.server log_message:249 - "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+[INFO] 04/03/2026 10:47:52 django.server log_message:249 - "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+[INFO] 04/03/2026 10:48:00 django.server log_message:249 - "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+[INFO] 04/03/2026 10:48:00 django.server log_message:249 - "GET /admin/ HTTP/1.1" 200 11793
+[INFO] 04/03/2026 10:48:00 django.server log_message:249 - "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+[INFO] 04/03/2026 10:48:00 django.server log_message:249 - "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+[INFO] 04/03/2026 10:48:00 django.server log_message:249 - "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+[INFO] 04/03/2026 10:48:00 django.server log_message:249 - "GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 304 0
+[INFO] 04/03/2026 10:48:06 django.server log_message:249 - "GET /admin/crypto_app/userprofile/ HTTP/1.1" 200 14482
+[INFO] 04/03/2026 10:48:06 django.server log_message:249 - "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+[INFO] 04/03/2026 10:48:06 django.server log_message:249 - "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+[INFO] 04/03/2026 10:48:06 django.server log_message:249 - "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+[INFO] 04/03/2026 10:48:06 django.server log_message:249 - "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+[INFO] 04/03/2026 10:48:06 django.server log_message:249 - "GET /static/admin/js/core.js HTTP/1.1" 304 0
+[INFO] 04/03/2026 10:48:06 django.server log_message:249 - "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+[INFO] 04/03/2026 10:48:06 django.server log_message:249 - "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+[INFO] 04/03/2026 10:48:06 django.server log_message:249 - "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+[INFO] 04/03/2026 10:48:06 django.server log_message:249 - "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+[INFO] 04/03/2026 10:48:06 django.server log_message:249 - "GET /static/admin/img/search.svg HTTP/1.1" 304 0
+[INFO] 04/03/2026 10:48:06 django.server log_message:249 - "GET /static/admin/img/icon-no.svg HTTP/1.1" 304 0
+[INFO] 04/03/2026 10:48:06 django.server log_message:249 - "GET /static/admin/js/filters.js HTTP/1.1" 304 0
+[INFO] 04/03/2026 10:48:06 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 04/03/2026 10:48:06 django.server log_message:249 - "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+[INFO] 04/03/2026 10:48:06 django.server log_message:249 - "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 304 0
+[INFO] 04/03/2026 10:48:30 django.server log_message:249 - "GET /admin/ HTTP/1.1" 200 11793
+[INFO] 04/03/2026 10:48:31 django.server log_message:249 - "GET /admin/login/?next=/admin/ HTTP/1.1" 302 0
+[INFO] 04/03/2026 10:48:31 django.server log_message:249 - "GET /admin/ HTTP/1.1" 200 11793
+[INFO] 04/03/2026 10:48:38 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 7761
+[INFO] 04/03/2026 10:49:20 django.server log_message:249 - "GET /decrypt/ HTTP/1.1" 200 19105
+[INFO] 04/03/2026 10:54:43 django.server log_message:249 - "GET /decrypt/ HTTP/1.1" 200 20615
+[INFO] 04/03/2026 10:55:50 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 7761
+[INFO] 04/03/2026 10:59:47 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 23296
+[INFO] 04/03/2026 11:00:25 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 7761
+[INFO] 04/03/2026 11:06:00 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 17980
+[INFO] 04/03/2026 11:07:38 django.server log_message:249 - "GET /keys/6/ HTTP/1.1" 200 5795
+[INFO] 04/03/2026 11:07:52 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 17980
+[INFO] 04/03/2026 11:08:35 django.server log_message:249 - "POST /keys/ HTTP/1.1" 302 0
+[INFO] 04/03/2026 11:08:35 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 21349
+[INFO] 04/03/2026 11:08:51 django.server log_message:249 - "GET /keys/10/ HTTP/1.1" 200 8041
+[INFO] 04/03/2026 11:08:59 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 21065
+[INFO] 04/03/2026 11:09:09 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 24051
+[INFO] 04/03/2026 11:09:39 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 16835
+[INFO] 04/03/2026 11:13:53 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 23243
+[INFO] 04/03/2026 11:19:58 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 23197
+[INFO] 04/03/2026 11:21:03 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 23296
+[INFO] 04/03/2026 11:21:15 django.server log_message:249 - "GET /decrypt/ HTTP/1.1" 200 20615
+[INFO] 04/03/2026 11:21:32 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 24051
+[INFO] 04/03/2026 11:21:37 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 21065
+[INFO] 04/03/2026 11:21:51 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 23206
+[INFO] 04/03/2026 11:22:11 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 23296
+[INFO] 04/03/2026 11:22:16 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 23206
+[INFO] 04/03/2026 11:22:19 django.server log_message:249 - "GET /decrypt/ HTTP/1.1" 200 20615
+[INFO] 04/03/2026 11:23:15 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 23206
+[INFO] 04/03/2026 11:23:20 django.server log_message:249 - "GET /encrypt-text/ HTTP/1.1" 200 16078
+[INFO] 04/03/2026 11:31:34 django.server log_message:249 - "GET /encrypt-text/ HTTP/1.1" 200 20466
+[INFO] 04/03/2026 11:32:29 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 21065
+[INFO] 04/03/2026 11:32:35 django.server log_message:249 - "GET /keys/6/ HTTP/1.1" 200 5795
+[INFO] 04/03/2026 11:32:53 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 21065
+[INFO] 04/03/2026 11:33:36 django.server log_message:249 - "POST /encrypt-text/ HTTP/1.1" 200 23443
+[INFO] 04/03/2026 11:34:31 django.server log_message:249 - "POST /encrypt-text/ HTTP/1.1" 200 23335
+[INFO] 04/03/2026 11:35:08 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 21065
+[INFO] 04/03/2026 11:35:16 django.server log_message:249 - "GET /keys/6/ HTTP/1.1" 200 5795
+[INFO] 04/03/2026 11:35:51 django.server log_message:249 - "POST /encrypt-text/ HTTP/1.1" 200 23335
+[INFO] 04/03/2026 11:36:27 django.server log_message:249 - "POST /encrypt-text/ HTTP/1.1" 200 23443
+[INFO] 04/03/2026 11:37:02 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 21065
+[INFO] 04/03/2026 11:37:06 django.server log_message:249 - "GET /keys/6/ HTTP/1.1" 200 5795
+[INFO] 04/03/2026 11:37:53 django.server log_message:249 - "POST /encrypt-text/ HTTP/1.1" 200 23435
+[INFO] 04/03/2026 11:49:08 django.server log_message:249 - "POST /encrypt-text/ HTTP/1.1" 200 23435
+[ERROR] 04/03/2026 11:49:21 django.request log_message:249 - Internal Server Error: /dashboard/
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py", line 50, in dashboard
+    return render(request, 'crypto_app/dashboard.html', {'stats': stats})
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 174, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 166, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1052, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader_tags.py", line 160, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 166, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1052, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\loader_tags.py", line 66, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1091, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\base.py", line 1052, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\template\defaulttags.py", line 511, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\urls\resolvers.py", line 842, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'decrypt_text' not found. 'decrypt_text' is not a valid view function or pattern name.
+[ERROR] 04/03/2026 11:49:21 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 500 170486
+[INFO] 04/03/2026 11:51:04 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 23245
+[INFO] 04/03/2026 11:53:32 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 23822
+[INFO] 04/03/2026 11:54:20 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 23266
+[INFO] 04/03/2026 11:55:14 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 19195
+[INFO] 04/03/2026 11:56:51 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 24051
+[INFO] 04/03/2026 12:02:50 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 24316
+[INFO] 04/03/2026 12:03:08 django.server log_message:249 - "GET /encrypt-text/ HTTP/1.1" 200 20731
+[INFO] 04/03/2026 12:07:56 django.server log_message:249 - "GET /encrypt-text/ HTTP/1.1" 200 20524
+[INFO] 04/03/2026 12:10:47 django.server log_message:249 - "GET /encrypt-text/ HTTP/1.1" 200 20737
+[INFO] 04/03/2026 12:14:42 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 21336
+[INFO] 04/03/2026 12:14:57 django.server log_message:249 - "GET /encrypt-text/ HTTP/1.1" 200 20737

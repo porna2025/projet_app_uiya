@@ -16,6 +16,16 @@
                     <p class="text-white-50">Protégez vos fichiers avec un chiffrement fort</p>
                 </div>
 
+                <!-- Messages d'erreur/succès -->
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert rounded-3 mb-3 {% if message.tags == 'error' %}alert-danger{% else %}alert-success{% endif %}">
+                    <i class="bi {% if message.tags == 'error' %}bi-exclamation-triangle{% else %}bi-check-circle{% endif %} me-2"></i>
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
+
                 <!-- Carte principale -->
                 <div class="card border-0 shadow-lg" style="border-radius: 20px; background: rgba(255,255,255,0.97);">
                     <div class="card-body p-4">
@@ -28,6 +38,13 @@
                         <form method="post" enctype="multipart/form-data" id="encryptForm">
                             {% csrf_token %}
 
+                            {% if form.non_field_errors %}
+                            <div class="alert alert-danger rounded-3">
+                                <i class="bi bi-exclamation-triangle me-2"></i>
+                                {{ form.non_field_errors }}
+                            </div>
+                            {% endif %}
+
                             <!-- Zone fichier -->
                             <div class="mb-4">
                                 <label class="form-label fw-semibold text-dark">
@@ -36,6 +53,9 @@
                                 </label>
 
                                 <input type="file" id="fileInput" name="file" required style="display:none;">
+                                {% if form.file.errors %}
+                                    <div class="text-danger small mb-2">{{ form.file.errors }}</div>
+                                {% endif %}
 
                                 <!-- Zone drop -->
                                 <div id="fileDropArea"
@@ -64,7 +84,6 @@
                                             <i class="bi bi-x-lg"></i>
                                         </button>
                                     </div>
-                                    <!-- Barre de progression taille -->
                                     <div class="mt-2">
                                         <div class="progress" style="height: 4px; border-radius: 10px;">
                                             <div class="progress-bar bg-success" id="sizeBar" style="width: 0%;"></div>
@@ -94,6 +113,9 @@
                                         <i class="bi bi-eye" id="eyeIcon1"></i>
                                     </button>
                                 </div>
+                                {% if form.password.errors %}
+                                    <div class="text-danger small mt-1">{{ form.password.errors }}</div>
+                                {% endif %}
                                 <!-- Barre de force -->
                                 <div class="mt-2">
                                     <div class="progress" style="height: 5px; border-radius: 10px;">
@@ -105,15 +127,15 @@
 
                             <!-- Confirmer mot de passe -->
                             <div class="mb-3">
-                                <label for="id_password2" class="form-label fw-semibold text-dark">
+                                <label for="id_confirm_password" class="form-label fw-semibold text-dark">
                                     <i class="bi bi-key-fill me-1"></i>
                                     Confirmer le mot de passe *
                                 </label>
                                 <div class="input-group">
                                     <input type="password"
                                            class="form-control form-control-lg rounded-start-3"
-                                           id="id_password2"
-                                           name="password2"
+                                           id="id_confirm_password"
+                                           name="confirm_password"
                                            required
                                            placeholder="Répétez le mot de passe"
                                            style="border: 2px solid #e0e0e0; border-right: none;">
@@ -123,6 +145,9 @@
                                         <i class="bi bi-eye" id="eyeIcon2"></i>
                                     </button>
                                 </div>
+                                {% if form.confirm_password.errors %}
+                                    <div class="text-danger small mt-1">{{ form.confirm_password.errors }}</div>
+                                {% endif %}
                                 <small id="matchText" class="form-text mt-1 d-block"></small>
                             </div>
 
@@ -218,7 +243,7 @@
 </div>
 
 <script>
-    // Toggle mots de passe
+    // Toggle mot de passe 1
     document.getElementById('togglePwd1').addEventListener('click', function () {
         const pwd = document.getElementById('id_password');
         const icon = document.getElementById('eyeIcon1');
@@ -227,18 +252,20 @@
         icon.classList.toggle('bi-eye-slash');
     });
 
+    // Toggle mot de passe 2
     document.getElementById('togglePwd2').addEventListener('click', function () {
-        const pwd = document.getElementById('id_password2');
+        const pwd = document.getElementById('id_confirm_password');
         const icon = document.getElementById('eyeIcon2');
         pwd.type = pwd.type === 'password' ? 'text' : 'password';
         icon.classList.toggle('bi-eye');
         icon.classList.toggle('bi-eye-slash');
     });
 
+    // Case afficher mots de passe
     document.getElementById('showPasswords').addEventListener('change', function () {
         const type = this.checked ? 'text' : 'password';
         document.getElementById('id_password').type = type;
-        document.getElementById('id_password2').type = type;
+        document.getElementById('id_confirm_password').type = type;
         document.getElementById('eyeIcon1').className = this.checked ? 'bi bi-eye-slash' : 'bi bi-eye';
         document.getElementById('eyeIcon2').className = this.checked ? 'bi bi-eye-slash' : 'bi bi-eye';
     });
@@ -273,11 +300,12 @@
         checkMatch();
     });
 
-    document.getElementById('id_password2').addEventListener('input', checkMatch);
+    // Vérification correspondance
+    document.getElementById('id_confirm_password').addEventListener('input', checkMatch);
 
     function checkMatch() {
         const p1 = document.getElementById('id_password').value;
-        const p2 = document.getElementById('id_password2').value;
+        const p2 = document.getElementById('id_confirm_password').value;
         const text = document.getElementById('matchText');
         if (!p2) { text.textContent = ''; return; }
         if (p1 === p2) {

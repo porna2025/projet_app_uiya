@@ -41,3 +41,5 @@
 [INFO] 03/03/2026 15:05:57 crypto_app.views user_login:425 - User kone logged in successfully
 [INFO] 03/03/2026 15:13:21 crypto_app.views user_login:425 - User kone logged in successfully
 [INFO] 04/03/2026 10:26:24 crypto_app.views user_login:425 - User kone logged in successfully
+[INFO] 04/03/2026 10:39:06 crypto_app.views user_login:425 - User kone logged in successfully
+[INFO] 04/03/2026 10:47:07 crypto_app.views user_register:450 - New user registered: kone1
