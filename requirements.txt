@@ -1,11 +1,13 @@
 asgiref==3.11.1
+cffi==2.0.0
+cryptography==46.0.5
 Django==6.0.2
 django-stubs==5.2.9
 django-stubs-ext==5.2.9
+gunicorn==25.1.0
+packaging==26.0
+pycparser==3.0
 sqlparse==0.5.5
 types-PyYAML==6.0.12.20250915
 typing_extensions==4.15.0
 tzdata==2025.3
-gunicorn==20.1.0
-setuptools==79.0.1
-wheel==0.40.0
