@@ -3,252 +3,283 @@
 {% block title %}Inscription - CryptoSafe{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row justify-content-center py-5">
-        <div class="col-md-8 col-lg-7">
-            <div class="card">
-                <div class="card-header text-center">
-                    <h3 class="mb-0 text-white">
-                        <i class="bi bi-person-plus me-2"></i>
-                        Créer un compte
-                    </h3>
+<div class="min-vh-100 d-flex align-items-center py-4" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-7 col-lg-6">
+
+                <!-- Logo / Titre -->
+                <div class="text-center mb-4">
+                    <div class="mb-3">
+                        <i class="bi bi-shield-lock-fill" style="font-size: 3rem; color: #4fc3f7;"></i>
+                    </div>
+                    <h2 class="fw-bold text-white">CryptoSafe</h2>
+                    <p class="text-white-50">Créez votre espace sécurisé</p>
                 </div>
-                <div class="card-body p-4">
-                    <form method="post" action="{% url 'register' %}">
-                        {% csrf_token %}
+
+                <!-- Carte inscription -->
+                <div class="card border-0 shadow-lg" style="border-radius: 20px; background: rgba(255,255,255,0.95);">
+                    <div class="card-body p-4">
+
+                        <h4 class="fw-bold text-center mb-4" style="color: #1a1a2e;">
+                            <i class="bi bi-person-plus me-2" style="color: #0f3460;"></i>
+                            Créer un compte
+                        </h4>
+
                         {% if form.non_field_errors %}
-                        <div class="alert alert-danger">
+                        <div class="alert alert-danger rounded-3 py-2">
+                            <i class="bi bi-exclamation-triangle me-2"></i>
                             {{ form.non_field_errors }}
                         </div>
                         {% endif %}
 
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="id_username" class="form-label">
-                                    <i class="bi bi-person me-1"></i>
-                                    Nom d'utilisateur *
-                                </label>
-                                <input type="text"
-                                       class="form-control"
-                                       id="id_username"
-                                       name="username"
-                                       required
-                                       value="{{ form.username.value|default_if_none:'' }}"
-                                       placeholder="Choisissez un nom d'utilisateur">
-                                <div class="form-text">
-                                    3 à 20 caractères, lettres et chiffres seulement
+                        <form method="post" action="{% url 'register' %}">
+                            {% csrf_token %}
+
+                            <div class="row">
+                                <!-- Nom d'utilisateur -->
+                                <div class="col-md-6 mb-3">
+                                    <label for="id_username" class="form-label fw-semibold text-dark">
+                                        <i class="bi bi-person me-1"></i> Nom d'utilisateur *
+                                    </label>
+                                    <input type="text"
+                                           class="form-control form-control-lg rounded-3"
+                                           id="id_username"
+                                           name="username"
+                                           required
+                                           value="{{ form.username.value|default_if_none:'' }}"
+                                           placeholder="Choisissez un nom"
+                                           style="border: 2px solid #e0e0e0;">
+                                    <div class="form-text">3 à 20 caractères</div>
+                                    {% if form.username.errors %}
+                                        <div class="text-danger small mt-1">{{ form.username.errors }}</div>
+                                    {% endif %}
                                 </div>
-                                {% if form.username.errors %}
-                                    <div class="text-danger small mt-1">{{ form.username.errors }}</div>
-                                {% endif %}
+
+                                <!-- Email -->
+                                <div class="col-md-6 mb-3">
+                                    <label for="id_email" class="form-label fw-semibold text-dark">
+                                        <i class="bi bi-envelope me-1"></i> Adresse email *
+                                    </label>
+                                    <input type="email"
+                                           class="form-control form-control-lg rounded-3"
+                                           id="id_email"
+                                           name="email"
+                                           required
+                                           value="{{ form.email.value|default_if_none:'' }}"
+                                           placeholder="votre@email.com"
+                                           style="border: 2px solid #e0e0e0;">
+                                    {% if form.email.errors %}
+                                        <div class="text-danger small mt-1">{{ form.email.errors }}</div>
+                                    {% endif %}
+                                </div>
                             </div>
 
-                            <div class="col-md-6 mb-3">
-                                <label for="id_email" class="form-label">
-                                    <i class="bi bi-envelope me-1"></i>
-                                    Adresse email *
-                                </label>
-                                <input type="email"
-                                       class="form-control"
-                                       id="id_email"
-                                       name="email"
-                                       required
-                                       value="{{ form.email.value|default_if_none:'' }}"
-                                       placeholder="votre@email.com">
-                                {% if form.email.errors %}
-                                    <div class="text-danger small mt-1">{{ form.email.errors }}</div>
-                                {% endif %}
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="password1" class="form-label">
-                                    <i class="bi bi-key me-1"></i>
-                                    Mot de passe *
-                                </label>
-                                <div class="input-group">
-                                    <input type="password"
-                                           class="form-control"
-                                           id="id_password1"
-                                           name="password1"
-                                           required
-                                           placeholder="Créez un mot de passe">
-                                    <button class="btn btn-outline-secondary toggle-password" type="button">
-                                        <i class="bi bi-eye"></i>
-                                    </button>
-                                </div>
-                                {% if form.password1.errors %}
-                                    <div class="text-danger small mt-1">{{ form.password1.errors }}</div>
-                                {% endif %}
-                                <div class="password-strength mt-2">
-                                    <div class="progress" style="height: 5px;">
-                                        <div class="progress-bar" id="password-strength-bar" style="width: 0%"></div>
+                            <div class="row">
+                                <!-- Mot de passe -->
+                                <div class="col-md-6 mb-3">
+                                    <label for="id_password1" class="form-label fw-semibold text-dark">
+                                        <i class="bi bi-key me-1"></i> Mot de passe *
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="password"
+                                               class="form-control form-control-lg rounded-start-3"
+                                               id="id_password1"
+                                               name="password1"
+                                               required
+                                               placeholder="Créez un mot de passe"
+                                               style="border: 2px solid #e0e0e0; border-right: none;">
+                                        <button class="btn btn-outline-secondary rounded-end-3"
+                                                type="button" id="togglePwd1"
+                                                style="border: 2px solid #e0e0e0; border-left: none;">
+                                            <i class="bi bi-eye" id="eyeIcon1"></i>
+                                        </button>
                                     </div>
-                                    <small id="password-feedback" class="form-text"></small>
+                                    <!-- Barre de force -->
+                                    <div class="mt-2">
+                                        <div class="progress" style="height: 5px; border-radius: 10px;">
+                                            <div class="progress-bar" id="strengthBar" style="width: 0%; transition: all 0.3s;"></div>
+                                        </div>
+                                        <small id="strengthText" class="form-text"></small>
+                                    </div>
+                                    {% if form.password1.errors %}
+                                        <div class="text-danger small mt-1">{{ form.password1.errors }}</div>
+                                    {% endif %}
+                                </div>
+
+                                <!-- Confirmer mot de passe -->
+                                <div class="col-md-6 mb-3">
+                                    <label for="id_password2" class="form-label fw-semibold text-dark">
+                                        <i class="bi bi-key-fill me-1"></i> Confirmer *
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="password"
+                                               class="form-control form-control-lg rounded-start-3"
+                                               id="id_password2"
+                                               name="password2"
+                                               required
+                                               placeholder="Répétez le mot de passe"
+                                               style="border: 2px solid #e0e0e0; border-right: none;">
+                                        <button class="btn btn-outline-secondary rounded-end-3"
+                                                type="button" id="togglePwd2"
+                                                style="border: 2px solid #e0e0e0; border-left: none;">
+                                            <i class="bi bi-eye" id="eyeIcon2"></i>
+                                        </button>
+                                    </div>
+                                    <small id="matchText" class="form-text mt-1 d-block"></small>
+                                    {% if form.password2.errors %}
+                                        <div class="text-danger small mt-1">{{ form.password2.errors }}</div>
+                                    {% endif %}
                                 </div>
                             </div>
-                            
-                            <div class="col-md-6 mb-3">
-                                <label for="password2" class="form-label">
-                                    <i class="bi bi-key-fill me-1"></i>
-                                    Confirmer le mot de passe *
+
+                            <!-- Case afficher mots de passe -->
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" id="showPasswords">
+                                <label class="form-check-label small text-muted" for="showPasswords">
+                                    Afficher les mots de passe
                                 </label>
-                                <div class="input-group">
-                                     <input type="password"
-                                         class="form-control"
-                                         id="id_password2"
-                                         name="password2"
-                                         required
-                                         placeholder="Répétez le mot de passe">
-                                    <button class="btn btn-outline-secondary toggle-password" type="button">
-                                        <i class="bi bi-eye"></i>
-                                    </button>
-                                </div>
-                                <div class="form-text" id="password-match"></div>
-                                {% if form.password2.errors %}
-                                    <div class="text-danger small mt-1">{{ form.password2.errors }}</div>
-                                {% endif %}
                             </div>
-                        </div>
-                        
-                        
-                        
-                        <div class="d-grid mb-3">
-                            <button type="submit" class="btn btn-primary btn-lg">
-                                <i class="bi bi-person-plus me-2"></i>
-                                Créer mon compte
-                            </button>
-                        </div>
-                        
-                        <hr class="my-4">
-                        
-                        <div class="text-center">
-                            <p class="mb-0">Vous avez déjà un compte ?</p>
-                            <a href="{% url 'login' %}" class="btn btn-outline-primary mt-2">
-                                <i class="bi bi-box-arrow-in-right me-2"></i>
-                                Se connecter
-                            </a>
-                        </div>
-                    </form>
+
+                            <!-- Bouton créer -->
+                            <div class="d-grid mb-3">
+                                <button type="submit"
+                                        class="btn btn-lg fw-bold text-white"
+                                        style="background: linear-gradient(135deg, #0f3460, #4fc3f7); border: none; border-radius: 12px; padding: 12px;">
+                                    <i class="bi bi-person-plus me-2"></i>
+                                    Créer mon compte
+                                </button>
+                            </div>
+
+                            <hr class="text-muted">
+
+                            <div class="text-center">
+                                <p class="small text-muted mb-2">Vous avez déjà un compte ?</p>
+                                <a href="{% url 'login' %}"
+                                   class="btn btn-outline-primary fw-semibold w-100"
+                                   style="border-radius: 12px; border: 2px solid #0f3460; color: #0f3460;">
+                                    <i class="bi bi-box-arrow-in-right me-2"></i>
+                                    Se connecter
+                                </a>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="card mt-4">
-                <div class="card-body">
-                    <h6 class="mb-3">
-                        <i class="bi bi-lightbulb me-2"></i>
-                        Conseils pour un mot de passe sécurisé
-                    </h6>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <ul class="list-unstyled small">
-                                <li class="mb-2">
-                                    <i class="bi bi-check-circle text-success me-2"></i>
-                                    Minimum 12 caractères
-                                </li>
-                                <li class="mb-2">
-                                    <i class="bi bi-check-circle text-success me-2"></i>
-                                    Mélange de lettres majuscules/minuscules
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-md-6">
-                            <ul class="list-unstyled small">
-                                <li class="mb-2">
-                                    <i class="bi bi-check-circle text-success me-2"></i>
-                                    Inclure des chiffres et caractères spéciaux
-                                </li>
-                                <li class="mb-2">
-                                    <i class="bi bi-check-circle text-success me-2"></i>
-                                    Éviter les mots du dictionnaire
-                                </li>
-                            </ul>
+
+                <!-- Conseils sécurité -->
+                <div class="card border-0 mt-3 shadow-sm" style="border-radius: 15px; background: rgba(255,255,255,0.1);">
+                    <div class="card-body py-3 px-4">
+                        <h6 class="text-white mb-2">
+                            <i class="bi bi-lightbulb me-2" style="color: #4fc3f7;"></i>
+                            Conseils pour un mot de passe sécurisé
+                        </h6>
+                        <div class="row">
+                            <div class="col-6">
+                                <ul class="list-unstyled small text-white-50 mb-0">
+                                    <li class="mb-1"><i class="bi bi-check-circle text-success me-1"></i> Minimum 12 caractères</li>
+                                    <li class="mb-1"><i class="bi bi-check-circle text-success me-1"></i> Majuscules et minuscules</li>
+                                </ul>
+                            </div>
+                            <div class="col-6">
+                                <ul class="list-unstyled small text-white-50 mb-0">
+                                    <li class="mb-1"><i class="bi bi-check-circle text-success me-1"></i> Chiffres et symboles</li>
+                                    <li class="mb-1"><i class="bi bi-check-circle text-success me-1"></i> Éviter les mots courants</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="text-center mt-3">
+                    <small class="text-white-50">
+                        <i class="bi bi-shield-check me-1"></i>
+                        Inscription sécurisée — Vos données sont protégées
+                    </small>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const password1 = document.getElementById('password1');
-        const password2 = document.getElementById('password2');
-        const strengthBar = document.getElementById('password-strength-bar');
-        const strengthFeedback = document.getElementById('password-feedback');
-        const matchFeedback = document.getElementById('password-match');
-        
-        function checkPasswordStrength(password) {
-            let strength = 0;
-            let feedback = '';
-            
-            // Longueur minimale
-            if (password.length >= 12) strength += 25;
-            
-            // Contient des lettres minuscules
-            if (/[a-z]/.test(password)) strength += 15;
-            
-            // Contient des lettres majuscules
-            if (/[A-Z]/.test(password)) strength += 15;
-            
-            // Contient des chiffres
-            if (/[0-9]/.test(password)) strength += 20;
-            
-            // Contient des caractères spéciaux
-            if (/[^A-Za-z0-9]/.test(password)) strength += 25;
-            
-            // Déterminer le niveau de force
-            let color = '#ef4444'; // Rouge
-            if (strength >= 75) {
-                feedback = 'Très fort';
-                color = '#10b981'; // Vert
-            } else if (strength >= 50) {
-                feedback = 'Fort';
-                color = '#3b82f6'; // Bleu
-            } else if (strength >= 25) {
-                feedback = 'Moyen';
-                color = '#f59e0b'; // Orange
-            } else {
-                feedback = 'Faible';
-            }
-            
-            // Mettre à jour la barre et le texte
-            strengthBar.style.width = strength + '%';
-            strengthBar.style.backgroundColor = color;
-            strengthFeedback.textContent = feedback;
-            strengthFeedback.style.color = color;
-        }
-        
-        function checkPasswordMatch() {
-            if (password2.value === '') {
-                matchFeedback.textContent = '';
-                matchFeedback.style.color = '';
-                return;
-            }
-            
-            if (password1.value === password2.value) {
-                matchFeedback.textContent = '✓ Les mots de passe correspondent';
-                matchFeedback.style.color = '#10b981';
-            } else {
-                matchFeedback.textContent = '✗ Les mots de passe ne correspondent pas';
-                matchFeedback.style.color = '#ef4444';
-            }
-        }
-        
-        password1.addEventListener('input', function() {
-            checkPasswordStrength(this.value);
-            checkPasswordMatch();
-        });
-        
-        password2.addEventListener('input', checkPasswordMatch);
-        
-        // Initialiser
-        if (password1.value) {
-            checkPasswordStrength(password1.value);
-            checkPasswordMatch();
-        }
+    // Toggle mot de passe 1
+    document.getElementById('togglePwd1').addEventListener('click', function () {
+        const pwd = document.getElementById('id_password1');
+        const icon = document.getElementById('eyeIcon1');
+        pwd.type = pwd.type === 'password' ? 'text' : 'password';
+        icon.classList.toggle('bi-eye');
+        icon.classList.toggle('bi-eye-slash');
     });
+
+    // Toggle mot de passe 2
+    document.getElementById('togglePwd2').addEventListener('click', function () {
+        const pwd = document.getElementById('id_password2');
+        const icon = document.getElementById('eyeIcon2');
+        pwd.type = pwd.type === 'password' ? 'text' : 'password';
+        icon.classList.toggle('bi-eye');
+        icon.classList.toggle('bi-eye-slash');
+    });
+
+    // Case "Afficher les mots de passe"
+    document.getElementById('showPasswords').addEventListener('change', function () {
+        const type = this.checked ? 'text' : 'password';
+        document.getElementById('id_password1').type = type;
+        document.getElementById('id_password2').type = type;
+        document.getElementById('eyeIcon1').className = this.checked ? 'bi bi-eye-slash' : 'bi bi-eye';
+        document.getElementById('eyeIcon2').className = this.checked ? 'bi bi-eye-slash' : 'bi bi-eye';
+    });
+
+    // Force du mot de passe
+    document.getElementById('id_password1').addEventListener('input', function () {
+        const pwd = this.value;
+        let strength = 0;
+        if (pwd.length >= 12) strength += 25;
+        if (/[a-z]/.test(pwd)) strength += 15;
+        if (/[A-Z]/.test(pwd)) strength += 20;
+        if (/[0-9]/.test(pwd)) strength += 20;
+        if (/[^A-Za-z0-9]/.test(pwd)) strength += 20;
+
+        const bar = document.getElementById('strengthBar');
+        const text = document.getElementById('strengthText');
+        bar.style.width = strength + '%';
+
+        if (strength >= 75) {
+            bar.style.backgroundColor = '#10b981';
+            text.textContent = '✓ Très fort';
+            text.style.color = '#10b981';
+        } else if (strength >= 50) {
+            bar.style.backgroundColor = '#3b82f6';
+            text.textContent = 'Fort';
+            text.style.color = '#3b82f6';
+        } else if (strength >= 25) {
+            bar.style.backgroundColor = '#f59e0b';
+            text.textContent = 'Moyen';
+            text.style.color = '#f59e0b';
+        } else {
+            bar.style.backgroundColor = '#ef4444';
+            text.textContent = 'Faible';
+            text.style.color = '#ef4444';
+        }
+        checkMatch();
+    });
+
+    // Vérification correspondance
+    document.getElementById('id_password2').addEventListener('input', checkMatch);
+
+    function checkMatch() {
+        const p1 = document.getElementById('id_password1').value;
+        const p2 = document.getElementById('id_password2').value;
+        const text = document.getElementById('matchText');
+        if (p2 === '') { text.textContent = ''; return; }
+        if (p1 === p2) {
+            text.textContent = '✓ Les mots de passe correspondent';
+            text.style.color = '#10b981';
+        } else {
+            text.textContent = '✗ Les mots de passe ne correspondent pas';
+            text.style.color = '#ef4444';
+        }
+    }
 </script>
+
 {% endblock %}

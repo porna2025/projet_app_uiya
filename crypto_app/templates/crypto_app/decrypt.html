@@ -3,261 +3,266 @@
 {% block title %}Déchiffrer un fichier - CryptoSafe{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row justify-content-center py-4">
-        <div class="col-lg-8">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="mb-0">
-                        <i class="bi bi-unlock me-2"></i>
-                        Déchiffrer un fichier
-                    </h4>
+<div class="min-vh-100 py-5" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+
+                <!-- Titre page -->
+                <div class="text-center mb-4">
+                    <i class="bi bi-unlock-fill" style="font-size: 3rem; color: #4fc3f7;"></i>
+                    <h2 class="fw-bold text-white mt-2">Déchiffrer un fichier</h2>
+                    <p class="text-white-50">Restaurez vos fichiers en toute sécurité</p>
                 </div>
-                <div class="card-body">
-                    <form method="post" enctype="multipart/form-data" id="decryptForm">
-                        {% csrf_token %}
-                        {% if form.non_field_errors %}
-                        <div class="alert alert-danger">
-                            {{ form.non_field_errors }}
-                        </div>
-                        {% endif %}
-                        
-                        <!-- Sélection du fichier -->
-                        <div class="mb-4">
-                            <label class="form-label">
-                                <i class="bi bi-file-earmark-lock me-1"></i>
-                                Fichier chiffré (.enc)
-                            </label>
-                            <div class="file-preview">
-                                    <input type="file"
-                                        class="form-control"
-                                        id="fileInput"
-                                        name="file"
-                                        accept=".enc"
-                                        required
-                                        style="display: none;">
-                                    {% if form.file.errors %}
-                                     <div class="text-danger small mt-1">{{ form.file.errors }}</div>
-                                    {% endif %}
-                                
-                                <div id="fileDropArea" class="py-5">
-                                    <i class="bi bi-file-earmark-lock fs-1 text-muted d-block mb-3"></i>
-                                    <h5>Sélectionnez un fichier chiffré</h5>
-                                    <p class="text-muted">Fichiers .enc uniquement</p>
-                                    <button type="button" class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
-                                        <i class="bi bi-folder me-2"></i>
-                                        Parcourir
+
+                <!-- Carte principale -->
+                <div class="card border-0 shadow-lg" style="border-radius: 20px; background: rgba(255,255,255,0.97);">
+                    <div class="card-body p-4">
+
+                        <form method="post" enctype="multipart/form-data" id="decryptForm">
+                            {% csrf_token %}
+
+                            {% if form.non_field_errors %}
+                            <div class="alert alert-danger rounded-3">
+                                <i class="bi bi-exclamation-triangle me-2"></i>
+                                {{ form.non_field_errors }}
+                            </div>
+                            {% endif %}
+
+                            <!-- Zone fichier -->
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold text-dark">
+                                    <i class="bi bi-file-earmark-lock me-1"></i>
+                                    Fichier chiffré (.enc)
+                                </label>
+
+                                <input type="file" id="fileInput" name="file" accept=".enc" required style="display:none;">
+                                {% if form.file.errors %}
+                                    <div class="text-danger small mb-2">{{ form.file.errors }}</div>
+                                {% endif %}
+
+                                <!-- Zone drop -->
+                                <div id="fileDropArea"
+                                     class="text-center py-5 rounded-3"
+                                     style="border: 2px dashed #4fc3f7; cursor: pointer; background: #f0f9ff; transition: all 0.3s;">
+                                    <i class="bi bi-file-earmark-lock fs-1 mb-3 d-block" style="color: #4fc3f7;"></i>
+                                    <h6 class="fw-semibold text-dark">Glissez votre fichier ici</h6>
+                                    <p class="text-muted small mb-3">Fichiers .enc uniquement</p>
+                                    <button type="button"
+                                            class="btn fw-semibold text-white"
+                                            onclick="document.getElementById('fileInput').click()"
+                                            style="background: linear-gradient(135deg, #0f3460, #4fc3f7); border: none; border-radius: 10px;">
+                                        <i class="bi bi-folder2-open me-2"></i>Parcourir
                                     </button>
                                 </div>
-                                
-                                <div id="fileInfo" style="display: none;">
+
+                                <!-- Info fichier sélectionné -->
+                                <div id="fileInfo" class="rounded-3 p-3 mt-2" style="display:none; background: #f0fdf4; border: 2px solid #10b981;">
                                     <div class="d-flex align-items-center">
-                                        <i class="bi bi-file-earmark-lock fs-2 text-primary me-3"></i>
+                                        <i class="bi bi-file-earmark-lock fs-2 me-3" style="color: #10b981;"></i>
                                         <div class="flex-grow-1">
-                                            <h6 id="fileName"></h6>
-                                            <p class="small text-muted mb-0" id="fileDetails"></p>
+                                            <h6 class="mb-0 fw-semibold" id="fileName"></h6>
+                                            <small class="text-muted" id="fileDetails"></small>
                                         </div>
-                                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="clearFile()">
-                                            <i class="bi bi-x"></i>
+                                        <button type="button" class="btn btn-sm btn-outline-danger rounded-3" onclick="clearFile()">
+                                            <i class="bi bi-x-lg"></i>
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <!-- Mot de passe -->
-                        <div class="mb-4">
-                            <label for="password" class="form-label">
-                                <i class="bi bi-key me-1"></i>
-                                Mot de passe de déchiffrement
-                            </label>
-                            <div class="input-group">
+
+                            <!-- Mot de passe -->
+                            <div class="mb-4">
+                                <label for="password" class="form-label fw-semibold text-dark">
+                                    <i class="bi bi-key me-1"></i>
+                                    Mot de passe de déchiffrement
+                                </label>
+                                <div class="input-group">
                                     <input type="password"
-                                        class="form-control"
-                                        id="password"
-                                        name="password"
-                                        required
-                                        placeholder="Entrez le mot de passe utilisé pour chiffrer">
-                                    {% if form.password.errors %}
-                                     <div class="text-danger small mt-1">{{ form.password.errors }}</div>
-                                    {% endif %}
-                                <button class="btn btn-outline-secondary toggle-password" type="button">
-                                    <i class="bi bi-eye"></i>
-                                </button>
+                                           class="form-control form-control-lg rounded-start-3"
+                                           id="password"
+                                           name="password"
+                                           required
+                                           placeholder="Mot de passe utilisé lors du chiffrement"
+                                           style="border: 2px solid #e0e0e0; border-right: none;">
+                                    <button class="btn btn-outline-secondary rounded-end-3"
+                                            type="button" id="togglePwd"
+                                            style="border: 2px solid #e0e0e0; border-left: none;">
+                                        <i class="bi bi-eye" id="eyeIcon"></i>
+                                    </button>
+                                </div>
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" type="checkbox" id="showPwd">
+                                    <label class="form-check-label small text-muted" for="showPwd">
+                                        Afficher le mot de passe
+                                    </label>
+                                </div>
+                                {% if form.password.errors %}
+                                    <div class="text-danger small mt-1">{{ form.password.errors }}</div>
+                                {% endif %}
                             </div>
-                            <div class="form-text">
-                                Le même mot de passe que celui utilisé lors du chiffrement
-                            </div>
-                        </div>
-                        
-                        <!-- Options -->
-                        <div class="mb-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="deleteAfter">
-                                <label class="form-check-label" for="deleteAfter">
+
+                            <!-- Option suppression -->
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" id="deleteAfter" name="delete_after">
+                                <label class="form-check-label text-muted" for="deleteAfter">
+                                    <i class="bi bi-trash me-1"></i>
                                     Supprimer le fichier chiffré après déchiffrement
                                 </label>
                             </div>
-                        </div>
-                        
-                        <div class="alert alert-warning">
-                            <i class="bi bi-exclamation-triangle me-2"></i>
-                            <strong>Note importante :</strong>
-                            <ul class="mb-0 mt-2">
-                                <li>Le déchiffrement échouera si le mot de passe est incorrect</li>
-                                <li>Le fichier chiffré doit être au format .enc généré par CryptoSafe</li>
-                                <li>Assurez-vous d'avoir une sauvegarde du fichier original</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="d-flex justify-content-between">
-                            <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">
-                                <i class="bi bi-arrow-left me-2"></i>
-                                Annuler
-                            </a>
-                            <button type="submit" class="btn btn-success">
-                                <i class="bi bi-unlock me-2"></i>
-                                Déchiffrer le fichier
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            
-            <!-- Guide de déchiffrement -->
-            <div class="card mt-4">
-                <div class="card-header">
-                    <h5 class="mb-0">
-                        <i class="bi bi-question-circle me-2"></i>
-                        Guide de déchiffrement
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <div class="text-center">
-                                <div class="feature-icon easy mx-auto mb-3">
-                                    <i class="bi bi-file-earmark-lock"></i>
-                                </div>
-                                <h6>1. Sélection</h6>
-                                <p class="small text-muted mb-0">
-                                    Choisissez le fichier .enc que vous avez précédemment chiffré
-                                </p>
+
+                            <!-- Alerte -->
+                            <div class="alert rounded-3 mb-4" style="background: #fffbeb; border: 1px solid #f59e0b;">
+                                <i class="bi bi-exclamation-triangle me-2" style="color: #f59e0b;"></i>
+                                <strong>Note importante :</strong>
+                                <ul class="mb-0 mt-2 small">
+                                    <li>Le déchiffrement échouera si le mot de passe est incorrect</li>
+                                    <li>Le fichier doit être au format .enc généré par CryptoSafe</li>
+                                    <li>Conservez une sauvegarde de votre fichier chiffré</li>
+                                </ul>
                             </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <div class="text-center">
-                                <div class="feature-icon security mx-auto mb-3">
-                                    <i class="bi bi-key"></i>
-                                </div>
-                                <h6>2. Mot de passe</h6>
-                                <p class="small text-muted mb-0">
-                                    Saisissez exactement le même mot de passe que lors du chiffrement
-                                </p>
+
+                            <!-- Boutons -->
+                            <div class="d-flex justify-content-between gap-2">
+                                <a href="{% url 'dashboard' %}"
+                                   class="btn btn-outline-secondary fw-semibold"
+                                   style="border-radius: 12px; border: 2px solid #ccc;">
+                                    <i class="bi bi-arrow-left me-2"></i>Annuler
+                                </a>
+                                <button type="submit"
+                                        class="btn fw-bold text-white flex-grow-1"
+                                        style="background: linear-gradient(135deg, #10b981, #059669); border: none; border-radius: 12px;">
+                                    <i class="bi bi-unlock me-2"></i>
+                                    Déchiffrer le fichier
+                                </button>
                             </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <div class="text-center">
-                                <div class="feature-icon fast mx-auto mb-3">
-                                    <i class="bi bi-download"></i>
-                                </div>
-                                <h6>3. Téléchargement</h6>
-                                <p class="small text-muted mb-0">
-                                    Téléchargez le fichier déchiffré sur votre appareil
-                                </p>
-                            </div>
-                        </div>
+                        </form>
                     </div>
-                    
-                    <div class="alert alert-info mt-3">
-                        <h6>
-                            <i class="bi bi-lightbulb me-2"></i>
-                            Problèmes courants
+                </div>
+
+                <!-- Guide -->
+                <div class="card border-0 mt-3 shadow-sm" style="border-radius: 15px; background: rgba(255,255,255,0.08);">
+                    <div class="card-body p-4">
+                        <h6 class="text-white fw-bold mb-3">
+                            <i class="bi bi-question-circle me-2" style="color: #4fc3f7;"></i>
+                            Guide de déchiffrement
                         </h6>
-                        <ul class="mb-0">
-                            <li>
-                                <strong>Mot de passe incorrect :</strong>
-                                Vérifiez les majuscules/minuscules et les caractères spéciaux
-                            </li>
-                            <li>
-                                <strong>Fichier corrompu :</strong>
-                                Le fichier peut avoir été altéré après le chiffrement
-                            </li>
-                            <li>
-                                <strong>Format invalide :</strong>
-                                Seuls les fichiers .enc générés par CryptoSafe sont acceptés
-                            </li>
-                        </ul>
+                        <div class="row text-center">
+                            <div class="col-4">
+                                <div class="rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center"
+                                     style="width:50px; height:50px; background: rgba(79,195,247,0.2);">
+                                    <i class="bi bi-file-earmark-lock" style="color: #4fc3f7; font-size: 1.3rem;"></i>
+                                </div>
+                                <p class="small text-white fw-semibold mb-1">1. Sélection</p>
+                                <p class="small text-white-50 mb-0">Choisissez votre fichier .enc</p>
+                            </div>
+                            <div class="col-4">
+                                <div class="rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center"
+                                     style="width:50px; height:50px; background: rgba(79,195,247,0.2);">
+                                    <i class="bi bi-key" style="color: #4fc3f7; font-size: 1.3rem;"></i>
+                                </div>
+                                <p class="small text-white fw-semibold mb-1">2. Mot de passe</p>
+                                <p class="small text-white-50 mb-0">Entrez le bon mot de passe</p>
+                            </div>
+                            <div class="col-4">
+                                <div class="rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center"
+                                     style="width:50px; height:50px; background: rgba(79,195,247,0.2);">
+                                    <i class="bi bi-download" style="color: #4fc3f7; font-size: 1.3rem;"></i>
+                                </div>
+                                <p class="small text-white fw-semibold mb-1">3. Téléchargement</p>
+                                <p class="small text-white-50 mb-0">Récupérez votre fichier</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Fichiers récemment chiffrés -->
-            <div class="card mt-4">
-                <div class="card-header">
-                    <h5 class="mb-0">
-                        <i class="bi bi-clock-history me-2"></i>
-                        Fichiers récemment chiffrés
-                    </h5>
+
+                <!-- Fichiers récents -->
+                <div class="card border-0 mt-3 shadow-sm" style="border-radius: 15px; background: rgba(255,255,255,0.97);">
+                    <div class="card-body p-4">
+                        <h6 class="fw-bold mb-3" style="color: #1a1a2e;">
+                            <i class="bi bi-clock-history me-2" style="color: #0f3460;"></i>
+                            Fichiers récemment chiffrés
+                        </h6>
+                        {% if recent_files %}
+                        <div class="table-responsive">
+                            <table class="table table-sm table-hover">
+                                <thead style="background: #f8fafc;">
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Taille</th>
+                                        <th>Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for file in recent_files|slice:":3" %}
+                                    <tr>
+                                        <td>
+                                            <i class="bi bi-file-earmark-lock me-2 text-primary"></i>
+                                            {{ file.original_name|truncatechars:20 }}
+                                        </td>
+                                        <td><span class="badge bg-secondary">{{ file.get_file_size_display }}</span></td>
+                                        <td><small class="text-muted">{{ file.encrypted_at|date:"d/m/Y" }}</small></td>
+                                        <td>
+                                            <a href="{% url 'download_file' file.id %}"
+                                               class="btn btn-sm btn-outline-primary rounded-3">
+                                                <i class="bi bi-download"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="text-end">
+                            <a href="{% url 'file_list' %}" class="btn btn-sm btn-outline-primary rounded-3">
+                                Voir tous les fichiers →
+                            </a>
+                        </div>
+                        {% else %}
+                        <div class="text-center py-4">
+                            <i class="bi bi-folder-x fs-1 text-muted d-block mb-2"></i>
+                            <p class="text-muted small">Aucun fichier chiffré</p>
+                            <a href="{% url 'encrypt_file' %}"
+                               class="btn btn-sm fw-semibold text-white"
+                               style="background: linear-gradient(135deg, #0f3460, #4fc3f7); border-radius: 10px; border: none;">
+                                <i class="bi bi-lock me-1"></i> Chiffrer un fichier
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="card-body">
-                    {% if recent_files %}
-                    <div class="table-responsive">
-                        <table class="table table-sm">
-                            <thead>
-                                <tr>
-                                    <th>Nom</th>
-                                    <th>Taille</th>
-                                    <th>Date</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for file in recent_files|slice:":3" %}
-                                <tr>
-                                    <td>
-                                        <i class="bi bi-file-earmark-lock me-2"></i>
-                                        {{ file.original_name|truncatechars:20 }}
-                                    </td>
-                                    <td>
-                                        <span class="badge bg-secondary">
-                                            {{ file.get_file_size_display }}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <small>{{ file.encrypted_at|date:"d/m/Y" }}</small>
-                                    </td>
-                                    <td>
-                                        <a href="{% url 'download_file' file.id %}" class="btn btn-sm btn-outline-primary">
-                                            <i class="bi bi-download"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="text-end">
-                        <a href="{% url 'file_list' %}" class="btn btn-sm btn-outline-primary">
-                            Voir tous les fichiers
-                        </a>
-                    </div>
-                    {% else %}
-                    <div class="text-center py-4">
-                        <i class="bi bi-folder-x fs-1 text-muted d-block mb-2"></i>
-                        <p class="text-muted">Aucun fichier chiffré</p>
-                        <a href="{% url 'encrypt_file' %}" class="btn btn-sm btn-primary">
-                            Chiffrer un premier fichier
-                        </a>
-                    </div>
-                    {% endif %}
+
+                <div class="text-center mt-3">
+                    <small class="text-white-50">
+                        <i class="bi bi-shield-check me-1"></i>
+                        Déchiffrement sécurisé — Vos fichiers restent privés
+                    </small>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
 
 <script>
+    // Toggle mot de passe bouton œil
+    document.getElementById('togglePwd').addEventListener('click', function () {
+        const pwd = document.getElementById('password');
+        const icon = document.getElementById('eyeIcon');
+        pwd.type = pwd.type === 'password' ? 'text' : 'password';
+        icon.classList.toggle('bi-eye');
+        icon.classList.toggle('bi-eye-slash');
+    });
+
+    // Case à cocher afficher mot de passe
+    document.getElementById('showPwd').addEventListener('change', function () {
+        const pwd = document.getElementById('password');
+        const icon = document.getElementById('eyeIcon');
+        pwd.type = this.checked ? 'text' : 'password';
+        icon.className = this.checked ? 'bi bi-eye-slash' : 'bi bi-eye';
+    });
+
     function formatFileSize(bytes) {
         if (bytes === 0) return '0 B';
         const k = 1024;
@@ -265,73 +270,43 @@
         const i = Math.floor(Math.log(bytes) / Math.log(k));
         return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
     }
-    
+
     function clearFile() {
         document.getElementById('fileInput').value = '';
         document.getElementById('fileDropArea').style.display = 'block';
         document.getElementById('fileInfo').style.display = 'none';
     }
-    
-    document.addEventListener('DOMContentLoaded', function() {
-        const fileDropArea = document.getElementById('fileDropArea');
+
+    document.addEventListener('DOMContentLoaded', function () {
         const fileInput = document.getElementById('fileInput');
-        const fileInfo = document.getElementById('fileInfo');
-        const fileName = document.getElementById('fileName');
-        const fileDetails = document.getElementById('fileDetails');
-        
-        fileDropArea.addEventListener('click', function() {
-            fileInput.click();
-        });
-        
-        fileInput.addEventListener('change', function() {
+        const fileDropArea = document.getElementById('fileDropArea');
+
+        fileDropArea.addEventListener('click', () => fileInput.click());
+
+        fileInput.addEventListener('change', function () {
             if (this.files.length) {
                 const file = this.files[0];
-                
-                // Vérifier l'extension
                 if (!file.name.toLowerCase().endsWith('.enc')) {
-                    alert('Veuillez sélectionner un fichier .enc (fichier chiffré)');
+                    alert('Veuillez sélectionner un fichier .enc');
                     this.value = '';
                     return;
                 }
-                
-                fileName.textContent = file.name;
-                fileDetails.textContent = `${formatFileSize(file.size)} - Fichier chiffré`;
-                
+                document.getElementById('fileName').textContent = file.name;
+                document.getElementById('fileDetails').textContent = formatFileSize(file.size) + ' — Fichier chiffré';
                 fileDropArea.style.display = 'none';
-                fileInfo.style.display = 'block';
+                document.getElementById('fileInfo').style.display = 'block';
             }
         });
-        
+
         // Drag & drop
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            fileDropArea.addEventListener(eventName, preventDefaults, false);
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(e => {
+            fileDropArea.addEventListener(e, ev => { ev.preventDefault(); ev.stopPropagation(); });
         });
-        
-        function preventDefaults(e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
-        
-        ['dragenter', 'dragover'].forEach(eventName => {
-            fileDropArea.addEventListener(eventName, highlight, false);
-        });
-        
-        ['dragleave', 'drop'].forEach(eventName => {
-            fileDropArea.addEventListener(eventName, unhighlight, false);
-        });
-        
-        function highlight() {
-            fileDropArea.classList.add('dragover');
-        }
-        
-        function unhighlight() {
-            fileDropArea.classList.remove('dragover');
-        }
-        
-        fileDropArea.addEventListener('drop', function(e) {
-            const dt = e.dataTransfer;
-            const files = dt.files;
-            
+        fileDropArea.addEventListener('dragover', () => fileDropArea.style.background = '#e0f2fe');
+        fileDropArea.addEventListener('dragleave', () => fileDropArea.style.background = '#f0f9ff');
+        fileDropArea.addEventListener('drop', function (e) {
+            fileDropArea.style.background = '#f0f9ff';
+            const files = e.dataTransfer.files;
             if (files.length) {
                 fileInput.files = files;
                 fileInput.dispatchEvent(new Event('change'));

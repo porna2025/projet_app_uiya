@@ -2180,3 +2180,29 @@ httpx.ConnectError: [Errno 11001] getaddrinfo failed
 [INFO] 03/03/2026 15:15:16 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462
 [INFO] 03/03/2026 15:17:52 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462
 [INFO] 04/03/2026 01:22:49 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 04/03/2026 02:06:52 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 04/03/2026 02:10:28 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 04/03/2026 02:22:30 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\cryptosafe\settings.py changed, reloading.
+[INFO] 04/03/2026 02:32:49 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 04/03/2026 02:36:20 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 04/03/2026 02:39:42 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\cryptosafe\settings.py changed, reloading.
+[INFO] 04/03/2026 02:39:50 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 04/03/2026 02:40:11 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\cryptosafe\settings.py changed, reloading.
+[INFO] 04/03/2026 02:40:16 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 04/03/2026 02:46:10 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 04/03/2026 02:51:34 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 04/03/2026 02:51:51 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 04/03/2026 03:11:32 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\cryptosafe\settings.py changed, reloading.
+[INFO] 04/03/2026 03:11:35 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 04/03/2026 10:22:19 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\cryptosafe\settings.py changed, reloading.
+[INFO] 04/03/2026 10:22:24 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 04/03/2026 10:23:01 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 04/03/2026 10:24:38 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 04/03/2026 10:25:47 django.server log_message:249 - "GET / HTTP/1.1" 200 15845
+[INFO] 04/03/2026 10:25:58 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462
+[INFO] 04/03/2026 10:26:24 crypto_app.views user_login:425 - User kone logged in successfully
+[INFO] 04/03/2026 10:26:24 django.server log_message:249 - "POST /login/ HTTP/1.1" 302 0
+[INFO] 04/03/2026 10:26:24 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 17090
+[INFO] 04/03/2026 10:26:54 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 04/03/2026 10:26:54 django.server log_message:249 - "GET / HTTP/1.1" 200 16121
+[INFO] 04/03/2026 10:26:56 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 7462

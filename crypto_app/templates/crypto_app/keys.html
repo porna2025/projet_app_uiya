@@ -4,53 +4,203 @@
 {% block title %}Clés - CryptoSafe{% endblock %}
 
 {% block content %}
-<div class="container py-4">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="card">
-        <div class="card-header">
-          <h5 class="mb-0"><i class="bi bi-key"></i> Gérer les clés</h5>
-        </div>
-        <div class="card-body">
-          <form method="post">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
-              <button class="btn btn-primary" type="submit">Générer</button>
-            </div>
-          </form>
-        </div>
-      </div>
+<div class="min-vh-100 py-5" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
 
-      <div class="card mt-4">
-        <div class="card-header">
-          <h5 class="mb-0">Clés existantes</h5>
+                <!-- Titre -->
+                <div class="text-center mb-4">
+                    <i class="bi bi-key-fill" style="font-size: 3rem; color: #4fc3f7;"></i>
+                    <h2 class="fw-bold text-white mt-2">Gérer les clés</h2>
+                    <p class="text-white-50">Générez et gérez vos clés de chiffrement</p>
+                </div>
+
+                <!-- Carte génération -->
+                <div class="card border-0 shadow-lg mb-4" style="border-radius: 20px; background: rgba(255,255,255,0.97);">
+                    <div class="card-body p-4">
+
+                        <h4 class="fw-bold mb-4" style="color: #1a1a2e;">
+                            <i class="bi bi-plus-circle me-2" style="color: #0f3460;"></i>
+                            Nouvelle clé
+                        </h4>
+
+                        <form method="post">
+                            {% csrf_token %}
+
+                            <!-- Nom de la clé -->
+                            <div class="mb-3">
+                                <label for="id_name" class="form-label fw-semibold text-dark">
+                                    <i class="bi bi-tag me-1"></i> Nom de la clé *
+                                </label>
+                                <input type="text"
+                                       class="form-control form-control-lg rounded-3"
+                                       id="id_name"
+                                       name="name"
+                                       required
+                                       placeholder="Ex: Ma clé personnelle"
+                                       style="border: 2px solid #e0e0e0;">
+                                <div class="form-text">Donnez un nom descriptif à votre clé</div>
+                            </div>
+
+                            <!-- Type de clé -->
+                            <div class="mb-4">
+                                <label for="id_key_type" class="form-label fw-semibold text-dark">
+                                    <i class="bi bi-shield me-1"></i> Type de clé *
+                                </label>
+                                <select class="form-select form-select-lg rounded-3"
+                                        id="id_key_type"
+                                        name="key_type"
+                                        style="border: 2px solid #e0e0e0;">
+                                    <option value="AES">🔐 Clé AES (256 bits) — Recommandé pour les fichiers</option>
+                                    <option value="RSA">🔑 Clé RSA (2048 bits) — Pour échanges sécurisés</option>
+                                    <option value="PASSWORD">🔒 Mot de passe — Dérivation PBKDF2</option>
+                                </select>
+
+                                <!-- Info type sélectionné -->
+                                <div id="keyTypeInfo" class="mt-2 p-3 rounded-3 small" style="background: #eff6ff; border: 1px solid #4fc3f7; color: #1e40af;">
+                                    <i class="bi bi-info-circle me-1"></i>
+                                    <span id="keyTypeText">AES-256 : chiffrement symétrique rapide, idéal pour les fichiers volumineux.</span>
+                                </div>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit"
+                                        class="btn btn-lg fw-bold text-white"
+                                        style="background: linear-gradient(135deg, #0f3460, #4fc3f7); border: none; border-radius: 12px; padding: 12px;">
+                                    <i class="bi bi-lightning me-2"></i>
+                                    Générer la clé
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Carte clés existantes -->
+                <div class="card border-0 shadow-lg" style="border-radius: 20px; background: rgba(255,255,255,0.97);">
+                    <div class="card-body p-4">
+
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h4 class="fw-bold mb-0" style="color: #1a1a2e;">
+                                <i class="bi bi-collection me-2" style="color: #0f3460;"></i>
+                                Clés existantes
+                            </h4>
+                            {% if keys %}
+                            <span class="badge rounded-pill" style="background: #0f3460;">
+                                {{ keys|length }} clé{{ keys|length|pluralize }}
+                            </span>
+                            {% endif %}
+                        </div>
+
+                        {% if keys %}
+                        <div class="d-flex flex-column gap-3">
+                            {% for key in keys %}
+                            <div class="p-3 rounded-3 d-flex justify-content-between align-items-center"
+                                 style="background: #f8fafc; border: 1px solid #e2e8f0; transition: all 0.2s;"
+                                 onmouseover="this.style.background='#eff6ff'; this.style.borderColor='#4fc3f7';"
+                                 onmouseout="this.style.background='#f8fafc'; this.style.borderColor='#e2e8f0';">
+                                <div class="d-flex align-items-center">
+                                    <!-- Icône selon type -->
+                                    <div class="rounded-circle me-3 d-flex align-items-center justify-content-center"
+                                         style="width: 45px; height: 45px; background: linear-gradient(135deg, #0f3460, #4fc3f7);">
+                                        {% if key.key_type == "AES" %}
+                                            <i class="bi bi-shield-lock text-white"></i>
+                                        {% elif key.key_type == "RSA" %}
+                                            <i class="bi bi-key text-white"></i>
+                                        {% else %}
+                                            <i class="bi bi-lock text-white"></i>
+                                        {% endif %}
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-0 fw-bold" style="color: #1a1a2e;">{{ key.name }}</h6>
+                                        <small class="text-muted">
+                                            <span class="badge me-1"
+                                                  style="background: {% if key.key_type == 'AES' %}#10b981{% elif key.key_type == 'RSA' %}#3b82f6{% else %}#f59e0b{% endif %}; font-size: 0.7rem;">
+                                                {{ key.key_type }}
+                                            </span>
+                                            Créée le {{ key.created_at|date:"d/m/Y" }}
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <a href="{% url 'view_key' key.id %}"
+                                       class="btn btn-sm fw-semibold"
+                                       style="border-radius: 10px; border: 2px solid #0f3460; color: #0f3460; background: white;">
+                                        <i class="bi bi-eye me-1"></i>Voir
+                                    </a>
+                                    <form method="post" action="{% url 'delete_key' key.id %}" class="d-inline"
+                                          onsubmit="return confirm('Voulez-vous vraiment supprimer cette clé ?');">
+                                        {% csrf_token %}
+                                        <button type="submit"
+                                                class="btn btn-sm fw-semibold"
+                                                style="border-radius: 10px; border: 2px solid #ef4444; color: #ef4444; background: white;">
+                                            <i class="bi bi-trash me-1"></i>Supprimer
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        {% else %}
+                        <div class="text-center py-5">
+                            <i class="bi bi-key fs-1 text-muted d-block mb-3"></i>
+                            <h6 class="text-muted">Aucune clé disponible</h6>
+                            <p class="small text-muted">Générez votre première clé ci-dessus</p>
+                        </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+
+                <!-- Info sécurité -->
+                <div class="card border-0 mt-3 shadow-sm" style="border-radius: 15px; background: rgba(255,255,255,0.08);">
+                    <div class="card-body p-3 px-4">
+                        <h6 class="text-white mb-2">
+                            <i class="bi bi-shield-check me-2" style="color: #4fc3f7;"></i>
+                            Sécurité des clés
+                        </h6>
+                        <div class="row">
+                            <div class="col-6">
+                                <ul class="list-unstyled small text-white-50 mb-0">
+                                    <li class="mb-1"><i class="bi bi-check-circle text-success me-1"></i> Clés stockées chiffrées</li>
+                                    <li class="mb-1"><i class="bi bi-check-circle text-success me-1"></i> Accès sécurisé uniquement</li>
+                                </ul>
+                            </div>
+                            <div class="col-6">
+                                <ul class="list-unstyled small text-white-50 mb-0">
+                                    <li class="mb-1"><i class="bi bi-check-circle text-success me-1"></i> Suppression définitive</li>
+                                    <li class="mb-1"><i class="bi bi-check-circle text-success me-1"></i> Aucun partage tiers</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-3">
+                    <small class="text-white-50">
+                        <i class="bi bi-shield-check me-1"></i>
+                        Vos clés sont protégées et privées
+                    </small>
+                </div>
+
+            </div>
         </div>
-        <div class="card-body">
-          {% if keys %}
-            <ul class="list-group">
-              {% for key in keys %}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <div>
-                    <strong>{{ key.name }}</strong>
-                    <div class="small text-muted">{{ key.key_type }} • Créée le {{ key.created_at|date:"d/m/Y" }}</div>
-                  </div>
-                  <div>
-                    <a href="{% url 'view_key' key.id %}" class="btn btn-sm btn-outline-secondary">Voir</a>
-                    <form method="post" action="{% url 'delete_key' key.id %}" class="d-inline" onsubmit="return confirm('Voulez-vous vraiment supprimer cette clé ?');">
-                      {% csrf_token %}
-                      <button type="submit" class="btn btn-sm btn-outline-danger">Supprimer</button>
-                    </form>
-                  </div>
-                </li>
-              {% endfor %}
-            </ul>
-          {% else %}
-            <div class="text-center py-4 text-muted">Aucune clé disponible</div>
-          {% endif %}
-        </div>
-      </div>
     </div>
-  </div>
 </div>
+
+<script>
+    // Info selon type de clé
+    const keyInfos = {
+        'AES': 'AES-256 : chiffrement symétrique rapide, idéal pour les fichiers volumineux.',
+        'RSA': 'RSA-2048 : chiffrement asymétrique, parfait pour les échanges sécurisés.',
+        'PASSWORD': 'PBKDF2 : dérivation de clé depuis un mot de passe, très sécurisé.'
+    };
+
+    document.getElementById('id_key_type').addEventListener('change', function () {
+        const info = keyInfos[this.value] || '';
+        document.getElementById('keyTypeText').textContent = info;
+    });
+</script>
+
 {% endblock %}

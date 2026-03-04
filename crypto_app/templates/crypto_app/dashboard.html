@@ -3,296 +3,302 @@
 {% block title %}Tableau de bord - CryptoSafe{% endblock %}
 
 {% block content %}
-<div class="container">
-    <!-- Bienvenue -->
-    <div class="row mb-4">
-        <div class="col-12">
-            <div class="card bg-gradient-primary text-white">
-                <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col-md-8">
-                            <h2 class="fw-bold mb-2">
-                                <i class="bi bi-shield-check me-2"></i>
-                                Bienvenue, {{ user.username }} !
-                            </h2>
-                            <p class="mb-0">
-                                Gérez et protégez vos fichiers sensibles avec notre système de chiffrement AES-256.
-                            </p>
-                        </div>
-                        <div class="col-md-4 text-end">
-                            <span class="badge bg-light text-primary fs-6 p-3">
-                                <i class="bi bi-calendar-check me-2"></i>
-                                {% now "d F Y" %}
-                            </span>
-                        </div>
+<div class="min-vh-100 py-4" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);">
+    <div class="container">
+
+        <!-- Bienvenue -->
+        <div class="card border-0 shadow-lg mb-4" style="border-radius: 20px; background: linear-gradient(135deg, #0f3460, #4fc3f7);">
+            <div class="card-body p-4">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h2 class="fw-bold text-white mb-1">
+                            <i class="bi bi-shield-check me-2"></i>
+                            Bienvenue, {{ user.username }} !
+                        </h2>
+                        <p class="mb-0" style="color: rgba(255,255,255,0.8);">
+                            Gérez et protégez vos fichiers sensibles avec le chiffrement AES-256.
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                        <span class="badge p-2" style="background: rgba(255,255,255,0.2); border-radius: 12px; font-size: 0.9rem;">
+                            <i class="bi bi-calendar-check me-2"></i>
+                            {% now "d F Y" %}
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <!-- Statistiques rapides -->
-    <div class="row mb-4">
-        <div class="col-md-3 col-6 mb-3">
-            <div class="stat-card">
-                <div class="stat-number">{{ stats.total_files }}</div>
-                <div class="stat-label">Fichiers chiffrés</div>
-                <div class="mt-2">
-                    <i class="bi bi-folder text-primary"></i>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-md-3 col-6 mb-3">
-            <div class="stat-card">
-                <div class="stat-number">{{ stats.active_keys }}</div>
-                <div class="stat-label">Clés actives</div>
-                <div class="mt-2">
-                    <i class="bi bi-key text-primary"></i>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-md-3 col-6 mb-3">
-            <div class="stat-card">
-                <div class="stat-number">AES-256</div>
-                <div class="stat-label">Niveau sécurité</div>
-                <div class="mt-2">
-                    <i class="bi bi-shield-check text-primary"></i>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-md-3 col-6 mb-3">
-            <div class="stat-card">
-                <div class="stat-number">100%</div>
-                <div class="stat-label">Protection</div>
-                <div class="mt-2">
-                    <i class="bi bi-lock text-primary"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Actions rapides -->
-    <div class="row mb-4">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="mb-0">
-                        <i class="bi bi-lightning me-2"></i>
-                        Actions rapides
-                    </h4>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-6 mb-3">
-                            <a href="{% url 'encrypt_file' %}" class="btn btn-primary w-100 py-3">
-                                <i class="bi bi-lock fs-4 d-block mb-2"></i>
-                                Chiffrer un fichier
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-6 mb-3">
-                            <a href="{% url 'decrypt_file' %}" class="btn btn-success w-100 py-3">
-                                <i class="bi bi-unlock fs-4 d-block mb-2"></i>
-                                Déchiffrer un fichier
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-6 mb-3">
-                            <a href="{% url 'encrypt_text' %}" class="btn btn-info w-100 py-3">
-                                <i class="bi bi-chat-left-text fs-4 d-block mb-2"></i>
-                                Chiffrer du texte
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-6 mb-3">
-                            <a href="{% url 'manage_keys' %}" class="btn btn-warning w-100 py-3">
-                                <i class="bi bi-key fs-4 d-block mb-2"></i>
-                                Gérer les clés
-                            </a>
-                        </div>
+
+        <!-- Statistiques -->
+        <div class="row mb-4 g-3">
+            <div class="col-md-3 col-6">
+                <div class="card border-0 shadow text-center p-3" style="border-radius: 16px; background: rgba(255,255,255,0.97);">
+                    <div class="rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center"
+                         style="width:42px; height:42px; background: linear-gradient(135deg, #0f3460, #4fc3f7);">
+                        <i class="bi bi-folder text-white" style="font-size: 1rem;"></i>
                     </div>
+                    <h4 class="fw-bold mb-0" style="color: #0f3460;">{{ stats.total_files }}</h4>
+                    <small class="text-muted">Fichiers chiffrés</small>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="card border-0 shadow text-center p-3" style="border-radius: 16px; background: rgba(255,255,255,0.97);">
+                    <div class="rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center"
+                         style="width:42px; height:42px; background: linear-gradient(135deg, #10b981, #34d399);">
+                        <i class="bi bi-key text-white" style="font-size: 1rem;"></i>
+                    </div>
+                    <h4 class="fw-bold mb-0" style="color: #10b981;">{{ stats.active_keys }}</h4>
+                    <small class="text-muted">Clés actives</small>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="card border-0 shadow text-center p-3" style="border-radius: 16px; background: rgba(255,255,255,0.97);">
+                    <div class="rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center"
+                         style="width:42px; height:42px; background: linear-gradient(135deg, #f59e0b, #fbbf24);">
+                        <i class="bi bi-shield-check text-white" style="font-size: 1rem;"></i>
+                    </div>
+                    <h4 class="fw-bold mb-0" style="color: #f59e0b;">AES-256</h4>
+                    <small class="text-muted">Niveau sécurité</small>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="card border-0 shadow text-center p-3" style="border-radius: 16px; background: rgba(255,255,255,0.97);">
+                    <div class="rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center"
+                         style="width:42px; height:42px; background: linear-gradient(135deg, #8b5cf6, #a78bfa);">
+                        <i class="bi bi-lock text-white" style="font-size: 1rem;"></i>
+                    </div>
+                    <h4 class="fw-bold mb-0" style="color: #8b5cf6;">100%</h4>
+                    <small class="text-muted">Protection</small>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <div class="row">
-        <!-- Fichiers récents -->
-        <div class="col-lg-8 mb-4">
-            <div class="card h-100">
-                <div class="card-header">
-                    <h4 class="mb-0">
-                        <i class="bi bi-folder me-2"></i>
-                        Fichiers récents
-                    </h4>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Nom du fichier</th>
-                                    <th>Taille</th>
-                                    <th>Date</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for file in stats.recent_files|slice:":5" %}
-                                <tr>
-                                    <td>
-                                        <i class="bi bi-file-earmark-lock me-2"></i>
-                                        {{ file.original_name|truncatechars:20 }}
-                                    </td>
-                                    <td>
-                                        <span class="badge bg-secondary">
-                                            {{ file.get_file_size_display }}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <small>{{ file.encrypted_at|date:"d/m/Y" }}</small>
-                                    </td>
-                                    <td>
-                                        <div class="btn-group btn-group-sm">
-                                            <a href="{% url 'download_file' file.id %}" class="btn btn-outline-primary">
-                                                <i class="bi bi-download"></i>
-                                            </a>
-                                            <a href="{% url 'delete_file' file.id %}" class="btn btn-outline-danger btn-delete">
-                                                <i class="bi bi-trash"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                {% empty %}
-                                <tr>
-                                    <td colspan="4" class="text-center py-4">
-                                        <i class="bi bi-folder-x fs-1 text-muted d-block mb-2"></i>
-                                        <p class="text-muted">Aucun fichier chiffré</p>
-                                        <a href="{% url 'encrypt_file' %}" class="btn btn-sm btn-primary">
-                                            Chiffrer mon premier fichier
-                                        </a>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                    {% if stats.total_files > 5 %}
-                    <div class="text-end">
-                        <a href="{% url 'file_list' %}" class="btn btn-sm btn-outline-primary">
-                            Voir tous les fichiers
+
+        <!-- Actions rapides -->
+        <div class="card border-0 shadow-lg mb-4" style="border-radius: 20px; background: rgba(255,255,255,0.97);">
+            <div class="card-body p-4">
+                <h5 class="fw-bold mb-3" style="color: #1a1a2e;">
+                    <i class="bi bi-lightning me-2" style="color: #0f3460;"></i>
+                    Actions rapides
+                </h5>
+                <div class="row g-3">
+                    <div class="col-lg-3 col-md-6">
+                        <a href="{% url 'encrypt_file' %}"
+                           class="btn w-100 py-3 fw-bold text-white d-flex flex-column align-items-center"
+                           style="background: linear-gradient(135deg, #0f3460, #4fc3f7); border: none; border-radius: 14px; transition: transform 0.2s;"
+                           onmouseover="this.style.transform='translateY(-3px)'"
+                           onmouseout="this.style.transform='translateY(0)'">
+                            <i class="bi bi-lock mb-1" style="font-size: 1.5rem;"></i>
+                            <span style="font-size: 0.9rem;">Chiffrer un fichier</span>
                         </a>
                     </div>
-                    {% endif %}
+                    <div class="col-lg-3 col-md-6">
+                        <a href="{% url 'decrypt_file' %}"
+                           class="btn w-100 py-3 fw-bold text-white d-flex flex-column align-items-center"
+                           style="background: linear-gradient(135deg, #10b981, #059669); border: none; border-radius: 14px; transition: transform 0.2s;"
+                           onmouseover="this.style.transform='translateY(-3px)'"
+                           onmouseout="this.style.transform='translateY(0)'">
+                            <i class="bi bi-unlock mb-1" style="font-size: 1.5rem;"></i>
+                            <span style="font-size: 0.9rem;">Déchiffrer un fichier</span>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <a href="{% url 'encrypt_text' %}"
+                           class="btn w-100 py-3 fw-bold text-white d-flex flex-column align-items-center"
+                           style="background: linear-gradient(135deg, #3b82f6, #60a5fa); border: none; border-radius: 14px; transition: transform 0.2s;"
+                           onmouseover="this.style.transform='translateY(-3px)'"
+                           onmouseout="this.style.transform='translateY(0)'">
+                            <i class="bi bi-chat-left-text mb-1" style="font-size: 1.5rem;"></i>
+                            <span style="font-size: 0.9rem;">Chiffrer du texte</span>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <a href="{% url 'manage_keys' %}"
+                           class="btn w-100 py-3 fw-bold text-white d-flex flex-column align-items-center"
+                           style="background: linear-gradient(135deg, #f59e0b, #fbbf24); border: none; border-radius: 14px; transition: transform 0.2s;"
+                           onmouseover="this.style.transform='translateY(-3px)'"
+                           onmouseout="this.style.transform='translateY(0)'">
+                            <i class="bi bi-key mb-1" style="font-size: 1.5rem;"></i>
+                            <span style="font-size: 0.9rem;">Gérer les clés</span>
+                        </a>
+                    </div>
+                    
+                    
                 </div>
             </div>
         </div>
-        
-        <!-- Activité récente -->
-        <div class="col-lg-4 mb-4">
-            <div class="card h-100">
-                <div class="card-header">
-                    <h4 class="mb-0">
-                        <i class="bi bi-activity me-2"></i>
-                        Activité récente
-                    </h4>
+
+        <div class="row g-4 mb-4">
+            <!-- Fichiers récents -->
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-lg h-100" style="border-radius: 20px; background: rgba(255,255,255,0.97);">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="fw-bold mb-0" style="color: #1a1a2e;">
+                                <i class="bi bi-folder me-2" style="color: #0f3460;"></i>
+                                Fichiers récents
+                            </h5>
+                            {% if stats.total_files > 5 %}
+                            <a href="{% url 'file_list' %}" class="btn btn-sm btn-outline-primary rounded-3">
+                                Voir tous →
+                            </a>
+                            {% endif %}
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead style="background: #f8fafc;">
+                                    <tr>
+                                        <th class="small text-muted fw-semibold">Nom</th>
+                                        <th class="small text-muted fw-semibold">Taille</th>
+                                        <th class="small text-muted fw-semibold">Date</th>
+                                        <th class="small text-muted fw-semibold">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for file in stats.recent_files|slice:":5" %}
+                                    <tr>
+                                        <td>
+                                            <i class="bi bi-file-earmark-lock me-2 text-primary"></i>
+                                            <span class="fw-semibold small">{{ file.original_name|truncatechars:22 }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-secondary rounded-pill small">{{ file.get_file_size_display }}</span>
+                                        </td>
+                                        <td>
+                                            <small class="text-muted">{{ file.encrypted_at|date:"d/m/Y" }}</small>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex gap-1">
+                                                <a href="{% url 'download_file' file.id %}"
+                                                   class="btn btn-sm rounded-3"
+                                                   style="border: 2px solid #0f3460; color: #0f3460;"
+                                                   title="Télécharger">
+                                                    <i class="bi bi-download"></i>
+                                                </a>
+                                                <a href="{% url 'delete_file' file.id %}"
+                                                   class="btn btn-sm rounded-3"
+                                                   style="border: 2px solid #ef4444; color: #ef4444;"
+                                                   title="Supprimer"
+                                                   onclick="return confirm('Supprimer ce fichier ?')">
+                                                    <i class="bi bi-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="4" class="text-center py-5">
+                                            <i class="bi bi-folder-x fs-1 text-muted d-block mb-2"></i>
+                                            <p class="text-muted mb-2 small">Aucun fichier chiffré</p>
+                                            <a href="{% url 'encrypt_file' %}"
+                                               class="btn btn-sm fw-semibold text-white"
+                                               style="background: linear-gradient(135deg, #0f3460, #4fc3f7); border: none; border-radius: 10px;">
+                                                <i class="bi bi-lock me-1"></i> Chiffrer mon premier fichier
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <div class="activity-timeline">
-                        {% for activity in stats.recent_activities %}
-                        <div class="activity-item">
-                            <div class="d-flex justify-content-between">
-                                <strong>{{ activity.action }}</strong>
-                                <small class="text-muted">{{ activity.timestamp|timesince }}</small>
+            </div>
+
+            <!-- Activité récente -->
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-lg h-100" style="border-radius: 20px; background: rgba(255,255,255,0.97);">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold mb-3" style="color: #1a1a2e;">
+                            <i class="bi bi-activity me-2" style="color: #0f3460;"></i>
+                            Activité récente
+                        </h5>
+                        <div class="d-flex flex-column gap-2">
+                            {% for activity in stats.recent_activities %}
+                            <div class="p-3 rounded-3" style="background: #f8fafc; border-left: 4px solid
+                                {% if activity.severity == 'INFO' %}#4fc3f7{% elif activity.severity == 'WARNING' %}#f59e0b{% elif activity.severity == 'ERROR' %}#ef4444{% else %}#94a3b8{% endif %};">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <strong class="small" style="color: #1a1a2e;">{{ activity.action }}</strong>
+                                    <small class="text-muted">{{ activity.timestamp|timesince }}</small>
+                                </div>
+                                <p class="mb-1 small text-muted">{{ activity.description|truncatechars:40 }}</p>
+                                <span class="badge rounded-pill small"
+                                      style="{% if activity.severity == 'INFO' %}background:#eff6ff; color:#3b82f6;{% elif activity.severity == 'WARNING' %}background:#fffbeb; color:#f59e0b;{% elif activity.severity == 'ERROR' %}background:#fef2f2; color:#ef4444;{% else %}background:#f1f5f9; color:#64748b;{% endif %}">
+                                    {{ activity.severity }}
+                                </span>
                             </div>
-                            <p class="mb-0 small">{{ activity.description|truncatechars:40 }}</p>
-                            <span class="badge bg-{% if activity.severity == 'INFO' %}info{% elif activity.severity == 'WARNING' %}warning{% elif activity.severity == 'ERROR' %}danger{% else %}secondary{% endif %} badge-sm">
-                                {{ activity.severity }}
-                            </span>
+                            {% empty %}
+                            <div class="text-center py-4">
+                                <i class="bi bi-activity fs-1 text-muted d-block mb-2"></i>
+                                <p class="text-muted small">Aucune activité récente</p>
+                            </div>
+                            {% endfor %}
                         </div>
-                        {% empty %}
-                        <div class="text-center py-4">
-                            <i class="bi bi-activity fs-1 text-muted d-block mb-2"></i>
-                            <p class="text-muted">Aucune activité récente</p>
-                        </div>
-                        {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <!-- Conseils de sécurité -->
-    <div class="row mt-4">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="mb-0">
-                        <i class="bi bi-shield-check me-2"></i>
-                        Conseils de sécurité
-                    </h4>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0">
-                                    <i class="bi bi-key fs-4 text-primary"></i>
+
+        <!-- Conseils sécurité -->
+        <div class="card border-0 shadow-lg" style="border-radius: 20px; background: rgba(255,255,255,0.97);">
+            <div class="card-body p-4">
+                <h5 class="fw-bold mb-3" style="color: #1a1a2e;">
+                    <i class="bi bi-shield-check me-2" style="color: #0f3460;"></i>
+                    Conseils de sécurité
+                </h5>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="p-3 rounded-3 h-100" style="background: #eff6ff; border: 1px solid #bfdbfe;">
+                            <div class="d-flex align-items-center mb-2">
+                                <div class="rounded-circle me-2 d-flex align-items-center justify-content-center flex-shrink-0"
+                                     style="width:36px; height:36px; background: linear-gradient(135deg, #0f3460, #4fc3f7);">
+                                    <i class="bi bi-key text-white" style="font-size: 0.9rem;"></i>
                                 </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <h6>Mots de passe forts</h6>
-                                    <p class="small text-muted mb-0">
-                                        Utilisez toujours des mots de passe complexes avec majuscules, chiffres et caractères spéciaux.
-                                    </p>
-                                </div>
+                                <h6 class="fw-bold mb-0 small" style="color: #1e40af;">Mots de passe forts</h6>
                             </div>
+                            <p class="small mb-0" style="color: #3b82f6;">
+                                Utilisez des mots de passe complexes avec majuscules, chiffres et caractères spéciaux.
+                            </p>
                         </div>
-                        <div class="col-md-4 mb-3">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0">
-                                    <i class="bi bi-arrows-angle-contract fs-4 text-primary"></i>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 rounded-3 h-100" style="background: #f0fdf4; border: 1px solid #bbf7d0;">
+                            <div class="d-flex align-items-center mb-2">
+                                <div class="rounded-circle me-2 d-flex align-items-center justify-content-center flex-shrink-0"
+                                     style="width:36px; height:36px; background: linear-gradient(135deg, #10b981, #34d399);">
+                                    <i class="bi bi-arrows-angle-contract text-white" style="font-size: 0.9rem;"></i>
                                 </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <h6>Clés de chiffrement</h6>
-                                    <p class="small text-muted mb-0">
-                                        Générez régulièrement de nouvelles clés de chiffrement pour renforcer la sécurité.
-                                    </p>
-                                </div>
+                                <h6 class="fw-bold mb-0 small" style="color: #065f46;">Clés de chiffrement</h6>
                             </div>
+                            <p class="small mb-0" style="color: #10b981;">
+                                Renouvelez régulièrement vos clés de chiffrement pour renforcer la sécurité.
+                            </p>
                         </div>
-                        <div class="col-md-4 mb-3">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0">
-                                    <i class="bi bi-cloud-arrow-up fs-4 text-primary"></i>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 rounded-3 h-100" style="background: #fffbeb; border: 1px solid #fde68a;">
+                            <div class="d-flex align-items-center mb-2">
+                                <div class="rounded-circle me-2 d-flex align-items-center justify-content-center flex-shrink-0"
+                                     style="width:36px; height:36px; background: linear-gradient(135deg, #f59e0b, #fbbf24);">
+                                    <i class="bi bi-cloud-arrow-up text-white" style="font-size: 0.9rem;"></i>
                                 </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <h6>Sauvegarde</h6>
-                                    <p class="small text-muted mb-0">
-                                        Sauvegardez vos clés de déchiffrement dans un endroit sécurisé hors ligne.
-                                    </p>
-                                </div>
+                                <h6 class="fw-bold mb-0 small" style="color: #92400e;">Sauvegarde</h6>
                             </div>
+                            <p class="small mb-0" style="color: #b45309;">
+                                Sauvegardez vos clés dans un endroit sécurisé hors ligne pour éviter toute perte.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="text-center mt-4 pb-3">
+            <small class="text-white-50">
+                <i class="bi bi-shield-check me-1"></i>
+                CryptoSafe — Chiffrement AES-256 — Vos données restent privées
+            </small>
+        </div>
+
     </div>
 </div>
-
-<style>
-    .card {
-        border-radius: 12px;
-    }
-    
-    .badge-sm {
-        font-size: 0.7em;
-        padding: 2px 8px;
-    }
-    
-    .btn-delete:hover {
-        background-color: #ef4444;
-        color: white;
-    }
-</style>
 {% endblock %}

@@ -3,114 +3,167 @@
 {% block title %}Connexion - CryptoSafe{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row justify-content-center py-5">
-        <div class="col-md-6 col-lg-5">
-            <div class="card">
-                <div class="card-header text-center">
-                    <h3 class="mb-0 text-white">
-                        <i class="bi bi-box-arrow-in-right me-2"></i>
-                        Connexion
-                    </h3>
+<div class="min-vh-100 d-flex align-items-center" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5 col-lg-4">
+
+                <!-- Logo / Titre -->
+                <div class="text-center mb-4">
+                    <div class="mb-3">
+                        <i class="bi bi-shield-lock-fill" style="font-size: 3rem; color: #4fc3f7;"></i>
+                    </div>
+                    <h2 class="fw-bold text-white">CryptoSafe</h2>
+                    <p class="text-white-50">Connectez-vous à votre espace sécurisé</p>
                 </div>
-                <div class="card-body p-4">
-                    <form method="post" action="{% url 'login' %}">
-                        {% csrf_token %}
-                        
-                        <div class="mb-3">
-                            <label for="username" class="form-label">
-                                <i class="bi bi-person me-1"></i>
-                                Nom d'utilisateur
-                            </label>
-                            <input type="text" 
-                                   class="form-control" 
-                                   id="username" 
-                                   name="username" 
-                                   required
-                                   placeholder="Entrez votre nom d'utilisateur">
+
+                <!-- Carte connexion -->
+                <div class="card border-0 shadow-lg" style="border-radius: 20px; background: rgba(255,255,255,0.95);">
+                    <div class="card-body p-4">
+
+                        <h4 class="fw-bold text-center mb-4" style="color: #1a1a2e;">
+                            <i class="bi bi-box-arrow-in-right me-2" style="color: #0f3460;"></i>
+                            Connexion
+                        </h4>
+
+                        {% if form.errors %}
+                        <div class="alert alert-danger rounded-3 py-2">
+                            <i class="bi bi-exclamation-triangle me-2"></i>
+                            Nom d'utilisateur ou mot de passe incorrect.
                         </div>
-                        
-                        <div class="mb-3">
-                            <label for="password" class="form-label">
-                                <i class="bi bi-key me-1"></i>
-                                Mot de passe
-                            </label>
-                            <div class="input-group">
-                                <input type="password" 
-                                       class="form-control" 
-                                       id="password" 
-                                       name="password" 
+                        {% endif %}
+
+                        <form method="post" action="{% url 'login' %}">
+                            {% csrf_token %}
+
+                            <!-- Nom d'utilisateur -->
+                            <div class="mb-3">
+                                <label for="username" class="form-label fw-semibold text-dark">
+                                    <i class="bi bi-person me-1"></i> Nom d'utilisateur
+                                </label>
+                                <input type="text"
+                                       class="form-control form-control-lg rounded-3"
+                                       id="username"
+                                       name="username"
                                        required
-                                       placeholder="Entrez votre mot de passe">
-                                <button class="btn btn-outline-secondary toggle-password" type="button">
-                                    <i class="bi bi-eye"></i>
+                                       autocomplete="username"
+                                       placeholder="Votre nom d'utilisateur"
+                                       style="border: 2px solid #e0e0e0;">
+                            </div>
+
+                            <!-- Mot de passe -->
+                            <div class="mb-3">
+                                <label for="password" class="form-label fw-semibold text-dark">
+                                    <i class="bi bi-key me-1"></i> Mot de passe
+                                </label>
+                                <div class="input-group">
+                                    <input type="password"
+                                           class="form-control form-control-lg rounded-start-3"
+                                           id="password"
+                                           name="password"
+                                           required
+                                           autocomplete="current-password"
+                                           placeholder="Votre mot de passe"
+                                           style="border: 2px solid #e0e0e0; border-right: none;">
+                                    <button class="btn btn-outline-secondary rounded-end-3"
+                                            type="button"
+                                            id="togglePassword"
+                                            title="Afficher/Masquer le mot de passe"
+                                            style="border: 2px solid #e0e0e0; border-left: none;">
+                                        <i class="bi bi-eye" id="eyeIcon"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Afficher mot de passe + Se souvenir -->
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="showPassword">
+                                    <label class="form-check-label small text-muted" for="showPassword">
+                                        Afficher le mot de passe
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="remember" name="remember">
+                                    <label class="form-check-label small text-muted" for="remember">
+                                        Se souvenir de moi
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Bouton connexion -->
+                            <div class="d-grid mb-3">
+                                <button type="submit"
+                                        class="btn btn-lg fw-bold text-white"
+                                        style="background: linear-gradient(135deg, #0f3460, #4fc3f7); border: none; border-radius: 12px; padding: 12px;">
+                                    <i class="bi bi-box-arrow-in-right me-2"></i>
+                                    Se connecter
                                 </button>
                             </div>
-                        </div>
-                        
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="remember">
-                            <label class="form-check-label" for="remember">
-                                Se souvenir de moi
-                            </label>
-                        </div>
-                        
-                        <div class="d-grid mb-3">
-                            <button type="submit" class="btn btn-primary btn-lg">
-                                <i class="bi bi-box-arrow-in-right me-2"></i>
-                                Se connecter
-                            </button>
-                        </div>
-                        
-                        <div class="text-center mb-3">
-                            <a href="#" class="text-decoration-none">
-                                <i class="bi bi-question-circle me-1"></i>
-                                Mot de passe oublié ?
-                            </a>
-                        </div>
-                        
-                        <hr class="my-4">
-                        
-                        <div class="text-center">
-                            <p class="mb-0">Vous n'avez pas de compte ?</p>
-                            <a href="{% url 'register' %}" class="btn btn-outline-primary mt-2">
-                                <i class="bi bi-person-plus me-2"></i>
-                                Créer un compte
-                            </a>
-                        </div>
-                    </form>
+
+                            <!-- Mot de passe oublié -->
+                            <div class="text-center mb-3">
+                                <a href="#" class="text-decoration-none small" style="color: #0f3460;">
+                                    <i class="bi bi-question-circle me-1"></i>
+                                    Mot de passe oublié ?
+                                </a>
+                            </div>
+
+                            <hr class="text-muted">
+
+                            <!-- Créer un compte -->
+                            <div class="text-center">
+                                <p class="small text-muted mb-2">Vous n'avez pas de compte ?</p>
+                                <a href="{% url 'register' %}"
+                                   class="btn btn-outline-primary fw-semibold w-100"
+                                   style="border-radius: 12px; border: 2px solid #0f3460; color: #0f3460;">
+                                    <i class="bi bi-person-plus me-2"></i>
+                                    Créer un compte
+                                </a>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="card mt-4">
-                <div class="card-body">
-                    <h6 class="mb-3">
-                        <i class="bi bi-shield-check me-2"></i>
-                        Sécurité du compte
-                    </h6>
-                    <ul class="list-unstyled small">
-                        <li class="mb-2">
-                            <i class="bi bi-check-circle text-success me-2"></i>
-                            Utilisez un mot de passe fort et unique
-                        </li>
-                        <li class="mb-2">
-                            <i class="bi bi-check-circle text-success me-2"></i>
-                            Activez l'authentification à deux facteurs
-                        </li>
-                        <li class="mb-0">
-                            <i class="bi bi-check-circle text-success me-2"></i>
-                            Ne partagez jamais vos identifiants
-                        </li>
-                    </ul>
+
+                <!-- Sécurité -->
+                <div class="text-center mt-4">
+                    <small class="text-white-50">
+                        <i class="bi bi-shield-check me-1"></i>
+                        Connexion sécurisée — Ne partagez jamais vos identifiants
+                    </small>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
 
-<style>
-    .card {
-        border-radius: 15px;
-    }
-</style>
+<script>
+    // Bouton œil pour afficher/masquer
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        const pwd = document.getElementById('password');
+        const icon = document.getElementById('eyeIcon');
+        if (pwd.type === 'password') {
+            pwd.type = 'text';
+            icon.classList.replace('bi-eye', 'bi-eye-slash');
+        } else {
+            pwd.type = 'password';
+            icon.classList.replace('bi-eye-slash', 'bi-eye');
+        }
+    });
+
+    // Case à cocher "Afficher le mot de passe"
+    document.getElementById('showPassword').addEventListener('change', function () {
+        const pwd = document.getElementById('password');
+        const icon = document.getElementById('eyeIcon');
+        if (this.checked) {
+            pwd.type = 'text';
+            icon.classList.replace('bi-eye', 'bi-eye-slash');
+        } else {
+            pwd.type = 'password';
+            icon.classList.replace('bi-eye-slash', 'bi-eye');
+        }
+    });
+</script>
+
 {% endblock %}

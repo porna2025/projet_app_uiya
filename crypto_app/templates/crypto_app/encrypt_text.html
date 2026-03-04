@@ -3,299 +3,352 @@
 {% block title %}Chiffrer du texte - CryptoSafe{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row justify-content-center py-4">
-        <div class="col-lg-8">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="mb-0">
-                        <i class="bi bi-chat-left-text me-2"></i>
-                        Chiffrer/Déchiffrer du texte
-                    </h4>
+<div class="min-vh-100 py-5" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+
+                <!-- Titre -->
+                <div class="text-center mb-4">
+                    <i class="bi bi-chat-left-text-fill" style="font-size: 3rem; color: #4fc3f7;"></i>
+                    <h2 class="fw-bold text-white mt-2">Chiffrer / Déchiffrer du texte</h2>
+                    <p class="text-white-50">Protégez vos messages en toute sécurité</p>
                 </div>
-                <div class="card-body">
-                    <form method="post" id="textForm">
-                        {% csrf_token %}
-                        {% if form and form.non_field_errors %}
-                        <div class="alert alert-danger">{{ form.non_field_errors }}</div>
-                        {% endif %}
-                        
-                        <!-- Texte à chiffrer/déchiffrer -->
-                        <div class="mb-4">
-                            <label for="text" class="form-label">
-                                <i class="bi bi-text-paragraph me-1"></i>
-                                Texte
-                            </label>
-                            <textarea class="form-control"
-                                      id="text"
-                                      name="text"
-                                      rows="6"
-                                      placeholder="Saisissez le texte à chiffrer ou collez le texte chiffré à déchiffrer"
-                                      required>{{ form.text.value|default:"" }}</textarea>
-                            {% if form and form.text.errors %}
-                                <div class="text-danger small mt-1">{{ form.text.errors }}</div>
-                            {% endif %}
-                            <div class="form-text">
-                                Caractères restants : <span id="charCount">0</span>/5000
+
+                <!-- Carte formulaire -->
+                <div class="card border-0 shadow-lg" style="border-radius: 20px; background: rgba(255,255,255,0.97);">
+                    <div class="card-body p-4">
+
+                        <h4 class="fw-bold mb-4" style="color: #1a1a2e;">
+                            <i class="bi bi-shield-lock me-2" style="color: #0f3460;"></i>
+                            Nouveau traitement
+                        </h4>
+
+                        <form method="post" id="textForm">
+                            {% csrf_token %}
+
+                            {% if form and form.non_field_errors %}
+                            <div class="alert alert-danger rounded-3">
+                                <i class="bi bi-exclamation-triangle me-2"></i>
+                                {{ form.non_field_errors }}
                             </div>
-                        </div>
-                        
-                        <!-- Mot de passe -->
-                        <div class="mb-4">
-                            <label for="password" class="form-label">
-                                <i class="bi bi-key me-1"></i>
-                                Mot de passe
-                            </label>
-                            <div class="input-group">
+                            {% endif %}
+
+                            <!-- Action (en haut pour clarté) -->
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold text-dark">
+                                    <i class="bi bi-arrow-left-right me-1"></i>
+                                    Action
+                                </label>
+                                <div class="row g-2">
+                                    <div class="col-6">
+                                        <input type="radio" class="btn-check" name="action"
+                                               id="encrypt" value="encrypt" autocomplete="off" checked>
+                                        <label class="btn w-100 fw-bold py-3" for="encrypt"
+                                               style="border-radius: 12px; border: 2px solid #0f3460; color: #0f3460; transition: all 0.2s;">
+                                            <i class="bi bi-lock d-block mb-1" style="font-size: 1.3rem;"></i>
+                                            Chiffrer
+                                        </label>
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="radio" class="btn-check" name="action"
+                                               id="decrypt" value="decrypt" autocomplete="off">
+                                        <label class="btn w-100 fw-bold py-3" for="decrypt"
+                                               style="border-radius: 12px; border: 2px solid #10b981; color: #10b981; transition: all 0.2s;">
+                                            <i class="bi bi-unlock d-block mb-1" style="font-size: 1.3rem;"></i>
+                                            Déchiffrer
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Zone texte -->
+                            <div class="mb-3">
+                                <label for="text" class="form-label fw-semibold text-dark">
+                                    <i class="bi bi-text-paragraph me-1"></i>
+                                    Texte
+                                </label>
+                                <textarea class="form-control rounded-3"
+                                          id="text"
+                                          name="text"
+                                          rows="6"
+                                          placeholder="Saisissez le texte à chiffrer ou collez le texte chiffré à déchiffrer..."
+                                          required
+                                          style="border: 2px solid #e0e0e0; resize: vertical;">{{ form.text.value|default:"" }}</textarea>
+                                {% if form and form.text.errors %}
+                                    <div class="text-danger small mt-1">{{ form.text.errors }}</div>
+                                {% endif %}
+                                <div class="d-flex justify-content-between mt-1">
+                                    <small class="text-muted">Auto-détection du type de texte activée</small>
+                                    <small id="charCountDisplay">
+                                        <span id="charCount">0</span>
+                                        <span class="text-muted">/5000</span>
+                                    </small>
+                                </div>
+                                <!-- Barre progression caractères -->
+                                <div class="progress mt-1" style="height: 3px; border-radius: 10px;">
+                                    <div class="progress-bar" id="charBar" style="width: 0%; background: #10b981; transition: all 0.3s;"></div>
+                                </div>
+                            </div>
+
+                            <!-- Mot de passe -->
+                            <div class="mb-3">
+                                <label for="password" class="form-label fw-semibold text-dark">
+                                    <i class="bi bi-key me-1"></i>
+                                    Mot de passe
+                                </label>
+                                <div class="input-group">
                                     <input type="password"
-                                        class="form-control"
-                                        id="password"
-                                        name="password"
-                                        required
-                                        placeholder="Entrez le mot de passe de chiffrement">
-                                    {% if form and form.password.errors %}
-                                     <div class="text-danger small mt-1">{{ form.password.errors }}</div>
-                                    {% endif %}
-                                <button class="btn btn-outline-secondary toggle-password" type="button">
-                                    <i class="bi bi-eye"></i>
+                                           class="form-control form-control-lg rounded-start-3"
+                                           id="password"
+                                           name="password"
+                                           required
+                                           placeholder="Mot de passe de chiffrement"
+                                           style="border: 2px solid #e0e0e0; border-right: none;">
+                                    <button class="btn btn-outline-secondary rounded-end-3"
+                                            type="button" id="togglePwd"
+                                            style="border: 2px solid #e0e0e0; border-left: none;">
+                                        <i class="bi bi-eye" id="eyeIcon"></i>
+                                    </button>
+                                </div>
+                                {% if form and form.password.errors %}
+                                    <div class="text-danger small mt-1">{{ form.password.errors }}</div>
+                                {% endif %}
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" type="checkbox" id="showPassword">
+                                    <label class="form-check-label small text-muted" for="showPassword">
+                                        Afficher le mot de passe
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Boutons -->
+                            <div class="d-flex gap-2 mt-4">
+                                <button type="button"
+                                        class="btn fw-semibold"
+                                        id="clearBtn"
+                                        style="border-radius: 12px; border: 2px solid #ccc; color: #666;">
+                                    <i class="bi bi-trash me-1"></i> Effacer
+                                </button>
+                                <button type="submit"
+                                        class="btn fw-bold text-white flex-grow-1"
+                                        style="background: linear-gradient(135deg, #0f3460, #4fc3f7); border: none; border-radius: 12px; padding: 12px;">
+                                    <i class="bi bi-arrow-right-circle me-2"></i>
+                                    Exécuter
                                 </button>
                             </div>
-                        </div>
-                        
-                        <!-- Action -->
-                        <div class="mb-4">
-                            <label class="form-label d-block">
-                                <i class="bi bi-arrow-left-right me-1"></i>
-                                Action
-                            </label>
-                            <div class="btn-group w-100" role="group">
-                                <input type="radio" 
-                                       class="btn-check" 
-                                       name="action" 
-                                       id="encrypt" 
-                                       value="encrypt" 
-                                       autocomplete="off" 
-                                       checked>
-                                <label class="btn btn-outline-primary" for="encrypt">
-                                    <i class="bi bi-lock me-2"></i>
-                                    Chiffrer
-                                </label>
-                                
-                                <input type="radio" 
-                                       class="btn-check" 
-                                       name="action" 
-                                       id="decrypt" 
-                                       value="decrypt" 
-                                       autocomplete="off">
-                                <label class="btn btn-outline-success" for="decrypt">
-                                    <i class="bi bi-unlock me-2"></i>
-                                    Déchiffrer
-                                </label>
-                            </div>
-                        </div>
-                        
-                        <!-- Options -->
-                        <div class="mb-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="showPassword">
-                                <label class="form-check-label" for="showPassword">
-                                    Afficher le mot de passe
-                                </label>
-                            </div>
-                        </div>
-                        
-                        <div class="d-flex justify-content-between">
-                            <button type="button" class="btn btn-outline-secondary" id="clearBtn">
-                                <i class="bi bi-trash me-2"></i>
-                                Effacer tout
-                            </button>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="bi bi-arrow-right-circle me-2"></i>
-                                Exécuter
-                            </button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
-            </div>
-            
-            <!-- Résultat -->
-            {% if result %}
-            <div class="card mt-4">
-                <div class="card-header">
-                    <h5 class="mb-0">
-                        <i class="bi bi-clipboard-check me-2"></i>
-                        Résultat
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <div class="mb-3">
-                        <label class="form-label">
+
+                <!-- Résultat -->
+                {% if result %}
+                <div class="card border-0 shadow-lg mt-4" style="border-radius: 20px; background: rgba(255,255,255,0.97);">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold mb-3" style="color: #1a1a2e;">
                             {% if action == 'encrypt' %}
-                                <i class="bi bi-lock-fill text-success me-1"></i>
+                                <i class="bi bi-lock-fill me-2" style="color: #10b981;"></i>
                                 Texte chiffré
                             {% else %}
-                                <i class="bi bi-unlock-fill text-primary me-1"></i>
+                                <i class="bi bi-unlock-fill me-2" style="color: #0f3460;"></i>
                                 Texte déchiffré
                             {% endif %}
-                        </label>
-                        <div class="position-relative">
-                            <textarea class="form-control" 
-                                      rows="6" 
-                                      id="resultText" 
-                                      readonly 
-                                      style="background-color: #f8f9fa;">{{ result }}</textarea>
-                            <button class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2 btn-copy" 
-                                    data-text="{{ result }}">
-                                <i class="bi bi-clipboard"></i>
+                        </h5>
+
+                        <div class="position-relative mb-3">
+                            <textarea class="form-control rounded-3"
+                                      rows="6"
+                                      id="resultText"
+                                      readonly
+                                      style="background: #f8fafc; border: 2px solid {% if action == 'encrypt' %}#10b981{% else %}#4fc3f7{% endif %}; resize: none;">{{ result }}</textarea>
+                            <button class="btn btn-sm position-absolute top-0 end-0 m-2 fw-semibold"
+                                    onclick="copyResult()"
+                                    style="background: {% if action == 'encrypt' %}#10b981{% else %}#0f3460{% endif %}; color: white; border-radius: 8px; border: none;">
+                                <i class="bi bi-clipboard me-1"></i> Copier
+                            </button>
+                        </div>
+
+                        <div class="d-flex flex-wrap gap-2">
+                            <button class="btn fw-semibold text-white"
+                                    onclick="copyResult()"
+                                    style="background: linear-gradient(135deg, #0f3460, #4fc3f7); border: none; border-radius: 10px;">
+                                <i class="bi bi-clipboard me-2"></i>Copier
+                            </button>
+                            <button class="btn fw-semibold"
+                                    onclick="downloadText()"
+                                    style="border-radius: 10px; border: 2px solid #10b981; color: #10b981;">
+                                <i class="bi bi-download me-2"></i>Télécharger
+                            </button>
+                            <button class="btn fw-semibold"
+                                    onclick="shareText()"
+                                    style="border-radius: 10px; border: 2px solid #3b82f6; color: #3b82f6;">
+                                <i class="bi bi-share me-2"></i>Partager
                             </button>
                         </div>
                     </div>
-                    
-                    <div class="d-flex flex-wrap gap-2">
-                        <button class="btn btn-outline-primary btn-copy" data-text="{{ result }}">
-                            <i class="bi bi-clipboard me-2"></i>
-                            Copier le résultat
-                        </button>
-                        <button class="btn btn-outline-success" onclick="downloadText()">
-                            <i class="bi bi-download me-2"></i>
-                            Télécharger
-                        </button>
-                        <button class="btn btn-outline-info" onclick="shareText()">
-                            <i class="bi bi-share me-2"></i>
-                            Partager
-                        </button>
-                    </div>
                 </div>
-            </div>
-            {% endif %}
-            
-            <!-- Guide -->
-            <div class="card mt-4">
-                <div class="card-header">
-                    <h5 class="mb-0">
-                        <i class="bi bi-info-circle me-2"></i>
-                        Comment utiliser le chiffrement de texte
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <h6>
-                                <i class="bi bi-lock text-success me-2"></i>
-                                Pour chiffrer
-                            </h6>
-                            <ol class="small text-muted">
-                                <li>Saisissez votre texte confidentiel</li>
-                                <li>Choisissez un mot de passe fort</li>
-                                <li>Sélectionnez "Chiffrer"</li>
-                                <li>Copiez le résultat chiffré</li>
-                            </ol>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <h6>
-                                <i class="bi bi-unlock text-primary me-2"></i>
-                                Pour déchiffrer
-                            </h6>
-                            <ol class="small text-muted">
-                                <li>Collez le texte chiffré</li>
-                                <li>Saisissez le même mot de passe</li>
-                                <li>Sélectionnez "Déchiffrer"</li>
-                                <li>Récupérez le texte original</li>
-                            </ol>
-                        </div>
-                    </div>
-                    
-                    <div class="alert alert-info">
-                        <h6>
-                            <i class="bi bi-lightbulb me-2"></i>
-                            Conseils pratiques
+                {% endif %}
+
+                <!-- Guide -->
+                <div class="card border-0 mt-3 shadow-sm" style="border-radius: 15px; background: rgba(255,255,255,0.08);">
+                    <div class="card-body p-4">
+                        <h6 class="text-white fw-bold mb-3">
+                            <i class="bi bi-info-circle me-2" style="color: #4fc3f7;"></i>
+                            Comment utiliser
                         </h6>
-                        <ul class="mb-0">
-                            <li>
-                                <strong>Utilisez un mot de passe différent</strong> pour chaque message
-                            </li>
-                            <li>
-                                <strong>Partagez le mot de passe</strong> par un canal séparé (pas dans le même message)
-                            </li>
-                            <li>
-                                <strong>Vérifiez le format</strong> : le texte chiffré est au format JSON
-                            </li>
-                            <li>
-                                <strong>Sauvegardez vos mots de passe</strong> dans un gestionnaire sécurisé
-                            </li>
-                        </ul>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="p-3 rounded-3" style="background: rgba(79,195,247,0.1); border: 1px solid rgba(79,195,247,0.3);">
+                                    <h6 class="text-white small fw-bold mb-2">
+                                        <i class="bi bi-lock me-1" style="color: #4fc3f7;"></i>Pour chiffrer
+                                    </h6>
+                                    <ol class="small mb-0" style="color: rgba(255,255,255,0.7);">
+                                        <li>Saisissez votre texte confidentiel</li>
+                                        <li>Choisissez un mot de passe fort</li>
+                                        <li>Sélectionnez "Chiffrer"</li>
+                                        <li>Copiez le résultat</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 rounded-3" style="background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3);">
+                                    <h6 class="text-white small fw-bold mb-2">
+                                        <i class="bi bi-unlock me-1" style="color: #10b981;"></i>Pour déchiffrer
+                                    </h6>
+                                    <ol class="small mb-0" style="color: rgba(255,255,255,0.7);">
+                                        <li>Collez le texte chiffré</li>
+                                        <li>Saisissez le même mot de passe</li>
+                                        <li>Sélectionnez "Déchiffrer"</li>
+                                        <li>Récupérez le texte original</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3 p-3 rounded-3" style="background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3);">
+                            <h6 class="fw-bold small mb-2" style="color: #fbbf24;">
+                                <i class="bi bi-lightbulb me-1"></i> Conseils pratiques
+                            </h6>
+                            <ul class="small mb-0" style="color: rgba(255,255,255,0.7);">
+                                <li>Utilisez un <strong class="text-white">mot de passe différent</strong> pour chaque message</li>
+                                <li>Partagez le mot de passe par un <strong class="text-white">canal séparé</strong></li>
+                                <li>Le texte chiffré est au <strong class="text-white">format JSON</strong></li>
+                                <li>Sauvegardez vos mots de passe dans un <strong class="text-white">gestionnaire sécurisé</strong></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
+
+                <div class="text-center mt-3">
+                    <small class="text-white-50">
+                        <i class="bi bi-shield-check me-1"></i>
+                        Chiffrement AES-256 — Vos messages restent privés
+                    </small>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
 
+<style>
+    /* Boutons radio chiffrer/déchiffrer */
+    .btn-check:checked + label[for="encrypt"] {
+        background: linear-gradient(135deg, #0f3460, #4fc3f7) !important;
+        color: white !important;
+        border-color: transparent !important;
+    }
+    .btn-check:checked + label[for="decrypt"] {
+        background: linear-gradient(135deg, #10b981, #059669) !important;
+        color: white !important;
+        border-color: transparent !important;
+    }
+</style>
+
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    // Toggle mot de passe bouton œil
+    document.getElementById('togglePwd').addEventListener('click', function () {
+        const pwd = document.getElementById('password');
+        const icon = document.getElementById('eyeIcon');
+        pwd.type = pwd.type === 'password' ? 'text' : 'password';
+        icon.classList.toggle('bi-eye');
+        icon.classList.toggle('bi-eye-slash');
+    });
+
+    // Case à cocher afficher mot de passe
+    document.getElementById('showPassword').addEventListener('change', function () {
+        const pwd = document.getElementById('password');
+        const icon = document.getElementById('eyeIcon');
+        pwd.type = this.checked ? 'text' : 'password';
+        icon.className = this.checked ? 'bi bi-eye-slash' : 'bi bi-eye';
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
         const textArea = document.getElementById('text');
         const charCount = document.getElementById('charCount');
+        const charBar = document.getElementById('charBar');
         const clearBtn = document.getElementById('clearBtn');
-        const showPassword = document.getElementById('showPassword');
         const passwordInput = document.getElementById('password');
-        
+
         // Compteur de caractères
         function updateCharCount() {
             const count = textArea.value.length;
             charCount.textContent = count;
-            
+            const pct = Math.min((count / 5000) * 100, 100);
+            charBar.style.width = pct + '%';
             if (count > 5000) {
+                charBar.style.background = '#ef4444';
                 charCount.style.color = '#ef4444';
-                textArea.style.borderColor = '#ef4444';
             } else if (count > 4000) {
+                charBar.style.background = '#f59e0b';
                 charCount.style.color = '#f59e0b';
-                textArea.style.borderColor = '#f59e0b';
             } else {
+                charBar.style.background = '#10b981';
                 charCount.style.color = '';
-                textArea.style.borderColor = '';
             }
         }
-        
+
         textArea.addEventListener('input', updateCharCount);
         updateCharCount();
-        
-        // Effacer tout
-        clearBtn.addEventListener('click', function() {
-            if (confirm('Voulez-vous vraiment effacer tout le texte ?')) {
+
+        // Effacer
+        clearBtn.addEventListener('click', function () {
+            if (confirm('Effacer tout le texte et le mot de passe ?')) {
                 textArea.value = '';
                 passwordInput.value = '';
                 updateCharCount();
             }
         });
-        
-        // Afficher/masquer le mot de passe
-        showPassword.addEventListener('change', function() {
-            passwordInput.type = this.checked ? 'text' : 'password';
-        });
-        
-        // Auto-détection du type de texte
-        textArea.addEventListener('input', function() {
+
+        // Auto-détection
+        textArea.addEventListener('input', function () {
             const text = this.value.trim();
-            
-            // Si le texte commence par { et contient des clés de chiffrement JSON
             if (text.startsWith('{') && text.includes('"ciphertext"') && text.includes('"salt"')) {
-                // Probablement du texte chiffré
                 document.getElementById('decrypt').checked = true;
             } else if (text.length > 0) {
-                // Probablement du texte en clair
                 document.getElementById('encrypt').checked = true;
             }
         });
     });
-    
+
+    function copyResult() {
+        const text = document.getElementById('resultText').value;
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                const btn = event.target.closest('button');
+                const original = btn.innerHTML;
+                btn.innerHTML = '<i class="bi bi-check me-1"></i> Copié !';
+                btn.style.background = '#10b981';
+                setTimeout(() => { btn.innerHTML = original; }, 2000);
+            });
+    }
+
     function downloadText() {
-        const resultText = document.getElementById('resultText').value;
-        if (!resultText) return;
-        
-        const blob = new Blob([resultText], { type: 'text/plain' });
+        const text = document.getElementById('resultText').value;
+        if (!text) return;
+        const blob = new Blob([text], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
-        
         a.href = url;
         a.download = `cryptosafe_${Date.now()}.txt`;
         document.body.appendChild(a);
@@ -303,23 +356,17 @@
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
     }
-    
+
     function shareText() {
-        const resultText = document.getElementById('resultText').value;
-        if (!resultText) return;
-        
+        const text = document.getElementById('resultText').value;
+        if (!text) return;
         if (navigator.share) {
-            navigator.share({
-                title: 'Texte chiffré CryptoSafe',
-                text: resultText.substring(0, 100) + '...',
-            })
-            .catch(error => console.log('Erreur de partage:', error));
+            navigator.share({ title: 'Texte chiffré CryptoSafe', text: text.substring(0, 100) + '...' });
         } else {
-            // Fallback pour les navigateurs qui ne supportent pas Web Share API
-            navigator.clipboard.writeText(resultText)
-                .then(() => alert('Texte copié dans le presse-papier !'))
-                .catch(err => console.error('Erreur de copie:', err));
+            navigator.clipboard.writeText(text)
+                .then(() => alert('Texte copié dans le presse-papier !'));
         }
     }
 </script>
+
 {% endblock %}
