@@ -7,7 +7,7 @@ SECRET_KEY = 'votre-clé-secrète-super-sécurisée-changez-en-production'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
