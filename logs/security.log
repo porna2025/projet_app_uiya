@@ -43,3 +43,9 @@
 [INFO] 04/03/2026 10:26:24 crypto_app.views user_login:425 - User kone logged in successfully
 [INFO] 04/03/2026 10:39:06 crypto_app.views user_login:425 - User kone logged in successfully
 [INFO] 04/03/2026 10:47:07 crypto_app.views user_register:450 - New user registered: kone1
+[WARNING] 04/03/2026 18:17:32 crypto_app.views decrypt_file:172 - Decryption failed for user 1: Invalid padding bytes.
+[INFO] 04/03/2026 18:32:07 crypto_app.views encrypt_file:105 - Encryption successful for user 1: Demande d'emploi.pdf
+[INFO] 04/03/2026 18:33:38 crypto_app.views decrypt_file:165 - Decryption successful for user 1: ecf94e8f-42b4-4409-9d91-610731f33176.enc
+[INFO] 05/03/2026 14:21:44 crypto_app.views user_login:425 - User porna logged in successfully
+[INFO] 05/03/2026 14:23:32 crypto_app.views user_register:450 - New user registered: chata
+[INFO] 05/03/2026 14:28:47 crypto_app.views user_login:425 - User chata logged in successfully

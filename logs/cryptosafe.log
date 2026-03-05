@@ -2362,3 +2362,186 @@ django.urls.exceptions.NoReverseMatch: Reverse for 'decrypt_text' not found. 'de
 [INFO] 04/03/2026 12:10:47 django.server log_message:249 - "GET /encrypt-text/ HTTP/1.1" 200 20737
 [INFO] 04/03/2026 12:14:42 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 21336
 [INFO] 04/03/2026 12:14:57 django.server log_message:249 - "GET /encrypt-text/ HTTP/1.1" 200 20737
+[INFO] 04/03/2026 18:14:50 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 23567
+[INFO] 04/03/2026 18:15:26 django.server log_message:249 - "POST /encrypt/ HTTP/1.1" 200 23567
+[INFO] 04/03/2026 18:15:53 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 24322
+[INFO] 04/03/2026 18:15:59 django.server log_message:249 - "GET /files/download/8/ HTTP/1.1" 302 0
+[INFO] 04/03/2026 18:15:59 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 24590
+[INFO] 04/03/2026 18:16:11 django.server log_message:249 - "GET /files/download/8/ HTTP/1.1" 302 0
+[INFO] 04/03/2026 18:16:11 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 24590
+[INFO] 04/03/2026 18:16:48 django.server log_message:249 - "GET /decrypt/ HTTP/1.1" 200 20886
+[WARNING] 04/03/2026 18:17:32 crypto_app.views decrypt_file:172 - Decryption failed for user 1: Invalid padding bytes.
+[INFO] 04/03/2026 18:17:32 django.server log_message:249 - "POST /decrypt/ HTTP/1.1" 200 21183
+[INFO] 04/03/2026 18:17:48 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 23567
+[INFO] 04/03/2026 18:18:38 django.server log_message:249 - "POST /encrypt/ HTTP/1.1" 200 23567
+[INFO] 04/03/2026 18:30:40 django.server log_message:249 - "POST /encrypt/ HTTP/1.1" 200 24046
+[INFO] 04/03/2026 18:31:17 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 21336
+[INFO] 04/03/2026 18:31:24 django.server log_message:249 - "GET /keys/6/ HTTP/1.1" 200 6066
+[INFO] 04/03/2026 18:31:32 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 23842
+[INFO] 04/03/2026 18:32:07 crypto_app.views encrypt_file:105 - Encryption successful for user 1: Demande d'emploi.pdf
+[INFO] 04/03/2026 18:32:08 django.server log_message:249 - "POST /encrypt/ HTTP/1.1" 302 0
+[INFO] 04/03/2026 18:32:08 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 28650
+[INFO] 04/03/2026 18:32:54 django.server log_message:249 - "GET /files/download/10/ HTTP/1.1" 200 243017
+[INFO] 04/03/2026 18:33:04 django.server log_message:249 - "GET /decrypt/ HTTP/1.1" 200 21852
+[INFO] 04/03/2026 18:33:38 crypto_app.views decrypt_file:165 - Decryption successful for user 1: ecf94e8f-42b4-4409-9d91-610731f33176.enc
+[INFO] 04/03/2026 18:33:38 django.server log_message:249 - "POST /decrypt/ HTTP/1.1" 200 182127
+[INFO] 05/03/2026 14:10:27 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/03/2026 14:10:36 django.server log_message:249 - "GET /decrypt/ HTTP/1.1" 200 21852
+[WARNING] 05/03/2026 14:10:37 django.request log_message:249 - Not Found: /favicon.ico
+[WARNING] 05/03/2026 14:10:37 django.server log_message:249 - "GET /favicon.ico HTTP/1.1" 404 6740
+[INFO] 05/03/2026 14:14:54 django.server log_message:249 - "GET /admin HTTP/1.1" 301 0
+[INFO] 05/03/2026 14:14:54 django.server log_message:249 - "GET /admin/ HTTP/1.1" 200 11793
+[INFO] 05/03/2026 14:15:01 django.server log_message:249 - "GET /admin/crypto_app/userprofile/ HTTP/1.1" 200 14482
+[INFO] 05/03/2026 14:15:01 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 05/03/2026 14:21:16 django.server log_message:249 - "GET / HTTP/1.1" 302 0
+[INFO] 05/03/2026 14:21:16 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 23596
+[INFO] 05/03/2026 14:21:23 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 14:21:23 django.server log_message:249 - "GET / HTTP/1.1" 200 16121
+[INFO] 05/03/2026 14:21:25 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 10514
+[INFO] 05/03/2026 14:21:44 crypto_app.views user_login:425 - User porna logged in successfully
+[INFO] 05/03/2026 14:21:44 django.server log_message:249 - "POST /login/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 14:21:44 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 23839
+[INFO] 05/03/2026 14:21:51 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 14:21:51 django.server log_message:249 - "GET / HTTP/1.1" 200 16121
+[INFO] 05/03/2026 14:21:54 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 10514
+[INFO] 05/03/2026 14:22:00 django.server log_message:249 - "GET /register/ HTTP/1.1" 200 16552
+[INFO] 05/03/2026 14:23:32 crypto_app.views user_register:450 - New user registered: chata
+[INFO] 05/03/2026 14:23:32 django.server log_message:249 - "POST /register/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 14:23:32 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 19854
+[INFO] 05/03/2026 14:24:36 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 14:24:36 django.server log_message:249 - "GET / HTTP/1.1" 200 16121
+[INFO] 05/03/2026 14:25:06 django.server log_message:249 - "GET /admin/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 14:25:06 django.server log_message:249 - "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4158
+[INFO] 05/03/2026 14:25:12 django.server log_message:249 - "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 14:25:12 django.server log_message:249 - "GET /admin/ HTTP/1.1" 200 11793
+[INFO] 05/03/2026 14:25:19 django.server log_message:249 - "GET /admin/crypto_app/userprofile/ HTTP/1.1" 200 14962
+[INFO] 05/03/2026 14:25:19 django.server log_message:249 - "GET /admin/jsi18n/ HTTP/1.1" 200 8634
+[INFO] 05/03/2026 14:28:13 django.server log_message:249 - "GET / HTTP/1.1" 302 0
+[INFO] 05/03/2026 14:28:13 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 23573
+[INFO] 05/03/2026 14:28:19 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 14:28:19 django.server log_message:249 - "GET / HTTP/1.1" 200 16121
+[INFO] 05/03/2026 14:28:22 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 10514
+[INFO] 05/03/2026 14:28:47 crypto_app.views user_login:425 - User chata logged in successfully
+[INFO] 05/03/2026 14:28:47 django.server log_message:249 - "POST /login/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 14:28:47 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 20371
+[INFO] 05/03/2026 15:55:22 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py changed, reloading.
+[INFO] 05/03/2026 15:55:29 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/03/2026 15:55:41 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 20116
+[INFO] 05/03/2026 15:55:51 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 32281
+[ERROR] 05/03/2026 15:58:45 django.request log_message:249 - Internal Server Error: /profile/
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py", line 532, in user_profile
+    return redirect('user_profile')
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\urls\resolvers.py", line 842, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'user_profile' not found. 'user_profile' is not a valid view function or pattern name.
+[ERROR] 05/03/2026 15:58:45 django.server log_message:249 - "POST /profile/ HTTP/1.1" 500 98663
+[INFO] 05/03/2026 16:02:48 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py changed, reloading.
+[INFO] 05/03/2026 16:02:52 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/03/2026 16:03:11 django.server log_message:249 - "POST /profile/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 16:03:11 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 37067
+[INFO] 05/03/2026 16:03:53 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 23564
+[INFO] 05/03/2026 16:04:02 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 16:04:02 django.server log_message:249 - "GET / HTTP/1.1" 200 16121
+[INFO] 05/03/2026 16:04:09 django.server log_message:249 - "GET /register/ HTTP/1.1" 200 16552
+[INFO] 05/03/2026 16:05:17 django.server log_message:249 - "POST /register/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 16:05:17 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 19853
+[INFO] 05/03/2026 16:05:26 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 30808
+[INFO] 05/03/2026 16:07:16 django.server log_message:249 - "POST /profile/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 16:07:17 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 33750
+[INFO] 05/03/2026 16:08:07 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 20975
+[INFO] 05/03/2026 16:08:14 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 16:08:14 django.server log_message:249 - "GET / HTTP/1.1" 200 16121
+[INFO] 05/03/2026 16:08:17 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 10514
+[INFO] 05/03/2026 16:08:45 django.server log_message:249 - "POST /login/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 16:08:45 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 22075
+[INFO] 05/03/2026 16:09:34 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 34192
+[ERROR] 05/03/2026 16:10:14 django.request log_message:249 - Internal Server Error: /profile/
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\lenovo\AppData\Roaming\Python\Python313\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py", line 473, in user_profile
+    if userprofile.avatar:
+       ^^^^^^^^^^^^^^^^^^
+AttributeError: 'UserProfile' object has no attribute 'avatar'
+[ERROR] 05/03/2026 16:10:14 django.server log_message:249 - "POST /profile/ HTTP/1.1" 500 79295
+[INFO] 05/03/2026 16:13:53 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\models.py changed, reloading.
+[INFO] 05/03/2026 16:13:57 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/03/2026 16:16:21 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\models.py changed, reloading.
+[INFO] 05/03/2026 16:16:25 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/03/2026 16:19:33 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/03/2026 16:19:47 django.server log_message:249 - "POST /profile/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 16:19:48 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 35600
+[WARNING] 05/03/2026 16:19:48 django.request log_message:249 - Not Found: /media/avatars/avatar_7.jpg
+[WARNING] 05/03/2026 16:19:48 django.server log_message:249 - "GET /media/avatars/avatar_7.jpg HTTP/1.1" 404 6785
+[INFO] 05/03/2026 16:20:11 django.server log_message:249 - "POST /profile/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 16:20:11 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 36542
+[WARNING] 05/03/2026 16:20:11 django.request log_message:249 - Not Found: /media/avatars/avatar_7.jpg
+[WARNING] 05/03/2026 16:20:11 django.server log_message:249 - "GET /media/avatars/avatar_7.jpg HTTP/1.1" 404 6785
+[WARNING] 05/03/2026 16:20:12 django.request log_message:249 - Not Found: /media/avatars/avatar_7.jpg
+[WARNING] 05/03/2026 16:20:12 django.server log_message:249 - "GET /media/avatars/avatar_7.jpg HTTP/1.1" 404 6785
+[INFO] 05/03/2026 16:26:00 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/03/2026 16:26:06 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 36067
+[WARNING] 05/03/2026 16:26:06 django.request log_message:249 - Not Found: /media/avatars/avatar_7.jpg
+[WARNING] 05/03/2026 16:26:06 django.server log_message:249 - "GET /media/avatars/avatar_7.jpg HTTP/1.1" 404 6785
+[INFO] 05/03/2026 16:26:22 django.server log_message:249 - "POST /profile/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 16:26:22 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 37484
+[WARNING] 05/03/2026 16:26:22 django.request log_message:249 - Not Found: /media/avatars/avatar_7.jpg
+[WARNING] 05/03/2026 16:26:22 django.server log_message:249 - "GET /media/avatars/avatar_7.jpg HTTP/1.1" 404 6785
+[INFO] 05/03/2026 16:36:47 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\cryptosafe\urls.py changed, reloading.
+[INFO] 05/03/2026 16:36:51 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/03/2026 16:38:06 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 37009
+[INFO] 05/03/2026 16:38:06 django.server log_message:249 - "GET /media/avatars/avatar_7.jpg HTTP/1.1" 200 801191
+[INFO] 05/03/2026 16:42:41 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 36261
+[INFO] 05/03/2026 16:42:41 django.server log_message:249 - "GET /media/avatars/avatar_7.jpg HTTP/1.1" 304 0
+[INFO] 05/03/2026 16:45:33 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 37009
+[INFO] 05/03/2026 16:45:33 django.server log_message:249 - "GET /media/avatars/avatar_7.jpg HTTP/1.1" 304 0
+[INFO] 05/03/2026 16:45:45 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 16:45:45 django.server log_message:249 - "GET / HTTP/1.1" 200 16121
+[INFO] 05/03/2026 16:45:48 django.server log_message:249 - "GET /register/ HTTP/1.1" 200 16552
+[INFO] 05/03/2026 16:59:58 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py changed, reloading.
+[INFO] 05/03/2026 17:00:03 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/03/2026 17:03:04 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 10514
+[INFO] 05/03/2026 17:03:11 django.server log_message:249 - "POST /login/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 17:03:11 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 26987
+[INFO] 05/03/2026 17:03:21 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 38892
+[INFO] 05/03/2026 17:08:14 django.server log_message:249 - "POST /profile/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 17:08:14 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 39371
+[INFO] 05/03/2026 17:08:15 django.server log_message:249 - "GET /media/avatars/avatar_1.jpg HTTP/1.1" 200 801191
+[INFO] 05/03/2026 17:38:04 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\models.py changed, reloading.
+[INFO] 05/03/2026 17:38:12 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/03/2026 17:39:55 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\cryptosafe\settings.py changed, reloading.
+[INFO] 05/03/2026 17:39:57 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/03/2026 17:42:53 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\urls.py changed, reloading.
+[INFO] 05/03/2026 17:42:56 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/03/2026 17:43:41 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py changed, reloading.
+[INFO] 05/03/2026 17:43:44 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/03/2026 17:44:36 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py changed, reloading.
+[INFO] 05/03/2026 17:44:38 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/03/2026 17:56:11 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/03/2026 17:56:26 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 39030
+[INFO] 05/03/2026 17:56:26 django.server log_message:249 - "GET /media/avatars/avatar_1.jpg HTTP/1.1" 304 0
+[INFO] 05/03/2026 17:57:15 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 26725
+[INFO] 05/03/2026 17:57:21 django.server log_message:249 - "GET /decrypt/ HTTP/1.1" 200 21852
+[INFO] 05/03/2026 17:57:30 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 17:57:30 django.server log_message:249 - "GET / HTTP/1.1" 200 16121
+[INFO] 05/03/2026 17:57:40 django.server log_message:249 - "GET /register/ HTTP/1.1" 200 16552
+[INFO] 05/03/2026 17:58:58 django.server log_message:249 - "POST /register/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 17:58:58 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 20406

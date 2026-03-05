@@ -1,0 +1,132 @@
+{% extends 'crypto_app/base.html' %}
+{% block title %}Vérification 2FA - CryptoSafe{% endblock %}
+
+{% block content %}
+<div class="min-vh-100 d-flex align-items-center justify-content-center py-5"
+     style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);">
+    <div class="col-lg-4 col-md-6 col-sm-10">
+
+        <div class="text-center mb-4">
+            <div class="rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center"
+                 style="width:80px;height:80px;background:linear-gradient(135deg,#0f3460,#4fc3f7);">
+                <i class="bi bi-shield-lock-fill text-white" style="font-size:2rem;"></i>
+            </div>
+            <h2 class="fw-bold text-white">Vérification 2FA</h2>
+            <p class="text-white-50">Entrez le code envoyé à votre email</p>
+        </div>
+
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert rounded-3 mb-3 {% if message.tags == 'error' %}alert-danger{% else %}alert-info{% endif %}">
+            <i class="bi {% if message.tags == 'error' %}bi-exclamation-triangle{% else %}bi-info-circle{% endif %} me-2"></i>
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        <div class="card border-0 shadow-lg" style="border-radius:20px;background:rgba(255,255,255,0.97);">
+            <div class="card-body p-4">
+
+                <div class="p-3 rounded-3 mb-4 text-center"
+                     style="background:#eff6ff;border:1px solid #4fc3f7;">
+                    <i class="bi bi-envelope-fill me-2" style="color:#0f3460;"></i>
+                    <span style="color:#0f3460;">Code envoyé à <strong>{{ email }}</strong></span>
+                </div>
+
+                <form method="post" id="otpForm">
+                    {% csrf_token %}
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold text-dark text-center d-block">
+                            Code de vérification à 6 chiffres
+                        </label>
+
+                        <!-- 6 cases individuelles -->
+                        <div class="d-flex justify-content-center gap-2 mb-2" id="otpBoxes">
+                            {% for i in "123456" %}
+                            <input type="text"
+                                   class="otp-box form-control text-center fw-bold"
+                                   maxlength="1"
+                                   inputmode="numeric"
+                                   style="width:48px;height:56px;font-size:1.5rem;border:2px solid #e0e0e0;border-radius:10px;">
+                            {% endfor %}
+                        </div>
+                        <input type="hidden" name="otp_code" id="otpHidden">
+                        <small class="text-muted d-block text-center">⏱️ Expire dans 10 minutes</small>
+                    </div>
+
+                    <button type="submit" id="submitBtn"
+                            class="btn fw-bold text-white w-100 py-3"
+                            style="background:linear-gradient(135deg,#0f3460,#4fc3f7);border:none;border-radius:12px;">
+                        <i class="bi bi-check-circle me-2"></i> Vérifier le code
+                    </button>
+                </form>
+
+                <div class="text-center mt-3">
+                    <a href="{% url 'login' %}" class="text-muted small">
+                        <i class="bi bi-arrow-left me-1"></i> Retour à la connexion
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-3">
+            <small class="text-white-50">
+                <i class="bi bi-shield-check me-1"></i>
+                CryptoSafe — Chiffrement AES-256
+            </small>
+        </div>
+    </div>
+</div>
+
+<script>
+    const boxes = document.querySelectorAll('.otp-box');
+    const hidden = document.getElementById('otpHidden');
+    const form = document.getElementById('otpForm');
+
+    boxes.forEach((box, index) => {
+        box.addEventListener('input', function () {
+            this.value = this.value.replace(/[^0-9]/g, '');
+            if (this.value && index < boxes.length - 1) {
+                boxes[index + 1].focus();
+            }
+            updateHidden();
+        });
+
+        box.addEventListener('keydown', function (e) {
+            if (e.key === 'Backspace' && !this.value && index > 0) {
+                boxes[index - 1].focus();
+            }
+        });
+
+        box.addEventListener('focus', function () {
+            this.style.borderColor = '#4fc3f7';
+            this.style.boxShadow = '0 0 0 3px rgba(79,195,247,0.2)';
+        });
+
+        box.addEventListener('blur', function () {
+            this.style.borderColor = '#e0e0e0';
+            this.style.boxShadow = 'none';
+        });
+    });
+
+    function updateHidden() {
+        const code = Array.from(boxes).map(b => b.value).join('');
+        hidden.value = code;
+        if (code.length === 6) {
+            setTimeout(() => form.submit(), 300);
+        }
+    }
+
+    // Coller un code copié
+    boxes[0].addEventListener('paste', function (e) {
+        e.preventDefault();
+        const pasted = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '');
+        pasted.split('').slice(0, 6).forEach((char, i) => {
+            if (boxes[i]) boxes[i].value = char;
+        });
+        updateHidden();
+    });
+
+    boxes[0].focus();
+</script>
+{% endblock %}

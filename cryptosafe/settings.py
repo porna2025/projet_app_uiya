@@ -141,3 +141,11 @@ LOGGING = {
         },
     },
 }
+# ── Email Gmail ────────────────────────────────────────────
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'koneporna2004@gmail.com'  # ← ton adresse Gmail
+EMAIL_HOST_PASSWORD = 'xxxx xxxx xxxx xxxx'  # ← mot de passe d'application Gmail
+DEFAULT_FROM_EMAIL = 'CryptoSafe <koneporna2004@gmail.com>'
