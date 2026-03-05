@@ -2545,3 +2545,77 @@ AttributeError: 'UserProfile' object has no attribute 'avatar'
 [INFO] 05/03/2026 17:57:40 django.server log_message:249 - "GET /register/ HTTP/1.1" 200 16552
 [INFO] 05/03/2026 17:58:58 django.server log_message:249 - "POST /register/ HTTP/1.1" 302 0
 [INFO] 05/03/2026 17:58:58 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 20406
+[INFO] 05/03/2026 18:00:33 django.server log_message:249 - "GET /encrypt-text/ HTTP/1.1" 200 20738
+[INFO] 05/03/2026 18:00:40 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 19843
+[INFO] 05/03/2026 18:00:46 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 12100
+[INFO] 05/03/2026 18:00:51 django.server log_message:249 - "GET /decrypt/ HTTP/1.1" 200 19572
+[INFO] 05/03/2026 18:00:56 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 23843
+[INFO] 05/03/2026 18:01:03 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 30521
+[INFO] 05/03/2026 18:02:38 django.server log_message:249 - "POST /profile/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 18:02:38 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 31929
+[INFO] 05/03/2026 18:02:38 django.server log_message:249 - "GET /media/avatars/avatar_8.jpg HTTP/1.1" 200 769700
+[INFO] 05/03/2026 18:02:57 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 20959
+[INFO] 05/03/2026 18:03:07 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 12100
+[INFO] 05/03/2026 18:03:16 django.server log_message:249 - "POST /keys/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 18:03:16 django.server log_message:249 - "GET /keys/ HTTP/1.1" 200 15462
+[INFO] 05/03/2026 18:03:22 django.server log_message:249 - "GET /keys/11/ HTTP/1.1" 200 6083
+[INFO] 05/03/2026 18:03:28 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 23843
+[INFO] 05/03/2026 18:04:13 django.server log_message:249 - "POST /encrypt/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 18:04:13 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 24661
+[INFO] 05/03/2026 18:04:25 django.server log_message:249 - "GET /files/download/11/ HTTP/1.1" 200 1068445
+[INFO] 05/03/2026 18:04:35 django.server log_message:249 - "GET /decrypt/ HTTP/1.1" 200 20898
+[INFO] 05/03/2026 18:05:16 django.server log_message:249 - "POST /decrypt/ HTTP/1.1" 200 801191
+[INFO] 05/03/2026 18:07:38 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 23843
+[INFO] 05/03/2026 18:08:38 django.server log_message:249 - "POST /encrypt/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 18:08:38 django.server log_message:249 - "GET /files/ HTTP/1.1" 200 28685
+[INFO] 05/03/2026 18:08:48 django.server log_message:249 - "GET /files/download/12/ HTTP/1.1" 200 243017
+[INFO] 05/03/2026 18:08:59 django.server log_message:249 - "GET /decrypt/ HTTP/1.1" 200 21864
+[INFO] 05/03/2026 18:09:32 django.server log_message:249 - "POST /decrypt/ HTTP/1.1" 200 182127
+[INFO] 05/03/2026 18:13:25 django.server log_message:249 - "POST /decrypt/ HTTP/1.1" 200 182127
+[INFO] 05/03/2026 18:14:02 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 23843
+[INFO] 05/03/2026 18:57:31 django.server log_message:249 - "GET /encrypt/ HTTP/1.1" 200 23843
+[INFO] 05/03/2026 18:57:37 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 36284
+[INFO] 05/03/2026 18:57:37 django.server log_message:249 - "GET /media/avatars/avatar_8.jpg HTTP/1.1" 304 0
+[INFO] 05/03/2026 18:58:04 django.server log_message:249 - "POST /profile/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 18:58:04 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 37701
+[INFO] 05/03/2026 19:00:00 django.server log_message:249 - "POST /profile/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 19:00:01 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 38509
+[INFO] 05/03/2026 19:00:31 django.server log_message:249 - "GET /logout/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 19:00:31 django.server log_message:249 - "GET / HTTP/1.1" 200 16121
+[INFO] 05/03/2026 19:00:34 django.server log_message:249 - "GET /login/ HTTP/1.1" 200 10514
+[INFO] 05/03/2026 19:02:38 django.server log_message:249 - "POST /login/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 19:02:38 django.server handle_error:82 - - Broken pipe from ('127.0.0.1', 63671)
+[INFO] 05/03/2026 19:02:38 django.server log_message:249 - "GET /dashboard/ HTTP/1.1" 200 26952
+[INFO] 05/03/2026 19:02:46 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 40880
+[INFO] 05/03/2026 19:03:21 django.server log_message:249 - "POST /profile/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 19:03:22 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 41355
+[INFO] 05/03/2026 19:03:22 django.server log_message:249 - "GET /media/avatars/avatar_8.jpg HTTP/1.1" 200 148805
+[INFO] 05/03/2026 20:11:30 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/03/2026 20:36:04 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py changed, reloading.
+[INFO] 05/03/2026 20:36:11 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/03/2026 20:37:17 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\views.py changed, reloading.
+[INFO] 05/03/2026 20:37:19 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/03/2026 20:37:31 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/03/2026 20:40:40 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\admin.py changed, reloading.
+[INFO] 05/03/2026 20:40:49 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/03/2026 20:41:04 django.utils.autoreload trigger_reload:265 - C:\Users\lenovo\Django\cryptosafe\crypto_app\models.py changed, reloading.
+[INFO] 05/03/2026 20:41:08 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/03/2026 20:42:31 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/03/2026 20:43:03 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 40880
+[INFO] 05/03/2026 20:43:03 django.server log_message:249 - "GET /media/avatars/avatar_8.jpg HTTP/1.1" 304 0
+[WARNING] 05/03/2026 20:43:04 django.request log_message:249 - Not Found: /favicon.ico
+[WARNING] 05/03/2026 20:43:04 django.server log_message:249 - "GET /favicon.ico HTTP/1.1" 404 6909
+[INFO] 05/03/2026 20:44:12 django.server log_message:249 - "POST /profile/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 20:44:12 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 40870
+[INFO] 05/03/2026 20:49:12 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 5094
+[INFO] 05/03/2026 20:49:41 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 5094
+[INFO] 05/03/2026 20:49:46 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 5094
+[INFO] 05/03/2026 20:49:59 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 40870
+[INFO] 05/03/2026 20:50:21 django.server log_message:249 - "POST /profile/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 20:50:21 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 41313
+[INFO] 05/03/2026 20:50:22 django.server log_message:249 - "GET /media/avatars/avatar_8.png HTTP/1.1" 200 1671872
+[INFO] 05/03/2026 20:58:42 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 39060
+[INFO] 05/03/2026 20:58:43 django.server log_message:249 - "GET /media/avatars/avatar_8.png HTTP/1.1" 304 0
+[INFO] 05/03/2026 20:59:12 django.server log_message:249 - "POST /profile/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 20:59:12 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 39521
+[INFO] 05/03/2026 20:59:13 django.server log_message:249 - "GET /media/avatars/avatar_8.jpg HTTP/1.1" 200 148805

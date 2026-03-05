@@ -21,7 +21,6 @@ from .forms import (
 )
 from .models import UserProfile, EncryptionKey, EncryptedFile, ActivityLog
 from .utils import CryptoUtils
-from .utils_email import send_otp_email, send_welcome_email, send_login_notification_email
 
 logger = logging.getLogger(__name__)
 
@@ -306,97 +305,30 @@ def cleanup_old_files(request):
 
 
 def user_login(request):
-    """Connexion avec 2FA optionnel"""
+    """Connexion utilisateur"""
     if request.user.is_authenticated:
         return redirect('dashboard')
-
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
-
         if user is not None:
-            userprofile, _ = UserProfile.objects.get_or_create(user=user)
-
-            if userprofile.two_factor_enabled:
-                if not user.email:
-                    messages.error(request, "Aucun email configuré. Contactez l'administrateur.")
-                    return render(request, 'crypto_app/login.html')
-                otp = userprofile.generate_otp()
-                try:
-                    send_otp_email(user, otp)
-                    request.session['pre_2fa_user_id'] = user.id
-                    messages.info(request, f"Code envoyé à {user.email[:3]}***{user.email.split('@')[1]}")
-                    return redirect('verify_otp')
-                except Exception as e:
-                    logger.error(f"Erreur OTP : {e}")
-                    messages.error(request, "Erreur envoi du code. Réessayez.")
-                    return render(request, 'crypto_app/login.html')
-            else:
-                login(request, user)
-                messages.success(request, f"Bienvenue {username} !")
-                if user.email:
-                    try:
-                        send_login_notification_email(user, request.META.get('REMOTE_ADDR'))
-                    except Exception:
-                        pass
-                ActivityLog.objects.create(
-                    user=user, action='LOGIN', description="Connexion réussie",
-                    severity='INFO', ip_address=request.META.get('REMOTE_ADDR')
-                )
-                return redirect('dashboard')
-        else:
-            logger.warning(f"Tentative échouée : {username}")
-            messages.error(request, "Identifiants incorrects")
-
-    return render(request, 'crypto_app/login.html')
-
-
-def verify_otp(request):
-    """Vérification du code OTP"""
-    user_id = request.session.get('pre_2fa_user_id')
-    if not user_id:
-        return redirect('login')
-
-    try:
-        user = DjangoUser.objects.get(id=user_id)
-        userprofile = UserProfile.objects.get(user=user)
-    except (DjangoUser.DoesNotExist, UserProfile.DoesNotExist):
-        return redirect('login')
-
-    if request.method == 'POST':
-        otp_input = request.POST.get('otp_code', '').strip()
-        if userprofile.is_otp_valid(otp_input):
-            userprofile.clear_otp()
-            del request.session['pre_2fa_user_id']
             login(request, user)
-            messages.success(request, f"Bienvenue {user.username} !")
-            if user.email:
-                try:
-                    send_login_notification_email(user, request.META.get('REMOTE_ADDR'))
-                except Exception:
-                    pass
+            messages.success(request, f"Bienvenue {username} !")
             ActivityLog.objects.create(
-                user=user, action='LOGIN_2FA',
-                description="Connexion 2FA réussie",
+                user=user, action='LOGIN',
+                description="Connexion réussie",
                 severity='INFO', ip_address=request.META.get('REMOTE_ADDR')
             )
             return redirect('dashboard')
         else:
-            messages.error(request, "Code incorrect ou expiré.")
-            ActivityLog.objects.create(
-                user=user, action='LOGIN_2FA_FAILED',
-                description="Code OTP incorrect",
-                severity='WARNING', ip_address=request.META.get('REMOTE_ADDR')
-            )
-
-    # Masquer partiellement l'email
-    email = user.email
-    masked = f"{email[:2]}***@{email.split('@')[1]}" if '@' in email else email
-    return render(request, 'crypto_app/verify_otp.html', {'email': masked})
+            logger.warning(f"Tentative échouée : {username}")
+            messages.error(request, "Identifiants incorrects")
+    return render(request, 'crypto_app/login.html')
 
 
 def user_register(request):
+    """Inscription utilisateur"""
     if request.user.is_authenticated:
         return redirect('dashboard')
     if request.method == 'POST':
@@ -406,17 +338,12 @@ def user_register(request):
                 user = form.save()
                 login(request, user)
                 UserProfile.objects.create(user=user)
-                if user.email:
-                    try:
-                        send_welcome_email(user)
-                    except Exception:
-                        pass
                 ActivityLog.objects.create(
                     user=user, action='REGISTER',
                     description="Nouveau compte créé",
                     severity='INFO', ip_address=request.META.get('REMOTE_ADDR')
                 )
-                messages.success(request, "Compte créé ! Vérifiez votre email. 🎉")
+                messages.success(request, "Compte créé avec succès !")
                 return redirect('dashboard')
             except Exception as e:
                 logger.exception("Erreur création compte")
@@ -434,34 +361,8 @@ def user_logout(request):
 
 
 @login_required
-def toggle_2fa(request):
-    """Activer / désactiver le 2FA"""
-    if request.method == 'POST':
-        userprofile, _ = UserProfile.objects.get_or_create(user=request.user)
-        if not request.user.email:
-            messages.error(request, "Configurez un email dans votre profil avant d'activer le 2FA.")
-            return redirect('profile')
-        userprofile.two_factor_enabled = not userprofile.two_factor_enabled
-        userprofile.save()
-        if userprofile.two_factor_enabled:
-            messages.success(request, "✅ 2FA activé ! Un code sera envoyé à chaque connexion.")
-            ActivityLog.objects.create(
-                user=request.user, action='2FA_ENABLED',
-                description="2FA activé", severity='INFO',
-                ip_address=request.META.get('REMOTE_ADDR')
-            )
-        else:
-            messages.info(request, "2FA désactivé.")
-            ActivityLog.objects.create(
-                user=request.user, action='2FA_DISABLED',
-                description="2FA désactivé", severity='WARNING',
-                ip_address=request.META.get('REMOTE_ADDR')
-            )
-    return redirect('profile')
-
-
-@login_required
 def user_profile(request):
+    """Profil utilisateur"""
     userprofile, _ = UserProfile.objects.get_or_create(user=request.user)
 
     if request.method == 'POST' and request.POST.get('action') == 'update_profile':

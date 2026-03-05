@@ -4,7 +4,7 @@ from .models import UserProfile, EncryptionKey, EncryptedFile, ActivityLog
 
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'security_level', 'two_factor_enabled', 'created_at')
+    list_display = ('user', 'security_level', 'two_factor_enabled')
     search_fields = ('user__username',)
 
 

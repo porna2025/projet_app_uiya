@@ -268,6 +268,8 @@
                             <i class="bi bi-shield-lock me-2" style="color: #0f3460;"></i>
                             Sécurité du compte
                         </h5>
+
+                        <!-- Niveau sécurité -->
                         <div class="p-3 rounded-3 mb-3" style="background: #f8fafc; border: 1px solid #e2e8f0;">
                             <div class="d-flex justify-content-between align-items-center mb-2">
                                 <small class="text-muted fw-semibold">Niveau de sécurité</small>
@@ -289,32 +291,27 @@
                                      style="width: {% if userprofile and userprofile.security_level == 'high' %}90{% elif userprofile and userprofile.security_level == 'medium' %}55{% else %}25{% endif %}%;
                                             background: {% if userprofile and userprofile.security_level == 'high' %}#10b981{% elif userprofile and userprofile.security_level == 'medium' %}#f59e0b{% else %}#ef4444{% endif %};"></div>
                             </div>
-                       <!-- 2FA -->
-<div class="p-3 rounded-3 mb-3" style="background: #f8fafc; border: 1px solid #e2e8f0;">
-    <div class="d-flex justify-content-between align-items-center">
-        <div>
-            <small class="text-muted fw-semibold d-block">Authentification 2FA</small>
-            <small class="text-muted">Code envoyé par email à chaque connexion</small>
-        </div>
-        <form method="post" action="{% url 'toggle_2fa' %}">
-            {% csrf_token %}
-            {% if userprofile and userprofile.two_factor_enabled %}
-            <button type="submit"
-                    class="btn btn-sm fw-semibold"
-                    style="background:#fef2f2;color:#ef4444;border:1px solid #fca5a5;border-radius:10px;"
-                    onclick="return confirm('Désactiver le 2FA ?')">
-                <i class="bi bi-x-circle me-1"></i>Désactiver
-            </button>
-            {% else %}
-            <button type="submit"
-                    class="btn btn-sm fw-semibold"
-                    style="background:#f0fdf4;color:#10b981;border:1px solid #6ee7b7;border-radius:10px;">
-                <i class="bi bi-check-circle me-1"></i>Activer
-            </button>
-            {% endif %}
-        </form>
-    </div>
-</div>
+                        </div>
+
+                        <!-- 2FA -->
+                        <div class="p-3 rounded-3 mb-3 d-flex justify-content-between align-items-center"
+                             style="background: #f8fafc; border: 1px solid #e2e8f0;">
+                            <div>
+                                <small class="text-muted fw-semibold d-block">Authentification 2FA</small>
+                                <small class="text-muted">Double vérification à la connexion</small>
+                            </div>
+                            {% if userprofile and userprofile.two_factor_enabled %}
+                            <span class="badge" style="background:#f0fdf4; color:#10b981;">
+                                <i class="bi bi-check-circle me-1"></i>Actif
+                            </span>
+                            {% else %}
+                            <span class="badge" style="background:#fef2f2; color:#ef4444;">
+                                <i class="bi bi-x-circle me-1"></i>Inactif
+                            </span>
+                            {% endif %}
+                        </div>
+
+                        <!-- Dernière connexion -->
                         <div class="p-3 rounded-3" style="background: #f8fafc; border: 1px solid #e2e8f0;">
                             <small class="text-muted fw-semibold d-block mb-1">Dernière connexion</small>
                             <span class="fw-semibold small">{{ user.last_login|date:"d/m/Y à H:i"|default:"Jamais" }}</span>

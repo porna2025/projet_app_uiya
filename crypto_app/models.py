@@ -1,9 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 import os
-import random
-import string
-from django.utils import timezone
 
 
 def avatar_upload_path(instance, filename):
@@ -21,39 +18,13 @@ class UserProfile(models.Model):
         null=True, blank=True,
         verbose_name="Photo de profil"
     )
-    otp_code = models.CharField(max_length=6, null=True, blank=True)
-    otp_created_at = models.DateTimeField(null=True, blank=True)
-    otp_verified = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = "Profil utilisateur"
         verbose_name_plural = "Profils utilisateurs"
-        ordering = ['-created_at']
 
     def __str__(self):
         return f"Profil de {self.user.username}"
-
-    def generate_otp(self):
-        self.otp_code = ''.join(random.choices(string.digits, k=6))
-        self.otp_created_at = timezone.now()
-        self.otp_verified = False
-        self.save()
-        return self.otp_code
-
-    def is_otp_valid(self, code):
-        if not self.otp_code or not self.otp_created_at:
-            return False
-        if self.otp_code != code:
-            return False
-        expiry = self.otp_created_at + timezone.timedelta(minutes=10)
-        return timezone.now() <= expiry
-
-    def clear_otp(self):
-        self.otp_code = None
-        self.otp_created_at = None
-        self.otp_verified = False
-        self.save()
 
 
 class EncryptionKey(models.Model):

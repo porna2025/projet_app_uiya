@@ -4,13 +4,11 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('login/', views.user_login, name='login'),
-    path('login/verify-otp/', views.verify_otp, name='verify_otp'),
     path('register/', views.user_register, name='register'),
     path('logout/', views.user_logout, name='logout'),
 
     path('dashboard/', views.dashboard, name='dashboard'),
     path('profile/', views.user_profile, name='profile'),
-    path('profile/toggle-2fa/', views.toggle_2fa, name='toggle_2fa'),
 
     path('encrypt/', views.encrypt_file, name='encrypt_file'),
     path('decrypt/', views.decrypt_file, name='decrypt_file'),
