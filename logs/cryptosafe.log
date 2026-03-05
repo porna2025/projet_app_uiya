@@ -2619,3 +2619,7 @@ AttributeError: 'UserProfile' object has no attribute 'avatar'
 [INFO] 05/03/2026 20:59:12 django.server log_message:249 - "POST /profile/ HTTP/1.1" 302 0
 [INFO] 05/03/2026 20:59:12 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 39521
 [INFO] 05/03/2026 20:59:13 django.server log_message:249 - "GET /media/avatars/avatar_8.jpg HTTP/1.1" 200 148805
+[INFO] 05/03/2026 22:12:03 django.utils.autoreload run_with_reloader:681 - Watching for file changes with StatReloader
+[INFO] 05/03/2026 22:12:15 django.server log_message:249 - "POST /profile/ HTTP/1.1" 302 0
+[INFO] 05/03/2026 22:12:15 django.server log_message:249 - "GET /profile/ HTTP/1.1" 200 39489
+[INFO] 05/03/2026 22:12:15 django.server log_message:249 - "GET /media/avatars/avatar_8.jpg HTTP/1.1" 200 801191
