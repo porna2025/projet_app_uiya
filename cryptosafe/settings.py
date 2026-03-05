@@ -18,6 +18,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'crispy_bootstrap4',
+    'cloudinary_storage',
+    'cloudinary',
+    'crypto_app',
     'crypto_app',
 ]
 
@@ -140,5 +143,16 @@ LOGGING = {
             'propagate': False,
         },
     },
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+# Cloudinary config
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
 }
-# ── Email Gmail ────────────────────────────────────────────
+
+# Utiliser Cloudinary pour les fichiers media
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'  # ── Email Gmail ────────────────────────────────────────────
