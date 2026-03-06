@@ -1,5 +1,8 @@
 import os
 from pathlib import Path
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -7,7 +10,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'votre-clé-secrète-super-sécurisée
 
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '127.0.0.1,localhost,.onrender.com').split(',')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -15,12 +18,12 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
+    'whitenoise.runserver_nostatic',
     'crispy_forms',
     'crispy_bootstrap4',
-    'cloudinary_storage',
     'cloudinary',
-    'crypto_app',
     'crypto_app',
 ]
 
@@ -93,7 +96,7 @@ LOGOUT_REDIRECT_URL = 'home'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Créer le répertoire logs
+# Logs
 LOGS_DIR = BASE_DIR / 'logs'
 LOGS_DIR.mkdir(exist_ok=True)
 
@@ -143,16 +146,13 @@ LOGGING = {
             'propagate': False,
         },
     },
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
+}
 
-# Cloudinary config
+# ── Cloudinary ─────────────────────────────────────────────
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
     'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
     'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
 }
 
-# Utiliser Cloudinary pour les fichiers media
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'  # ── Email Gmail ────────────────────────────────────────────
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
